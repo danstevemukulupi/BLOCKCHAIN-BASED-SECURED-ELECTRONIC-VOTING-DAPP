@@ -88,7 +88,10 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+//const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+
+
 
 function AdministratorPage() {
 
@@ -172,11 +175,11 @@ function AdministratorPage() {
 
   // Register Voter
   const registerVoter = async () => {
-    if (!contract || !voterName) return;
-    //if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone) return;
+    //if (!contract || !voterName) return;
+    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone) return;
     try {
-      const tx = await contract.registerVoter(voterName);
-      //const tx = await contract.registerVoter(voterName, parseInt(voterAge), voterEmail, voterPhone);
+      //const tx = await contract.registerVoter(voterName);
+      const tx = await contract.registerVoter(voterName, parseInt(voterAge), voterEmail, voterPhone);
       await tx.wait();
       alert(`Voter ${voterName} registered!`);
       //alert(`Voter ${voterAge} registered!`);
@@ -184,9 +187,9 @@ function AdministratorPage() {
       //alert(`Voter ${voterPhone} registered!`);
     
       setVoterName('');
-      //setVoterAge('');
-      //setVoterEmail('');
-      //setVoterPhone('');
+      setVoterAge('');
+      setVoterEmail('');
+      setVoterPhone('');
       getRegisteredVoters();
     } catch (err) {
       console.error("Error registering voter:", err);

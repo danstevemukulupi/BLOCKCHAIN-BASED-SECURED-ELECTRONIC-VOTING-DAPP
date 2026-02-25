@@ -50,7 +50,9 @@ import VoterLogin from './VoterLogin';
 import CandidateLogin from './CandidateLogin';
 import { Link } from 'react-router-dom';
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+//const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+
 
 function Dashboard() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -130,14 +132,14 @@ function Dashboard() {
 
   // Register Voter
   const registerVoter = async () => {
-    //if (!contract || !voterName) return; // 1. it was here
+    //if (!contract || !voterName) return; // 1. it was her
     if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone) return;// uncommented
     try {
       //const tx = await contract.registerVoter(voterName); // 2 it was here 
       const tx = await contract.registerVoter(voterName, parseInt(voterAge), voterEmail, voterPhone); // uncommented
       await tx.wait(); 
-      alert("Registration sbumitted.waiting for admin approval")
-      //alert(`Voter ${voterName} registered!`); // 4 it was here
+      alert("Registration submitted.waiting for admin approval")
+      alert(`Voter ${voterName} registered!`); // 4 it was here
       //alert(`Voter ${voterAge} registered!`);
       //alert(`Voter ${voterEmail} registered!`);
       //alert(`Voter ${voterPhone} registered!`);
@@ -256,25 +258,20 @@ function Dashboard() {
             </Link>
           </p>
 
-          {/*<h3>Registered Voters</h3>*/}
+    
           <ul>
-            {/* {voters.map((v, index) => ( 
-              <li key={index}>*/}
+            { voters.map((v, index) => ( 
+              <li key={index}>          
+                {v.name} — {v.votersAddress} — Status: {v.status.toString()} — Message: {v.message}
 
-            {voters
-            .filter(v => v.votersAddress.toLowerCase() === account.toLowerCase())
-            .map((v, index) => ( 
-              <li key={index}>
-                {/*{v.name} — {v.votersAddress} — Status: {v.status}*/} // it was here
-
-                <strong>Name:</strong> {v.name} <br /> 
-                <strong>Status:</strong> {v.status.toString()} <br />
-                <strong>Message:</strong> {v.message} 
-
-
+                {/*<strong>Name:</strong> {v.name} <br /> 
+                //<strong>Status:</strong> {v.status.toString()} <br />
+                //<strong>Message:</strong> {v.message} */}
               </li>
             ))}
           </ul>
+
+          
         </div>
 
         <div className="form-container">
