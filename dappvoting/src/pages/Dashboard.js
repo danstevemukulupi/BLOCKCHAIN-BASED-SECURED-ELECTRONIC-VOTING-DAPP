@@ -50,8 +50,9 @@ import VoterLogin from './VoterLogin';
 import CandidateLogin from './CandidateLogin';
 import { Link } from 'react-router-dom';
 
-//const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+//const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+
 
 
 function Dashboard() {
@@ -157,11 +158,11 @@ function Dashboard() {
 
   // Register Candidate
   const registerCandidate = async () => {
-    //if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
-    if (!contract || !candidateName ) return;
+    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
+    //if (!contract || !candidateName ) return;
     try {
-      const tx = await contract.registerCandidate(candidateName);
-      //const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateEmail, candidatePhone);
+      //const tx = await contract.registerCandidate(candidateName);
+      const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateEmail, candidatePhone);
       await tx.wait();
       alert(`Candidate ${candidateName} registered!`);
       //alert(`Candidate ${candidateAge} registered!`);
@@ -169,9 +170,9 @@ function Dashboard() {
       //alert(`Candidate ${candidatePhone} registered!`);
 
       setCandidateName('');
-      //setCandidateAge('');
-      //setCandidateEmail('');
-      //setCandidatePhone('');
+      setCandidateAge('');
+      setCandidateEmail('');
+      setCandidatePhone('');
       getRegisteredCandidates();
     } catch (err) {
       console.error("Error registering candidate:", err);

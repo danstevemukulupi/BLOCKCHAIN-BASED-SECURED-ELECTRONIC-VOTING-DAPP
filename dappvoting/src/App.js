@@ -51,6 +51,8 @@ import CandidateLogin from './pages/CandidateLogin';
 import Dashboard from './pages/Dashboard';
 import AdministratorPage from './pages/AdministratorPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CandidateRegistration from './pages/CandidateRegistration';
+import VoterRegistration from './pages/VoterRegistration';
 
 
 //import { Link } from 'react-router-dom';
@@ -67,6 +69,8 @@ function App() {
       <Route path="/voter-login" element={<VoterLogin />} />
       <Route path="/candidate-login" element={<CandidateLogin />} />
       <Route path="/administrator-page" element={<AdministratorPage />} />
+      <Route path="/voter-registration" element={<VoterRegistration />} />
+      <Route path="/candidate-registration" element={<CandidateRegistration />} />
     </Routes>
    </Router>
   )

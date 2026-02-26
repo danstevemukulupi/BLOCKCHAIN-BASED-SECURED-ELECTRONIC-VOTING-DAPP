@@ -67,7 +67,9 @@ contract VotingSystem{
         mapping (address => Voter) public voters;
         mapping (address => Candidate) public candidates;
         address[] public candidatesRegistered; // Candidate who are registered
-        address[] public votersRegistered; // Voters who are registered
+        address[] public votersRegistered; // Voters who are registered good one
+        //uint256[] public votersRegistered; // Voters who are registered
+
         address[] public acceptedCandidates; // Candidate who have been accepted for election
         address[] public acceptedVoters; // Voters who have been accepted to vote
         address[] public votersWhoCasted; // Voters who have voted
@@ -106,6 +108,10 @@ contract VotingSystem{
 
         // Register a voter 
     function registerVoter(string memory _name, uint256 _age, string memory _email, string memory _phone) public {
+
+        //require(voters[msg.sender].votersAddress == address(0), // after 
+        //"You have already registered as a voter.");
+
         Voter memory newVoter = Voter({
             /*votedRoundOne: false,
             votedRoundTwo: false,
@@ -122,9 +128,13 @@ contract VotingSystem{
             status: ConfirmationStatus.Awaiting
         });
 
-        voters[msg.sender] = newVoter;
-        votersRegistered.push(msg.sender);
-        VoterID++;
+        voters[msg.sender] = newVoter; // good 
+        votersRegistered.push(msg.sender); // good 
+        VoterID++; // good 
+
+        //voters[VoterID] = newVoter; // after 
+        //votersRegistered.push(VoterID);
+        //VoterID++;
     }
 
         

@@ -88,8 +88,9 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 
 
-//const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+//const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 
 
 
@@ -215,6 +216,30 @@ const approveVoter = async (voterAddress) => {
   }
 };
 
+const rejectVoter = async (voterAddress) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.rejectVoter(
+      voterAddress,
+    "You are not approved to vote"
+
+  );
+    await tx.wait();
+
+    alert("Voter rejected!");
+
+    getRegisteredVoters();
+   
+  } catch (err) {
+    console.error("Error rejecting voter:", err);
+  }
+};
+
+
+
+
+
+
 const getAcceptedVoters = async () => {
   if (!contract) return;
 
@@ -229,11 +254,11 @@ const getAcceptedVoters = async () => {
 
   // Register Candidate
   const registerCandidate = async () => {
-    //if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
-    if (!contract || !candidateName ) return;
+    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
+    //if (!contract || !candidateName ) return;
     try {
-      const tx = await contract.registerCandidate(candidateName);
-      //const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateEmail, candidatePhone);
+      //const tx = await contract.registerCandidate(candidateName);
+      const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateEmail, candidatePhone);
       await tx.wait();
       alert(`Candidate ${candidateName} registered!`);
       //alert(`Candidate ${candidateAge} registered!`);
@@ -241,9 +266,9 @@ const getAcceptedVoters = async () => {
       //alert(`Candidate ${candidatePhone} registered!`);
 
       setCandidateName('');
-      //setCandidateAge('');
-      //setCandidateEmail('');
-      //setCandidatePhone('');
+      setCandidateAge('');
+      setCandidateEmail('');
+      setCandidatePhone('');
       getRegisteredCandidates();
     } catch (err) {
       console.error("Error registering candidate:", err);
@@ -282,7 +307,7 @@ const getAcceptedVoters = async () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Voters " id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">List of Registered Voters</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/voter-Registration">List of Registered Voters</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Voter Approval</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Voter Rejection</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">List of Accepted Voters</NavDropdown.Item>
@@ -294,7 +319,7 @@ const getAcceptedVoters = async () => {
             </NavDropdown>
 
             <NavDropdown title="Candidates " id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">List of Registered Candidates</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/candidate-Registration">List of Registered Candidates</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Candidate Approval</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Candidate Rejection</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">List of Accepted Candidates</NavDropdown.Item>
@@ -319,10 +344,10 @@ const getAcceptedVoters = async () => {
       </Container>
     </Navbar>
     
-      <div className="container mt-4">
+      <div className="container mt-4 voters-section">
   <h2>Registered Voters</h2>
 
-  <button onClick={getRegisteredVoters}>Load Registered Voters</button>
+  {/*<button onClick={getRegisteredVoters}>Load Registered Voters</button>*/}
 
   <ul>
     {voters.map((v, index) => (
@@ -334,7 +359,13 @@ const getAcceptedVoters = async () => {
         {v.status.toString() === "0" && (
           <button onClick={() => approveVoter(v.votersAddress)}>
             Approve
-          </button>
+          </button> 
+        )}
+
+        {v.status.toString() === "0" && (
+          <button onClick={() => rejectVoter(v.votersAddress)}>
+            Reject
+          </button> 
         )}
 
         <hr />
