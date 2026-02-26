@@ -138,7 +138,7 @@ function VoterRegistration() {
     }
   };
 
-
+// approve voter
 const approveVoter = async (voterAddress) => {
   if (!contract) return;
   try {
@@ -157,6 +157,7 @@ const approveVoter = async (voterAddress) => {
   }
 };
 
+// reject voter 
 const rejectVoter = async (voterAddress) => {
   if (!contract) return;
   try {
@@ -180,12 +181,17 @@ const rejectVoter = async (voterAddress) => {
   useEffect(() => {
     const loadContract = async () => {
       try {
-        const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545"); // hardhat local node 
+        //const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545"); // hardhat local node 
+
+        //const signer = provider.getSigner();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
 
         const votigContract = new ethers.Contract(
           contractAddress,
           VotingArtifact.abi,
-          provider);
+          signer);
 
           setContract(votigContract);
 
@@ -229,7 +235,7 @@ useEffect(() => {
 
 
         <div className="container mt-4 voters-section">
-            <h1>Voter Registration Page</h1>
+            <h1>Registered Voters</h1>
 
 
 <button onClick={getRegisteredVoters}>Load Registered Voters</button>

@@ -36,7 +36,6 @@ function VoterLogin() {
             </NavDropdown>
             <NavDropdown title="Vote" id="basic-nav-dropdown">
               <NavDropdown.Item href="#VoterList">List of Voters</NavDropdown.Item>
-               <NavDropdown.Item href="#VoterapprovedList">Approved Voters</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.1">All Voted Voters</NavDropdown.Item>
               <NavDropdown.Divider />
             </NavDropdown>

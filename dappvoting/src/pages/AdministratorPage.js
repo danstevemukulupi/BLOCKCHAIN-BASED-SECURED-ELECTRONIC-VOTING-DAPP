@@ -275,6 +275,58 @@ const getAcceptedVoters = async () => {
     }
   };
 
+// approve candidate 
+  const approveCandidate = async (candidateAddress) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.approveCandidate(
+      candidateAddress,
+    "You are approved to run for this election"
+
+  );
+    await tx.wait();
+
+    alert("Candidate approved!");
+
+    getRegisteredCandidates();
+   
+  } catch (err) {
+    console.error("Error approving candidate:", err);
+  }
+};
+
+  // reject candidate
+  const rejectCandidate = async (candidateAddress) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.rejectCandidate(
+      candidateAddress,
+    "You are not approved to run for this election"
+
+  );
+    await tx.wait();
+
+    alert("Candidate rejected!");
+
+    getRegisteredCandidates();
+   
+  } catch (err) {
+    console.error("Error rejecting candidate:", err);
+  }
+};
+
+const getAcceptedCandidates = async () => {
+  if (!contract) return;
+
+  try {
+    const list = await contract.ListofAcceptedCandidates();
+    setCandidates(list);
+  } catch (err) {
+    console.error("Error fetching accepted candidates:", err);
+  }
+};
+
+
   // Vote
   const voteForCandidate = async (candidateAddress) => {
     if (!contract) return;
@@ -383,6 +435,41 @@ const getAcceptedVoters = async () => {
       </li>
     ))}
   </ul>
+
+
+<h2>Registered Candidates</h2>
+
+ 
+
+  <ul>
+    {candidates.map((c, index) => (
+      <li key={index}>
+        {c.name} — {c.candidateAddress} <br />
+        Status: {c.status.toString()} <br />
+        Message: {c.message} <br />
+
+        {c.status.toString() === "0" && (
+          <button onClick={() => approveCandidate(c.candidateAddress)}>
+            Approve
+          </button> 
+        )}
+
+        {c.status.toString() === "0" && (
+          <button onClick={() => rejectCandidate(c.candidateAddress)}>
+            Reject
+          </button> 
+        )}
+
+        <hr />
+      </li>
+    ))}
+  </ul>
+  
+
+
+
+
+
 </div>
       </>
   

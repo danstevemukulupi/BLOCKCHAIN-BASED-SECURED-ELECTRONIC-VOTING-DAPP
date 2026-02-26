@@ -261,16 +261,12 @@ function Dashboard() {
 
     
           <ul>
-            { voters.map((v, index) => ( 
+            {/*{ voters.map((v, index) => ( 
               <li key={index}>          
                 {v.name} — {v.votersAddress} — Status: {v.status.toString()} — Message: {v.message}
-
-                {/*<strong>Name:</strong> {v.name} <br /> 
-                //<strong>Status:</strong> {v.status.toString()} <br />
-                //<strong>Message:</strong> {v.message} */}
               </li>
-            ))}
-          </ul>
+            ))}*/}
+          </ul> 
 
           
         </div>
@@ -316,14 +312,14 @@ function Dashboard() {
             </Link>
           </p>
           {/*<h3>Registered Candidates</h3>*/}
-          <ul>
+         {/* <ul>
             {candidates.map((c, index) => (
               <li key={index}>
                 {c.name} — {c.candidatesAddress} — Status: {c.status}
                 <button onClick={() => voteForCandidate(c.candidatesAddress)}>Vote</button>
               </li>
             ))}
-          </ul>
+          </ul>*/}
         </div>
       </header>
     </div>

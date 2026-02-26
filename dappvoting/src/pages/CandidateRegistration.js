@@ -151,6 +151,58 @@ function CandidateRegistration() {
     }
   };
 
+  // approve candidate 
+  const approveCandidate = async (candidateAddress) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.approveCandidate(
+      candidateAddress,
+    "You are approved to run for office"
+
+  );
+    await tx.wait();
+
+    alert("Candidate approved!");
+
+    getRegisteredCandidates();
+   
+  } catch (err) {
+    console.error("Error approving candidate:", err);
+  }
+};
+
+  // reject candidate
+  const rejectCandidate = async (candidateAddress) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.rejectCandidate(
+      candidateAddress,
+    "You are not approved to run for this election"
+
+  );
+    await tx.wait();
+
+    alert("Candidate rejected!");
+
+    getRegisteredCandidates();
+   
+  } catch (err) {
+    console.error("Error rejecting candidate:", err);
+  }
+};
+
+// aceppted candidates
+const getAcceptedCandidates = async () => {
+  if (!contract) return;
+
+  try {
+    const list = await contract.ListofAcceptedCandidates();
+    setCandidates(list);
+  } catch (err) {
+    console.error("Error fetching accepted candidates:", err);
+  }
+};
+
   // Vote
   const voteForCandidate = async (candidateAddress) => {
     if (!contract) return;
@@ -167,17 +219,21 @@ function CandidateRegistration() {
   useEffect(() => {
     const loadContract = async () => {
       try {
-        const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545"); // hardhat local node 
+        //const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545"); // hardhat local node 
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
 
         const votigContract = new ethers.Contract(
           contractAddress,
           VotingArtifact.abi,
-          provider);
+          signer);
 
           setContract(votigContract);
 
           // automatically load voters
-          const list = await votigContract.getRegisteredCandidates();
+          const list = await votigContract.ListofRegisteredCandidates();
           setCandidates(list);
       } catch (err) {
         console.error("Error loading contract:", err);
@@ -228,7 +284,17 @@ useEffect(() => {
         Status: {c.status.toString()} <br />
         Message: {c.message} <br />
 
-        
+        {c.status.toString() === "0" && (
+          <button onClick={() => approveCandidate(c.candidateAddress)}>
+            Approve
+          </button> 
+        )}
+
+        {c.status.toString() === "0" && (
+          <button onClick={() => rejectCandidate(c.candidateAddress)}>
+            Reject
+          </button> 
+        )}
 
         <hr />
       </li>
