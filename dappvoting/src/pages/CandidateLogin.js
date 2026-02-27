@@ -21,15 +21,11 @@ function CandidateLogin() {
           <Nav className="my-center-nav">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#link">My Profile</Nav.Link>
-            <Nav.Link href="#link">Election Infos</Nav.Link>
-            <NavDropdown title="Candidates " id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">View Candidates</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.1">All Voted Candidates</NavDropdown.Item>
-                   <NavDropdown.Item href="#VoterList">List of Voters</NavDropdown.Item>
+            <NavDropdown title="Election" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/candidate-accepted-list">View Candidates</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>   
               <NavDropdown.Divider />
             </NavDropdown>
-            <Nav.Link href="#link">Contact</Nav.Link>
- 
 
            
            <button>Connect Wallet</button>

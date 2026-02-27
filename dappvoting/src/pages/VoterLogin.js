@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './VoterLogin.css';
 
+
 function VoterLogin() {
 
     const [voterEmail, setVoterEmail] = useState('');
@@ -29,20 +30,14 @@ function VoterLogin() {
           <Nav className="my-center-nav">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#link">My Profile</Nav.Link>
-            <NavDropdown title="View Candidates" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">List of all candidates</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.1">List of all voted candidates</NavDropdown.Item>
+            <NavDropdown title="Election" id="basic-nav-dropdown">
+              <NavDropdown.Item as={Link} to="/candidate-accepted-list">View Candidates</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/vote-info">How To Vote</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/vote-status">Voting Status</NavDropdown.Item>
+
               <NavDropdown.Divider />
             </NavDropdown>
-            <NavDropdown title="Vote" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#VoterList">List of Voters</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.1">All Voted Voters</NavDropdown.Item>
-              <NavDropdown.Divider />
-            </NavDropdown>
-            <Nav.Link href="#link">Election Infos</Nav.Link>
-            <Nav.Link href="#link">Contact</Nav.Link>
-
-
             
            <button>Connect Wallet</button>
           

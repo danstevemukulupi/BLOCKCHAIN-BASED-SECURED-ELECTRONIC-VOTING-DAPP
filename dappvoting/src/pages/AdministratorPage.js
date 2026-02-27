@@ -360,24 +360,22 @@ const getAcceptedCandidates = async () => {
             <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Voters " id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/voter-Registration">List of Registered Voters</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Voter Approval</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Voter Rejection</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">List of Accepted Voters</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">List of Rejected Voters</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Find Voter</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Update Voter Details</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/voter-approval">Voter Approval</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/voter-rejection">Voter Rejection</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/voter-accepted-list">List of Accepted Voters</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/voter-rejected-list">List of Rejected Voters</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/voter-finderr">Find Voter</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Candidates " id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/candidate-Registration">List of Registered Candidates</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Candidate Approval</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Candidate Rejection</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">List of Accepted Candidates</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">List of Rejected Candidates</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Find Candidate</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Update Candidate Details</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/candidate-approval">Candidate Approval</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/candidate-rejection">Candidate Rejection</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/candidate-accepted-list">List of Accepted Candidates</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/candidate-rejected-list">List of Rejected Candidates</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/candidate-finder">Find Candidate</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
             </NavDropdown>
