@@ -20,9 +20,8 @@ function CandidateLogin() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="my-center-nav">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#link">My Profile</Nav.Link>
+            <Nav.Link href="/candidate-profile">My Profile</Nav.Link>
             <NavDropdown title="Election" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/candidate-accepted-list">View Candidates</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>   
               <NavDropdown.Divider />
             </NavDropdown>

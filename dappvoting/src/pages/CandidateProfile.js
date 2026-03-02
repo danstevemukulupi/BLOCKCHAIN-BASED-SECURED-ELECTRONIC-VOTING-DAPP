@@ -10,7 +10,7 @@ function CandidateProfile() {
     return(
         <Navbar expand = "lg" className='navbarColour'>
       <Container>
-        <Navbar.Brand href="#home">My Profile </Navbar.Brand>
+        <Navbar.Brand href="/candidate-profile">My Profile </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="my-center-nav">

@@ -395,7 +395,7 @@ const getAcceptedCandidates = async () => {
     </Navbar>
     
       <div className="container mt-4 voters-section">
-  <h2>Registered Voters</h2>
+  <h2>List Registered Voters</h2>
 
   {/*<button onClick={getRegisteredVoters}>Load Registered Voters</button>*/}
 
@@ -405,35 +405,10 @@ const getAcceptedCandidates = async () => {
         {v.name} — {v.votersAddress} <br />
         Status: {v.status.toString()} <br />
         Message: {v.message} <br />
-
-        {v.status.toString() === "0" && (
-          <button onClick={() => approveVoter(v.votersAddress)}>
-            Approve
-          </button> 
-        )}
-
-        {v.status.toString() === "0" && (
-          <button onClick={() => rejectVoter(v.votersAddress)}>
-            Reject
-          </button> 
-        )}
-
         <hr />
       </li>
     ))}
   </ul>
-
-  <h2>Accepted Voters</h2>
-  <button onClick={getAcceptedVoters}>Load Accepted Voters</button>
-
-  <ul>
-    {voters.map((v, index) => (
-      <li key={index}>
-        {v.name} — {v.votersAddress}
-      </li>
-    ))}
-  </ul>
-
 
 <h2>Registered Candidates</h2>
 
