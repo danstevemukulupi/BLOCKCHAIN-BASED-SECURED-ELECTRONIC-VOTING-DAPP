@@ -110,7 +110,7 @@ const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 function CandidateRegistration() {
 
- const [candidateName, setCandidateName] = useState('');
+  const [candidateName, setCandidateName] = useState('');
   const [candidateAge, setCandidateAge] = useState('');
   const [candidateEmail, setCandidateEmail] = useState('');
   const [candidatePhone, setCandidatePhone] = useState('');

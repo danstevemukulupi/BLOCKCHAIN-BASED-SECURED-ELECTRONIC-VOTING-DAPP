@@ -417,18 +417,18 @@ const getAcceptedCandidates = async () => {
   <ul>
     {candidates.map((c, index) => (
       <li key={index}>
-        {c.name} — {c.candidateAddress} <br />
+        {c.name} — {c.candidatesAddress} <br />
         Status: {c.status.toString()} <br />
         Message: {c.message} <br />
 
         {c.status.toString() === "0" && (
-          <button onClick={() => approveCandidate(c.candidateAddress)}>
+          <button onClick={() => approveCandidate(c.candidatesAddress)}>
             Approve
           </button> 
         )}
 
         {c.status.toString() === "0" && (
-          <button onClick={() => rejectCandidate(c.candidateAddress)}>
+          <button onClick={() => rejectCandidate(c.candidatesAddress)}>
             Reject
           </button> 
         )}
