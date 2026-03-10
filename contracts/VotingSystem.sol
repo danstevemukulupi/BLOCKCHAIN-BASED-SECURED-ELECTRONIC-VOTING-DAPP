@@ -13,8 +13,8 @@ contract VotingSystem{
     // Election Variable
          address public owner; // The addresws of the election owner
          string public electionName; // The name of the election
-         uint256 public electionStartTime; // The starting time of the election
-         uint256 public electionEndTime; // The ending time of election 
+         uint256 public votingStartTime; // The starting time of the election
+         uint256 public votingEndTime; // The ending time of election 
 
          uint256 private CandidateID; // The Identification of the candidate
          uint256 private VoterID; // The Identification of the Voters
@@ -91,7 +91,7 @@ contract VotingSystem{
 
         // Voting Modification During Election
         modifier votingModification() {
-            require(block.timestamp >= electionStartTime && block.timestamp <= electionEndTime, "Voting still disabled");
+            require(block.timestamp >= votingStartTime && block.timestamp <= votingEndTime, "Voting still disabled");
             _;
         }
 
@@ -209,6 +209,7 @@ contract VotingSystem{
             electionEndTime = _electionEndTime;
         }*/
 
+      
         // Get All Register Voters
         function ListofRegisteredVoters() public view returns (Voter[] memory) {
             Voter[] memory voterListArray = new Voter[](votersRegistered.length);
@@ -285,8 +286,25 @@ contract VotingSystem{
 
         // changerowner
         // resetContract
+         // Starting Time and Ending Time of Election
+       function startendVoting(uint256 _votingStartTime, uint256 _votingEndTime) public onlyOwner {
+         require(votingStartTime == 0, "Voting already scheduled");
+         require(_votingStartTime > block.timestamp, "Start time must be in the future");
+         require(_votingStartTime < _votingEndTime, "Start time must be before end time");
+
+         votingStartTime = _votingStartTime;
+         votingEndTime = _votingEndTime;
+       }
+
+       // Modifier to check if voting is active
+       modifier duringVotingPeriod() {
+            require(block.timestamp >= votingStartTime, "Voting has not started yet");
+            require(block.timestamp <= votingEndTime, "Voting has ended");
+            _;  
+       }
+
         // vote
-        function vote(address _candidatesAddress) public {
+        function vote(address _candidatesAddress) public duringVotingPeriod {
             Voter storage voter = voters[msg.sender];
             require(voter.status == ConfirmationStatus.Accepted, "You are not a confirmed voter.");
             require(!voter.alreadyVoted, "You have already voted");

@@ -71,6 +71,9 @@ import ElectionInfo from './pages/ElectionInfo';
 import VoteInfo from './pages/VoteInfo';
 import VoteStatus from './pages/VoteStatus';
 
+import StartElection from './pages/StartElection';
+import StartVoting from './pages/StartVoting';
+
 
 
 
@@ -110,6 +113,9 @@ function App() {
       <Route path="/election-info" element={<ElectionInfo />} />
       <Route path="/vote-info" element={<VoteInfo />} />
       <Route path="/vote-status" element={<VoteStatus />} />
+
+      <Route path="/start-election" element={<StartElection />} />
+      <Route path="/start-voting" element={<StartVoting />} />
 
     </Routes>
    </Router>

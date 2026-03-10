@@ -38,6 +38,8 @@ function VoterLogin() {
 
               <NavDropdown.Divider />
             </NavDropdown>
+
+            <Nav.Link as={Link} to="/start-voting">Vote</Nav.Link>
             
            <button>Connect Wallet</button>
           
