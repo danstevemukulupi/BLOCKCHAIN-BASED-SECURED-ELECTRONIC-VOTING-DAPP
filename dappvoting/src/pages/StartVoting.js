@@ -16,15 +16,15 @@ function StartVoting() {
 
   const[status, setStatus] = useState("Loading.....");
   const [contract, setContract] = useState(null);
-  const [candidateAddress, setCandidateAddress] = useState([]);
+  const [candidates, setCandidates ] = useState([]);
   const [account, setAccount] = useState("");
 
   // Connect Wallet 
   const connectWallet = async () => {
-    if (window.ethereum) {
+    if (!window.ethereum) {
       alert ("Install MetaMask!");
       return; 
-    }
+  } 
 
     const accounts = await window.ethereum.request({
       method: 'eth_requestAccounts',
@@ -33,15 +33,42 @@ function StartVoting() {
     setAccount(accounts[0]);
 
   };
+  
+
+
+  // new connect 
+
+
+
+    // new 
+    // 1 Fetch registered candidates 
+    const getRegisteredCandidates = async () => {
+    if (!contract) return;
+    try {
+      const list = await contract.ListofRegisteredCandidates();
+      setCandidates(list);
+    } catch (err) {
+      console.error("Error fetching candidates:", err);
+    }
+  };
+
+   // 2 
+    
+    // end
+ 
+    // commented 
     // Load approved candidates
-    const getApprovedCandidates = async (votingContract) => {
-      try {
-        const list = await votingContract.ListofApprovedCandidates(); 
-        setCandidateAddress(list);
-      }catch (error) {
-        console.error("Error loading candidates:", error);
-      }
-    };
+   // const getApprovedCandidates = async (votingContract) => {
+      //try {
+       // const list = await votingContract.ListofApprovedCandidates(); 
+       // setCandidateAddress(list);
+      //}catch (error) {
+        //console.error("Error loading candidates:", error);
+      //}
+    //};
+
+    // commented 
+
 
     // Vote function 
     const voteForCandidate = async (candidateAddress) => {
@@ -87,6 +114,9 @@ function StartVoting() {
 
     setContract(votingContract);
 
+    const list = await votingContract.ListofRegisteredCandidates();
+    setCandidates(list);
+    //await getApprovedCandidates(votingContract);
     const start = await votingContract.votingStartTime();
     const end = await votingContract.votingEndTime();
 
@@ -107,6 +137,11 @@ function StartVoting() {
     };
 
     loadContract();
+
+    // check every 5 second 
+    const interval = setInterval(loadContract, 5000);
+
+    return () => clearInterval(interval);
 
   }, []);
 
@@ -140,16 +175,16 @@ function StartVoting() {
 
         <ul>  
 
-          {candidateAddress.map((c, index) => ( 
+          {candidates.map((c, index) => ( 
             <li key={index}> 
             <strong>{c.name}</strong> <br /> 
 
-            Address: {c.candidateAddress} <br /> 
+            Address: {c.candidatesAddress} <br /> 
 
             Votes: {c.voteCalculation.toString()} <br /> 
 
             <button 
-            onClick={() => voteForCandidate(c.candidateAddress)} 
+            onClick={() => voteForCandidate(c.candidatesAddress)} 
             > 
             Vote
             </button>
@@ -170,3 +205,13 @@ function StartVoting() {
     );
 } 
 export default StartVoting;
+
+
+
+
+
+
+
+
+
+

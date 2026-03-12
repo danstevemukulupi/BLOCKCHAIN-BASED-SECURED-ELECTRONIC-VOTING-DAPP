@@ -19,14 +19,15 @@ const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
 function StartElection() {
 
+  const [walletConnected, setWalletConnected] = useState(false);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [contract, setContract] = useState(null);
   const [account, setAccount] = useState("");
 
   // Connect to MetaMask and set up the contract
-  const connectWallet = async () => {
-    if (window.ethereum) {
+ {/* const connectWallet = async () => {
+    if (!window.ethereum) {
       alert ("Install MetaMask to use this app!");
       return;
 
@@ -48,17 +49,44 @@ function StartElection() {
     );
 
     setContract(votingContract);
+  };*/}
+
+  // New Connect to Wallet 
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setAccount(accounts[0]);
+        setWalletConnected(true);
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const votingContract = new ethers.Contract(contractAddress, VotingArtifact.abi, signer);
+        setContract(votingContract);
+
+        console.log("Wallet connected:", accounts[0]);
+      } catch (err) {
+        console.error("Error connecting wallet:", err);
+      }
+    } else {
+      alert("Please install MetaMask!");
+    }
   };
 
+
+
+
+
+
   // blockchain timestamp
-  const setElectionTime = async () => {
+  const startendVoting = async () => {
     if (!contract) return;
 
     try {
       const startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
       const endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
 
-      const tx = await contract.setElectionTime(startTimestamp, endTimestamp);
+      const tx = await contract.startendVoting(startTimestamp, endTimestamp);
       await tx.wait();
       alert('Election time set successfully!');
     } catch (error) {
@@ -79,6 +107,13 @@ function StartElection() {
           <Nav className="my-center-nav">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/administrator-page">Dashboard</Nav.Link>
+            
+            {!walletConnected ? (
+           <button onClick={connectWallet}>Connect Wallet</button>
+           ) : (
+           <p>Wallet connected: {account}</p>
+            )}
+
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -89,7 +124,9 @@ function StartElection() {
   
       <h1> Set Time and Date of Election </h1>
 
-      <Button onClick= {connectWallet}> Connect Admin Wallet</Button>
+      
+
+      {/*<Button onClick= {connectWallet}> Connect Admin Wallet</Button>*/}
 
       <br/><br/>
 
@@ -111,7 +148,7 @@ function StartElection() {
 
       <br/><br/>
 
-      <button onClick={setElectionTime}>Start Election</button>
+      <button onClick={startendVoting}>Start Election</button>
 
       </div>
 
