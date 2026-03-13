@@ -1,3 +1,4 @@
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -15,9 +16,76 @@ const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 function StartVoting() {
 
   const[status, setStatus] = useState("Loading.....");
-  const [contract, setContract] = useState(null);
-  const [candidates, setCandidates ] = useState([]);
+  //const [contract, setContract] = useState(null);
+  //const [candidates, setCandidates ] = useState([]);
   const [account, setAccount] = useState("");
+
+
+  // 1
+  // trying to load candidates
+const [candidateName, setCandidateName] = useState('');
+      const [candidateAge, setCandidateAge] = useState('');
+      const [candidateEmail, setCandidateEmail] = useState('');
+      const [candidatePhone, setCandidatePhone] = useState('');
+      const [candidates, setCandidates] = useState([]);
+      const [contract, setContract] = useState(null);
+
+      // Fetch registered candidates
+  const getRegisteredCandidates = async () => {
+    if (!contract) return;
+    try {
+      const list = await contract.ListofRegisteredCandidates();
+      setCandidates(list);
+    } catch (err) {
+      console.error("Error fetching candidates:", err);
+    }
+  };
+
+  // Register Candidate
+  const registerCandidate = async () => {
+    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
+    //if (!contract || !candidateName ) return;
+    try {
+      //const tx = await contract.registerCandidate(candidateName);
+      const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateEmail, candidatePhone);
+      await tx.wait();
+      alert(`Candidate ${candidateName} registered!`);
+    
+
+      setCandidateName('');
+      setCandidateAge('');
+      setCandidateEmail('');
+      setCandidatePhone('');
+      getRegisteredCandidates();
+    } catch (err) {
+      console.error("Error registering candidate:", err);
+    }
+  };
+
+  // approve candidate 
+  const approveCandidate = async (candidateAddress) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.approveCandidate(
+      candidateAddress,
+    "You are approved to run for office"
+
+  );
+    await tx.wait();
+
+    alert("Candidate approved!");
+
+    getRegisteredCandidates();
+   
+  } catch (err) {
+    console.error("Error approving candidate:", err);
+  }
+};
+
+  // end of loading candidates
+
+
+  
 
   // Connect Wallet 
   const connectWallet = async () => {
@@ -42,15 +110,15 @@ function StartVoting() {
 
     // new 
     // 1 Fetch registered candidates 
-    const getRegisteredCandidates = async () => {
-    if (!contract) return;
-    try {
-      const list = await contract.ListofRegisteredCandidates();
-      setCandidates(list);
-    } catch (err) {
-      console.error("Error fetching candidates:", err);
-    }
-  };
+    //const getRegisteredCandidates = async () => {
+    //if (!contract) return;
+    //try {
+      //const list = await contract.ListofRegisteredCandidates();
+      //setCandidates(list);
+    //} catch (err) {
+      //console.error("Error fetching candidates:", err);
+    //}
+  //};
 
    // 2 
     
