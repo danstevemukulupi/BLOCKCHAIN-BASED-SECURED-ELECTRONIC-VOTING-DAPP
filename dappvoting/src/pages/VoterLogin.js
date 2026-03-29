@@ -35,6 +35,7 @@ function VoterLogin() {
               <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/vote-info">How To Vote</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/vote-status">Voting Status</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/vote-result"> Election Result </NavDropdown.Item>
 
               <NavDropdown.Divider />
             </NavDropdown>

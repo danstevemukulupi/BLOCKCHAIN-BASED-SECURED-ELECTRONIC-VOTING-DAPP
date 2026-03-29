@@ -199,7 +199,7 @@ const [candidateName, setCandidateName] = useState('');
     }
 
     else {
-      setStatus("Voting has ended. Thank you for your participation!");
+      setStatus("You have voted. Thank you for your participation!");
     }
 
     };

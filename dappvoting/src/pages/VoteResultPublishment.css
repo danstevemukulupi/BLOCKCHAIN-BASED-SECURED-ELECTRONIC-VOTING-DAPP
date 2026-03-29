@@ -1,0 +1,36 @@
+
+
+.navbarColour {
+  background-color: lightskyblue !important;
+  padding: 8px;
+}
+
+.navbarColour .nav-link,
+.navbarColour .navbar-brand,
+.navbarColour .dropdown-toggle {
+  background-color: purple;
+  color: white !important;
+  padding: 10px 16px;
+  
+
+  font-size: 15px;
+
+}
+
+.navbarColour .nav-link:hover,
+.navbarColour .dropdown-toggle:hover {
+  background-color: #ddd !important;
+  color: blue !important;
+}
+
+.my-center-nav {
+  margin: 0 auto;
+}
+
+
+.container {
+  margin-top: 10px;
+  background-color: purple;
+
+}
+

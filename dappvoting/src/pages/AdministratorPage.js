@@ -381,6 +381,7 @@ const getAcceptedCandidates = async () => {
             </NavDropdown>
 
             <Nav.Link as={Link} to="/start-election">Start Election</Nav.Link>
+            <Nav.Link as ={Link} to="/vote-result-publishment"> Result Publication</Nav.Link>
 
 
            {!walletConnected ? (

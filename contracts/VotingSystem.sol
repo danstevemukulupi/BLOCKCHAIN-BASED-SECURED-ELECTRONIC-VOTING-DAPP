@@ -15,6 +15,7 @@ contract VotingSystem{
          string public electionName; // The name of the election
          uint256 public votingStartTime; // The starting time of the election
          uint256 public votingEndTime; // The ending time of election 
+         uint256 public resultPublicationTime; //the time when the result will be published
 
          uint256 private CandidateID; // The Identification of the candidate
          uint256 private VoterID; // The Identification of the Voters
@@ -344,11 +345,33 @@ contract VotingSystem{
         }
         // Winning Candidate
         function winningCandidate() public view returns (Candidate memory) {
-            //require(block.timestamp > electionEndTime, "Voting period is not over yet.");
+            //require(block.timestamp > votingEndTime, "Voting not finished  yet.");
+            //return CurrentVotingStatus();
+
+
+            if(block.timestamp <= votingEndTime) {
+                return Candidate({
+                    name: "Not decided yet",
+                    age: 0,
+                    email: "",
+                    phone: "",
+                    message: "Please wait until the election ends to see the winner.",
+                    registeredId: 0,
+                    voteCalculation: 0,
+                    candidatesAddress: address(0),
+                    status: ConfirmationStatus.Awaiting
+                });
+            }
             return CurrentVotingStatus();
         }
 
-
+       // Result Publication time 
+         function setResultPublicationTime(uint256 _resultPublicationTime) public onlyOwner {
+                require(resultPublicationTime == 0, "Result publication time already set");
+                //require(_resultPublicationTime > block.timestamp, "Result publication time must be in the future");
+                require(_resultPublicationTime > votingEndTime, "Result publication time must be after voting end time");
+                resultPublicationTime = _resultPublicationTime;
+         }
 
 
 
