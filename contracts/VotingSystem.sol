@@ -347,9 +347,9 @@ contract VotingSystem{
         function winningCandidate() public view returns (Candidate memory) {
             //require(block.timestamp > votingEndTime, "Voting not finished  yet.");
             //return CurrentVotingStatus();
+            require(acceptedCandidates.length > 0, "No Candidates accepted for election.");
 
-
-            if(block.timestamp <= votingEndTime) {
+            if(block.timestamp < votingEndTime) {
                 return Candidate({
                     name: "Not decided yet",
                     age: 0,
@@ -370,7 +370,9 @@ contract VotingSystem{
                 require(resultPublicationTime == 0, "Result publication time already set");
                 //require(_resultPublicationTime > block.timestamp, "Result publication time must be in the future");
                 require(_resultPublicationTime > votingEndTime, "Result publication time must be after voting end time");
+
                 resultPublicationTime = _resultPublicationTime;
+                //votingEndTime = _votingEndTime;
          }
 
 

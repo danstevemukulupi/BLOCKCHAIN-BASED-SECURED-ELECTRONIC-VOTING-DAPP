@@ -13,10 +13,15 @@ import { use } from 'chai';
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 function VoteResult() {
-  const [winner, setWinner] = useState(null);
-  const [contract, setContract] = useState(null);
+  const [candidateName, setCandidateName] = useState('');
+      const [candidateAge, setCandidateAge] = useState('');
+      const [candidateEmail, setCandidateEmail] = useState('');
+      const [candidatePhone, setCandidatePhone] = useState('');
+      const [Candidates, setCandidates] = useState(null);
 
-  const loadWinner = async () => {
+      const [contract, setContract] = useState(null);
+
+  const loadCandidateWinner = async () => {
     //try {
       ///const contract = await getContract();
       //setContract(contract);
@@ -27,7 +32,7 @@ function VoteResult() {
 
       try {
         const result = await contract.winningCandidate();
-        setWinner(result);
+        setCandidates(result);
 
       //}
 
@@ -59,8 +64,8 @@ function VoteResult() {
           setContract(votigContract);
 
           // automatically load winner
-          const list = await votigContract.winningCandidate();
-          setWinner(list);
+          const result = await votigContract.winningCandidate();
+          setCandidates(result);
       } catch (err) {
         console.error("Error loading contract:", err);
       }
@@ -78,9 +83,9 @@ function VoteResult() {
   useEffect(() => {
     if (!contract) return;
 
-    loadWinner();
+    loadCandidateWinner();
 
-    const interval = setInterval(loadWinner, 5000); // Refresh every 5 seconds
+    const interval = setInterval(loadCandidateWinner, 5000); // Refresh every 5 seconds
     return () => clearInterval(interval); // Cleanup on unmount
 
   }, [contract]);
@@ -92,16 +97,21 @@ function VoteResult() {
 
       try {
         const end = await contract.votingEndTime();
-        const now = Math.floor(Date.now() / 1000); // current time in seconds 
+
+
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const block = await provider.getBlock("latest");
 
         console.log("Voting end time:", end.toString());
-        console.log("Current time:", now);
+        console.log("Blockchain time:", block.timestamp);
+
+
          
         // first candidates wins if there is none
-        const candidates = await contract.ListofRegisteredCandidates();
-        console.log("Registered candidates:", candidates);
+        //const candidates = await contract.ListofRegisteredCandidates();
+        //console.log("Registered candidates:", candidates);
 
-        if (now > end.toNumber()) { 
+        if (block.timestamp > end.toNumber()) { 
           console.log("✅ Voting has ended");
       } else {
         console.log("⏳ Voting is still ongoing");
@@ -133,16 +143,16 @@ function VoteResult() {
     <Container className="mt-4">
       <h2>🏆 Winning Candidate</h2>
 
-      {winner === null ? ( 
+      {Candidates === null ? ( 
         <p>Loading....</p>
 
-      ): winner.name === "Not decided yet"? (
+      ): Candidates.candidatesAddress === ethers.constants.AddressZero? (
         <p>⏳ Election not finished yet</p>
       ) : ( 
 
         <div>
-          <p><strong>Name:</strong> {winner.name}</p>
-          <p><strong>Votes:</strong> {winner.voteCalculation.toString()}</p>
+          <p><strong>Name:</strong> {Candidates.name}</p>
+          <p><strong>Votes:</strong> {Candidates.voteCalculation.toString()}</p>
         </div>
       )}
     </Container>

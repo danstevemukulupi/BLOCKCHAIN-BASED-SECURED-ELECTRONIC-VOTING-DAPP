@@ -75,10 +75,6 @@ import StartElection from './pages/StartElection';
 import StartVoting from './pages/StartVoting';
 
 import VoteResult from './pages/VoteResult';
-import VoteResultPublishment from './pages/VoteResultPublishment';
-
-import VoteResultAnnoucement from './pages/VoteResultAnnoucement';
-
 
 
 //import { Link } from 'react-router-dom';
@@ -122,8 +118,6 @@ function App() {
 
       <Route path="/vote-result" element={<VoteResult />} />
       
-      <Route path="/vote-result-publishment" element={<VoteResultPublishment />} />
-      <Route path="/vote-result-announcement" element={<VoteResultAnnoucement />} />
     </Routes>
    </Router>
   )
