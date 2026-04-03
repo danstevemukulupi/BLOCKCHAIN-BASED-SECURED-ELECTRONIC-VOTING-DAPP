@@ -73,6 +73,10 @@ contract VotingSystem{
 
         address[] public acceptedCandidates; // Candidate who have been accepted for election
         address[] public acceptedVoters; // Voters who have been accepted to vote
+
+        address [] public rejectedCandidates; // Candidate who have been rejected for election
+        address[] public rejectedVoters; // Voters who have been rejected to vote
+
         address[] public votersWhoCasted; // Voters who have voted
         //address[] public voterList;  // to allow resetting voted flags between rounds
 
@@ -178,7 +182,7 @@ contract VotingSystem{
         // approval of Candidate
         function approveCandidate(address _candidatesAddress, string memory _message) public onlyOwner {
             Candidate storage candidate = candidates [_candidatesAddress];
-            require(candidate.candidatesAddress != address(0), "This voter does not appear in our system.");
+            require(candidate.candidatesAddress != address(0), "This candidate does not appear in our system.");
             candidate.status = ConfirmationStatus.Accepted;
             candidate.message = _message;
             acceptedCandidates.push(_candidatesAddress);
@@ -191,7 +195,7 @@ contract VotingSystem{
             require(voter.votersAddress != address(0), "No voter data available");
             voter.status = ConfirmationStatus.Denied;
             voter.message = _message;
-            //acceptedVoters.push(_votersAddress); // testing 
+            rejectedVoters.push(_votersAddress); 
         }
 
         // Reject Candidate
@@ -200,7 +204,7 @@ contract VotingSystem{
             require(candidate.candidatesAddress != address(0), "No candidate data available");
             candidate.status = ConfirmationStatus.Denied;
             candidate.message = _message;
-            //acceptedCandidates.push(_candidatesAddress);
+            rejectedCandidates.push(_candidatesAddress); 
         }
 
         // Starting time and ending time
@@ -246,6 +250,27 @@ contract VotingSystem{
             Candidate[] memory candidateListArray = new Candidate[](acceptedCandidates.length);
             for (uint256 i = 0; i < acceptedCandidates.length; i++) {
                 candidateListArray[i] = candidates[acceptedCandidates[i]];
+            }
+            return candidateListArray;
+
+        
+        }
+
+        // Get all Rejected Voters
+        function ListofRejectedVoters() public view returns(Voter[] memory) {
+            Voter[] memory voterListArray = new Voter[](rejectedVoters.length);
+            for (uint256 i = 0; i < rejectedVoters.length; i++) {
+                voterListArray[i] = voters[rejectedVoters[i]];
+            }
+            return voterListArray;
+
+        }
+
+        // Get all Rejected Candidates
+         function ListofRejectedCandidates() public view returns(Candidate[] memory) {
+            Candidate[] memory candidateListArray = new Candidate[](rejectedCandidates.length);
+            for (uint256 i = 0; i < rejectedCandidates.length; i++) {
+                candidateListArray[i] = candidates[rejectedCandidates[i]];
             }
             return candidateListArray;
 
