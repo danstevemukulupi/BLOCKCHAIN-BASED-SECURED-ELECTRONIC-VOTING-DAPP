@@ -163,7 +163,7 @@ const rejectVoter = async (voterAddress) => {
   try {
     const tx = await contract.rejectVoter(
       voterAddress,
-    "You are not approved to vote"
+    "You have been rejected as a voter! Update your information and try again."
 
   );
     await tx.wait();
@@ -240,6 +240,20 @@ useEffect(() => {
         {v.name} — {v.votersAddress} <br />
         Status: {v.status.toString()} <br />
         Message: {v.message} <br />
+
+         {v.status.toString() === "0" && (
+          <button onClick={() => approveVoter(v.votersAddress)}>
+            Approve
+          </button> 
+        )}
+
+         {v.status.toString() === "0" && (
+          <button onClick={() => rejectVoter(v.votersAddress)}>
+            Reject
+          </button> 
+        )}
+
+
 
         <hr />
       </li>

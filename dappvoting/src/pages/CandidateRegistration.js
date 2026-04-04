@@ -177,7 +177,7 @@ function CandidateRegistration() {
   try {
     const tx = await contract.rejectCandidate(
       candidateAddress,
-    "You are not approved to run for this election"
+    "You have been rejected as a candidate! Update your information and try again."
 
   );
     await tx.wait();
