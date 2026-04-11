@@ -1,7 +1,40 @@
 
 .topnav {
     background-color:  lightgray;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    align-items: center;
+    display: flex;
+   
+      
+}
+
+.topnav img {
+    height: 70px;
+    width: auto;
+}
+
+.topnav button {
+    margin-left: auto;;
+}
+body {
+    margin: 0;
+    padding-top: 60px;
+}
+
+.topnav link  {
+    color: black;
+    text-decoration: none;
     
+}
+
+.topnav a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
 }
 
 .App-header{
@@ -19,8 +52,10 @@
     padding: 5px;
     gap: 20px; 
     width: 100%;
-  
+    margin-top: 70px;
+    margin-bottom: 70px;
 
+  
 }
 .admin-section div {
      background-color: #f1f1f1;
@@ -29,10 +64,11 @@
      font-size: 24px;
      text-align: center;
      border-radius: 8px;
-     margin-top: 20px;
+     margin-top: 50px;
      margin-left: 20px;
      margin-right: 20px;
-     margin-bottom: 20px;
+     margin-bottom: 50px;
+     
     
    
 }
@@ -189,3 +225,4 @@
     font-size: 13px;
     color: black;
 }
+

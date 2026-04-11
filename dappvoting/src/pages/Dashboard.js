@@ -212,9 +212,11 @@ function Dashboard() {
 
         <div className = "topnav">
           <a>
-            <img src="./pics/MapoVote-logo.png" alt="logo" width={40} height={20} />
+       
+            <img src="./pics/MapoVote-nobackground.png" alt="logo" width={150} height={60} />
+
           </a>
-          <a>MapoVote</a>
+          <a style={{ color: "purple" }}>MapoVote</a>
           <Link to="/">Home</Link>
           <Link to="/administrator-page">Administrator</Link>
           <Link to="/help-infos">Help & Info</Link>
@@ -225,12 +227,8 @@ function Dashboard() {
           <p>Wallet connected: {account}</p>
         )}
         </div>
-
-
-
-        
-
-       
+       <br/>
+       <br/>
       {/* For the title and description of the dapp, and the buttons for how it works and current results */}
       <div className="App-title">
         <h1 style={{ color: "purple"}}>Empowering the Voice</h1>
@@ -300,7 +298,11 @@ function Dashboard() {
                <li>Accessible to all</li>
              </ul>
               
-              <img src="./pics/Trust-security-mapo.png" alt="trust" width={600} />
+              <img src="./pics/Trust-security-mapo.png" alt="trust" width={700} />
+              <img src="./pics/voter-candidate.png" alt="trust" width={700} />
+              <img src="./pics/victory2.png" alt="trust" width={500} />
+           
+            
            
           </div>
 
