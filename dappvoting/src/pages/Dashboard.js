@@ -50,6 +50,12 @@ import VoterLogin from './VoterLogin';
 import CandidateLogin from './CandidateLogin';
 import { Link } from 'react-router-dom';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import './Dashboard.css';
+
+
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 //const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 
@@ -206,18 +212,84 @@ function Dashboard() {
         <div className = "topnav">
           <Link to="/">Home</Link>
           <Link to="/administrator-page">Administrator</Link>
+          <Link to="/help-infos">Help & Info</Link>
 
-        </div>
-
-
-
-        <h1 className="App-title">Voting System Dashboard</h1>
-
-        {!walletConnected ? (
+           {!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
         ) : (
           <p>Wallet connected: {account}</p>
         )}
+        </div>
+
+
+
+        
+
+       
+      {/* For the title and description of the dapp, and the buttons for how it works and current results */}
+      <div className="App-title">
+        <h1 style={{ color: "purple"}}>Empowering the Voice</h1>
+        <h1 style={{ color: "lightskyblue"}}>of the Community</h1>
+        <br/>
+        <p style={{ color: "black" }}>MapoVote uses blockchain technology to guarantee secure, transparent, and tamper-proof voting.
+          <br/>Built for national elections, it upholds the highest standards of integrity-ensuring every citizen's voice is heard, protected, and counted</p>
+
+        <button style={{ background: "purple", color: "white" }}>How it Works</button> <button>Current Results</button>
+        <br/>
+        <br/>
+        </div>
+      
+          {/* For admin, voters and candidates and registration and logging */}
+          <div className="admin-section">
+             
+              <div className="admin">
+                Administration
+
+                <h6>System management and election control </h6>
+                <ul className="admin-list">
+                    <li> Voter Registry management</li>
+                    <li> Candidate Registry management</li>
+                    <li> Election control (start/end)</li>
+                    <li> Result management</li>
+                </ul>
+
+                <button className="admin-btn">Admin Access</button>
+                </div>
+
+
+              <div className="voter">
+                Voter Portal
+                
+                <h6>Cast your vote and view details of candidates.</h6>
+                <ul className="voter-list">
+                  <li>Secure ballot submission</li>
+                  <li> Research candidate information</li>
+                  <li> Track voting status</li>
+                  <li> View election results</li>
+                </ul>
+
+                <button className="voter-btn">Voter Login</button>
+                </div>
+
+              <div className="candidate">
+                Candidate Portal
+
+                <h6>Manage your campaign and view election results.</h6>
+                <ul className="candidate-list">
+                  <li> Campaign management</li>
+                  <li> Engage with voters</li>
+                  <li> Visison and mission</li>
+                  <li> View election results</li>
+                </ul>
+                <button className="candidate-btn">Candidate Login</button>
+                </div>
+          </div>
+
+          <div className="Information-section">
+
+          </div>
+
+
 
         <div className="form-container">
           <h2>Voter Registration</h2>

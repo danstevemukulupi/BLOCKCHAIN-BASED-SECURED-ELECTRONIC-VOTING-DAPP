@@ -1,0 +1,105 @@
+
+.App-title{
+    background-color: white;
+    
+}
+.admin-section {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: lightgray;
+    padding: 5px;
+    gap: 20px; 
+    width: 100%;
+  
+
+}
+.admin-section div {
+     background-color: #f1f1f1;
+     color: #000;
+     padding: 20px;
+     font-size: 24px;
+     text-align: center;
+     border-radius: 8px;
+     margin-top: 20px;
+     margin-left: 20px;
+     margin-right: 20px;
+     margin-bottom: 20px;
+    
+   
+}
+
+.admin {
+    border-top: 6px solid purple;
+}
+
+.voter {
+    border-top: 6px solid lightskyblue;
+}
+.candidate {
+    border-top: 6px solid blue;
+}
+
+.admin-list {
+    list-style-type: disc;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 15px;
+    margin-top: 30px;
+ 
+}
+
+.voter-list {
+    list-style-type: disc;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 15px;
+    margin-top: 30px;
+}
+.candidate-list {
+    list-style-type: disc;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 15px;
+    margin-top: 30px;
+}
+
+.admin-btn {
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 100px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    font-weight: 600;
+    
+ 
+}
+.voter-btn {
+    background-color:  lightskyblue;
+    color: white;
+    border: none;
+    padding: 10px 100px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    font-weight: 600;
+
+
+}
+.candidate-btn {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 100px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    font-weight: 600;
+}
