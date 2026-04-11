@@ -56,6 +56,7 @@ import Col from 'react-bootstrap/Col';
 import './Dashboard.css';
 
 
+
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 //const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 
@@ -210,6 +211,10 @@ function Dashboard() {
       <header className="App-header">
 
         <div className = "topnav">
+          <a>
+            <img src="./pics/MapoVote-logo.png" alt="logo" width={40} height={20} />
+          </a>
+          <a>MapoVote</a>
           <Link to="/">Home</Link>
           <Link to="/administrator-page">Administrator</Link>
           <Link to="/help-infos">Help & Info</Link>
@@ -286,7 +291,17 @@ function Dashboard() {
           </div>
 
           <div className="Information-section">
-
+            
+             <ul className="trust-info-info">
+            <h3 className="trust-info">Why Trust MapoVote?</h3>
+               <li>End-to-end encrypted voting</li>
+               <li>Blockchain-verified results</li>
+               <li>Fully transparent process</li>
+               <li>Accessible to all</li>
+             </ul>
+              
+              <img src="./pics/Trust-security-mapo.png" alt="trust" width={600} />
+           
           </div>
 
 
@@ -394,7 +409,50 @@ function Dashboard() {
           </ul>*/}
         </div>
       </header>
+      
+      <footer className="footer-final">
+        <div className='footer-container'>
+
+          <div className='footer-column'>
+            <h3 style={{ color: "purple"}}>MapoVote</h3>
+            <p>Secure, transparent, and accessible voting for every citizen, empowering democracy through technology.</p>
+          </div>
+
+          <div className='footer-column'>
+            <h3>Resources</h3>
+            <h5>How it works</h5>
+            <h5>Security & privacy</h5>
+            <h5>FAQ</h5>
+            <h5>Support Center</h5>
+          </div>
+
+          <div className='footer-column'>
+            <h1>Legal</h1>
+            <h5>Terms of Service</h5>
+            <h5>Privacy Policy</h5>
+            <h5>Compliance</h5>
+            <h5>Cookie Policy</h5>
+          </div>
+
+          <div className='footer-column'>
+            <h1>Contact Us</h1>
+            <h5>Email:
+              <a href="mailto:info@mapovote.com">info@mapovote.com</a>
+            </h5>
+            <h5>Phone: +1 (555) 123-4567</h5>
+             <h5>Address: 123 Democracy Lane, Capital City, Country</h5>    
+          </div>
+        </div>
+
+          <div className='footer-bottom'>
+            <p>@ 20026 MapoVote Voting Systems. All rights reserved.</p>
+          </div>
+
+      
+      </footer>
+
     </div>
+    
   );
 }
 
