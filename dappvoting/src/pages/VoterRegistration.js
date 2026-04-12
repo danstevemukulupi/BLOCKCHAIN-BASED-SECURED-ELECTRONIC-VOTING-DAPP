@@ -230,7 +230,8 @@ useEffect(() => {
       <br/>
           
           <div  className="App-title">
-            <h1 style={{ color: "purple"}}>Election Dashboard</h1>
+            <h1 style={{ color: "purple"}}>Voter Management</h1>
+            <h5>Review and manage registered voters in the system</h5>
 
           </div>
        <br/>
@@ -270,6 +271,103 @@ useEffect(() => {
   </ul>
 
         </div>  
+
+
+
+
+      <div className="admin-container">
+        <h3>Voter Registry</h3>
+        <table>
+
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Message</th>
+           
+          </tr>
+
+          <tr>
+
+          {voters.map((v, index) => (
+            <td  key={index}>
+           {v.name} — {v.votersAddress} <br />
+           Status: {v.status.toString()} <br />
+           Message: {v.message} <br />
+            </td>
+             ))}
+
+           {voters.map((v, index) => (
+            <td  key={index}>
+           Status: {v.status.toString()} <br />
+            </td>
+             ))}
+
+            {voters.map((v, index) => (
+            <td  key={index}>
+              Message: {v.message} <br />
+            </td>
+             ))}
+
+             <td>
+
+          
+             </td>
+
+             
+
+
+           
+            
+          </tr>
+        </table>
+      </div>
+
+       <footer className="footer-final">
+      
+        <div className='footer-container'>
+
+          <div className='footer-column'>
+            <h3 style={{ color: "purple"}}>MapoVote</h3>
+            <p>Secure, transparent, and accessible voting for every citizen, empowering democracy through technology.</p>
+          </div>
+          
+
+          <div className='footer-column'>
+            <h3>Resources</h3>
+            <h5>How it works</h5>
+            <h5>Security & privacy</h5>
+            <h5>FAQ</h5>
+            <h5>Support Center</h5>
+          </div>
+
+          <div className='footer-column'>
+            <h1>Legal</h1>
+            <h5>Terms of Service</h5>
+            <h5>Privacy Policy</h5>
+            <h5>Compliance</h5>
+            <h5>Cookie Policy</h5>
+          </div>
+
+          <div className='footer-column'>
+            <h1>Contact Us</h1>
+            <h5>Email:
+              <a href="mailto:info@mapovote.com">info@mapovote.com</a>
+            </h5>
+            <h5>Phone: +1 (555) 123-4567</h5>
+             <h5>Address: 123 Democracy Lane, Capital City, Country</h5>    
+          </div>
+        </div>
+
+          <div className='footer-bottom'>
+            <p>@ 20026 MapoVote Voting Systems. All rights reserved.</p>
+          </div>
+
+      
+      </footer>
+
+
+
+
         
     </div>
 

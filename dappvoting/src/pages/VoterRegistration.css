@@ -1,40 +1,192 @@
 
-.navbarColour {
-  background-color: lightskyblue !important;
-  padding: 8px;
-}
+.topnav {
+  background-color: lightgray;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  align-items: center;
+  display: flex;
 
-.navbarColour .nav-link,
-.navbarColour .navbar-brand,
-.navbarColour .dropdown-toggle {
-  background-color: purple;
-  color: white !important;
-  padding: 10px 16px;
+   
   
+}
 
-  font-size: 15px;
+.topnav h3 {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+} 
+
+.App-title h1 {
+text-align: left;
+margin: 20px ;
+
+
 
 }
 
-.navbarColour .nav-link:hover,
-.navbarColour .dropdown-toggle:hover {
-  background-color: #ddd !important;
-  color: blue !important;
+.App-title h5 {
+text-align: left;
+margin: 20px ;
+
 }
 
-.my-center-nav {
-  margin: 0 auto;
+
+.topnav img {
+    height: 70px;
+    width: auto;
 }
 
-.navbarColour button {
-    background-color: purple;
-    color:white;
-    border:none;
+.topnav button {
+    margin-left: auto;
     
 }
 
-.container {
-  margin-top: 10px;
-  background-color: purple;
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  
+}
+
+body {
+    margin: 0;
+   height: 80%;
+   
+    
+}
+
+.topnav, 
+.topnav * {
+  overflow: visible;
+}
+
+
+
+.topnav button {
+  margin-right: 10px;
+}
+
+
+
+.admin-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+
+
+.app-title {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 
 }
+
+
+
+
+.table { 
+font-family: Arial, Helvetica, sans-serif; 
+border-collapse: collapse; 
+width: 100%; 
+border: 1px solid #ddd; 
+
+
+} 
+
+.td, th { 
+border: 1px solid #ddd; 
+padding: 8px; 
+border-bottom: 1px solid #ddd;
+border-left: none;
+border-right: none;
+padding: 8px;
+
+}
+
+.tr:nth-child(even){background-color: white;} 
+
+.tr:hover {background-color: #ddd;} 
+
+.th { 
+
+padding-top: 12px; 
+padding-bottom: 12px; 
+text-align: left; 
+background-color: #f8f9fa; 
+color:#999999; }
+
+
+
+
+.admin-container h3{
+  text-align: left;
+}
+
+
+.footer {
+    background-color: lightgray;
+    text-align: center;
+    color: black;
+    padding: 100px;
+    margin: auto;
+}
+
+.footer-final{
+    background-color: lightgray;
+    color: black;
+    padding: 40px 20px;
+    margin-bottom: auto;
+    margin-top: auto;
+    
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+.footer-column h1 {
+    margin-bottom: 10px;
+}
+
+.footer-column h5 {
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin: 6px 0;
+    font-size: 14px;
+
+}
+
+.footer-column h5:hover {
+    color: purple; 
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: black; 
+    margin-top: 30px;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    font-size: 13px;
+    color: black;
+}
+
