@@ -97,38 +97,50 @@ function StartElection() {
 
     return(
 
-      <> 
-
-        <Navbar expand = "lg" className='navbarColour'>
-      <Container>
-        <Navbar.Brand href="#home">Start Election</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="my-center-nav">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/administrator-page">Dashboard</Nav.Link>
-            
-            {!walletConnected ? (
-           <button onClick={connectWallet}>Connect Wallet</button>
-           ) : (
-           <p>Wallet connected: {account}</p>
-            )}
-
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-    
-
-<div className="container mt-4 candidates-section">
-  
-      <h1> Set Time and Date of Election </h1>
+     
 
       
 
-      {/*<Button onClick= {connectWallet}> Connect Admin Wallet</Button>*/}
 
-      <br/><br/>
+     <div className="App">
+      <div className="topnav">
+        <a>
+       
+            <img src="./pics/MapoVote-nobackground.png" alt="logo" width={150} height={60} />
+
+          </a>
+          <h2 style={{ color: "purple" }}>MapoVote</h2>
+          <Link to="/">Home</Link>
+          <Link to="/administrator-page">Administrator</Link>
+          <Link to="/help-infos">Help & Info</Link>
+      
+
+           {!walletConnected ? (
+          <button onClick={connectWallet}>Connect Wallet</button>
+        ) : (
+          <p>Wallet connected: {account}</p>
+        )}
+
+      </div>
+
+      <br/>
+      <br/>
+          
+          <div  className="App-title">
+            <h1 style={{ color: "purple"}}>Election Dashboard</h1>
+
+          </div>
+ 
+
+
+       <br/>
+       <br/>
+
+       <div className="time-date-set">
+         
+        <div className="time-date-set-container">
+          <h3 > Election Time and Date </h3>
+      <br/>
 
       <Label>Start Time</Label>
       <input 
@@ -149,10 +161,58 @@ function StartElection() {
       <br/><br/>
 
       <button onClick={startendVoting}>Start Election</button>
+        </div>
 
-      </div>
+       </div>
 
-</>
+       <div className="admin-container"></div>
+
+       <footer className="footer-final">
+      
+        <div className='footer-container'>
+
+          <div className='footer-column'>
+            <h3 style={{ color: "purple"}}>MapoVote</h3>
+            <p>Secure, transparent, and accessible voting for every citizen, empowering democracy through technology.</p>
+          </div>
+          
+
+          <div className='footer-column'>
+            <h3>Resources</h3>
+            <h5>How it works</h5>
+            <h5>Security & privacy</h5>
+            <h5>FAQ</h5>
+            <h5>Support Center</h5>
+          </div>
+
+          <div className='footer-column'>
+            <h1>Legal</h1>
+            <h5>Terms of Service</h5>
+            <h5>Privacy Policy</h5>
+            <h5>Compliance</h5>
+            <h5>Cookie Policy</h5>
+          </div>
+
+          <div className='footer-column'>
+            <h1>Contact Us</h1>
+            <h5>Email:
+              <a href="mailto:info@mapovote.com">info@mapovote.com</a>
+            </h5>
+            <h5>Phone: +1 (555) 123-4567</h5>
+             <h5>Address: 123 Democracy Lane, Capital City, Country</h5>    
+          </div>
+        </div>
+
+          <div className='footer-bottom'>
+            <p>@ 20026 MapoVote Voting Systems. All rights reserved.</p>
+          </div>
+
+      
+      </footer>
+
+
+       </div>
+       
 
     );
 } 

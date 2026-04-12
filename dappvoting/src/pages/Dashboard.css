@@ -37,6 +37,17 @@ body {
     font-size: 18px;
 }
 
+.topnav h3 {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 .App-header{
     background-color: white;
 }
@@ -45,6 +56,13 @@ body {
     background-color: white;
     
 }
+
+
+.topnav button {
+  margin-right: 10px;
+}
+
+
 .admin-section {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -54,9 +72,9 @@ body {
     width: 100%;
     margin-top: 70px;
     margin-bottom: 70px;
-
-  
+     
 }
+
 .admin-section div {
      background-color: #f1f1f1;
      color: #000;
@@ -155,6 +173,12 @@ body {
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.information-section img {
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
 }
 
 .trust-info {

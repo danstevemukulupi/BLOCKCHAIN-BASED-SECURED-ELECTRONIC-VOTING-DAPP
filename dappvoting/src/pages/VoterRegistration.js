@@ -213,21 +213,30 @@ useEffect(() => {
 
     return(
 
+     <div className="App">
+      <div className="topnav">
+        <a>
+       
+            <img src="./pics/MapoVote-nobackground.png" alt="logo" width={150} height={60} />
 
-  <>
-    <Navbar expand = "lg" className='navbarColour'>
-      <Container>
-        <Navbar.Brand href="#home">Administrator Panel</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="my-center-nav">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/administrator-page">Dashboard</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </a>
+          <h2 style={{ color: "purple" }}>MapoVote</h2>
+          <Link to="/">Home</Link>
+          <Link to="/administrator-page">Administrator</Link>
+          <Link to="/help-infos">Help & Info</Link>
+      </div>
+         
+      <br/>
+      <br/>
+          
+          <div  className="App-title">
+            <h1 style={{ color: "purple"}}>Election Dashboard</h1>
 
+          </div>
+       <br/>
+       <br/>
+
+     
 
 
 
@@ -262,7 +271,7 @@ useEffect(() => {
 
         </div>  
         
-     </>
+    </div>
 
     ) 
   } 

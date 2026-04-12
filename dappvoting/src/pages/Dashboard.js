@@ -216,7 +216,7 @@ function Dashboard() {
             <img src="./pics/MapoVote-nobackground.png" alt="logo" width={150} height={60} />
 
           </a>
-          <a style={{ color: "purple" }}>MapoVote</a>
+          <h2 style={{ color: "purple" }}>MapoVote</h2>
           <Link to="/">Home</Link>
           <Link to="/administrator-page">Administrator</Link>
           <Link to="/help-infos">Help & Info</Link>
