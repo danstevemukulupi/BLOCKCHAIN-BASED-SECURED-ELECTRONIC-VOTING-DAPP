@@ -303,6 +303,20 @@ useEffect(() => {
         style={{ marginRight: "10px", padding: "5px", width: "300px" }}
 
        />
+       <button
+        onClick={searchVoter}
+       style={{
+        padding: "6px 12px",
+        background: "purple",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        cursor: "pointer"
+       }}
+       >
+        Search
+
+       </button>
 
        </div>
 
@@ -334,7 +348,7 @@ useEffect(() => {
               />
 
               <button 
-              onclick={updateMyName}
+              onClick={() => updateMyName(v.votersAddress)} 
               style={{
                 marginTop: "10px",
                 background: "blue",

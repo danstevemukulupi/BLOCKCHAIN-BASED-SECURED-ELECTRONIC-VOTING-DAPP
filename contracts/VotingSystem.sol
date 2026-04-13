@@ -105,7 +105,7 @@ contract VotingSystem{
         // for testing
         modifier beforeVotingStarts(){
             require(votingStartTime == 0 || block.timestamp < votingStartTime, "Cannot modify after voting starts");
-         _; ;
+         _; 
         }
 
         //end of testing  
@@ -359,6 +359,41 @@ contract VotingSystem{
 
          
          // testing 2 end 
+
+         // testing 3 
+           function searchCandidate(string memory _name, address _addr) public view returns (Candidate[] memory) {
+             uint count = 0;
+
+             for (uint i = 0; i < candidatesRegistered.length; i++) {
+             Candidate memory c = candidates[candidatesRegistered[i]];
+
+             if (
+            keccak256(bytes(c.name)) == keccak256(bytes(_name)) &&
+            c.candidatesAddress == _addr
+            ) {
+            count++;
+            }
+           }
+
+          Candidate[] memory results = new Candidate[](count);
+          uint index = 0;
+
+         for (uint i = 0; i < candidatesRegistered.length; i++) {
+         Candidate memory c = candidates[candidatesRegistered[i]];
+
+        if (
+            keccak256(bytes(c.name)) == keccak256(bytes(_name)) &&
+            c.candidatesAddress == _addr
+        ) {
+            results[index] = c;
+            index++;
+        }
+       }
+
+       return results;
+       }
+
+         // end testing 3
 
         // changerowner
         // resetContract

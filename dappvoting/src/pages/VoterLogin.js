@@ -12,6 +12,22 @@ function VoterLogin() {
     const [voterEmail, setVoterEmail] = useState('');
     const [voterPassword, setVoterPassword] = useState('');
 
+
+
+
+      const [candidateName, setCandidateName] = useState('');
+      const [candidateAge, setCandidateAge] = useState('');
+      const [candidateEmail, setCandidateEmail] = useState('');
+      const [candidatePhone, setCandidatePhone] = useState('');
+      const [candidates, setCandidates] = useState([]);
+      const [contract, setContract] = useState(null);
+    
+      const [searchName, setSearchName] = useState('');
+      const [searchAddress, setSearchAddress] = useState('');
+      const [ searchResult, setSearchResult] = useState([]);
+      const [ newName, setNewName] = useState(''); 
+
+
     const handleLogin = (e) => {
         e.preventDefault();
 
@@ -20,6 +36,114 @@ function VoterLogin() {
         alert("Voter logged in successfully!");
 
     };
+
+    // search candidate by name or address 
+   const searchCandidate = async () => {
+    if (!contract || !searchName || !searchAddress) return;
+
+    try {
+      const result = await contract.searchCandidate(searchName, searchAddress);
+      setSearchResult(result);
+    } catch (err) {
+      console.error("Error searching candidate:", err);
+
+    }
+  };
+  
+  // update candidate information 
+  const updateMyName = async () => {
+    if (!contract || ! newName) return;
+
+    try {
+      const tx = await contract.updateCandidate(newName);
+      await tx.wait();
+
+      alert("Updated sucessfully!");
+      setNewName('');
+      getRegisteredCandidates();
+    }
+    catch (err) {
+      console.error("Error updating candidate information:", err);
+    }
+  };
+
+  // Fetch registered candidates
+  const getRegisteredCandidates = async () => {
+    if (!contract) return;
+    try {
+      const list = await contract.ListofRegisteredCandidates();
+      setCandidates(list);
+    } catch (err) {
+      console.error("Error fetching candidates:", err);
+    }
+  };
+
+  // Register Candidate
+  const registerCandidate = async () => {
+    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
+    //if (!contract || !candidateName ) return;
+    try {
+      //const tx = await contract.registerCandidate(candidateName);
+      const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateEmail, candidatePhone);
+      await tx.wait();
+      alert(`Candidate ${candidateName} registered!`);
+      //alert(`Candidate ${candidateAge} registered!`);
+      //alert(`Candidate ${candidateEmail} registered!`);
+      //alert(`Candidate ${candidatePhone} registered!`);
+
+      setCandidateName('');
+      setCandidateAge('');
+      setCandidateEmail('');
+      setCandidatePhone('');
+      getRegisteredCandidates();
+    } catch (err) {
+      console.error("Error registering candidate:", err);
+    }
+  };
+
+  // approve candidate 
+  const approveCandidate = async (candidateAddress) => {
+  if (!contract) return;
+  try {
+    const tx = await contract.approveCandidate(
+      candidateAddress,
+    "You are approved to run for office"
+
+  );
+    await tx.wait();
+
+    alert("Candidate approved!");
+
+    getRegisteredCandidates();
+   
+  } catch (err) {
+    console.error("Error approving candidate:", err);
+  }
+};
+
+// aceppted candidates
+const getAcceptedCandidates = async () => {
+  if (!contract) return;
+
+  try {
+    const list = await contract.ListofAcceptedCandidates();
+    setCandidates(list);
+  } catch (err) {
+    console.error("Error fetching accepted candidates:", err);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
  
@@ -54,11 +178,102 @@ function VoterLogin() {
       <h5>Your portal for participation in the upcoming general election.</h5>
     </div>
 
+   <br/>
+   <br/>
+
+   < div style ={{marginBottom: "30px"}}>
+       <h3>Search Candidate</h3>
+
+       <input
+        type="text"
+        placeholder="Enter Name"
+        value={searchName}
+        onChange={(e) => setSearchName(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px"}}
+
+       />
+
+       <input
+       type="text"
+        placeholder="Enter wallet address"
+        value={searchAddress}
+        onChange={(e) => setSearchAddress(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px", width: "300px" }}
+
+       />
+       <button
+        onClick={searchCandidate}
+       style={{
+        padding: "6px 12px",
+        background: "purple",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        cursor: "pointer"
+       }}
+       >
+        Search
+
+       </button>
+
+       </div>
+
+       
+       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap"}}>
+        {
+          searchResult.map((c, index) => (
+            <div
+            key={index}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              padding: "20px",
+              width: "300px",
+              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
+            }}
+            >
+              <h4>{c.name}</h4>
+              <p><b>Address:</b> {c.candidatesAddress}</p>
+              <p><b>Status:</b> {c.status.toString()}</p>
+              <p><b>Message:</b> {c.message}</p>
+
+              {/* update section */}
+              <input 
+              type="text"
+              placeholder="New name"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              style={{ marginRight: "10px", padding: "5px", width: "100%" }}  
+              />
+
+              <button 
+              onClick={() => updateMyName(c.candidatesAddress)} 
+              style={{
+                marginTop: "10px",
+                background: "blue",
+                color: "white", 
+                padding: "6px",
+                border: "none",
+                borderRadius: "6px",
+                width: "100%",
+                cursor: "pointer"
+              }}
+              >
+                Update Name
+              </button>
+            </div>
+          ))}
+
+       </div>
+
+
+
+
+
+
 
      <div className="voter-content">
 
-   
-      
      </div>
     
     <footer className="footer-final">
