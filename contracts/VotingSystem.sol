@@ -100,6 +100,16 @@ contract VotingSystem{
             _;
         }
 
+
+
+        // for testing
+        modifier beforeVotingStarts(){
+            require(votingStartTime == 0 || block.timestamp < votingStartTime, "Cannot modify after voting starts");
+         _; ;
+        }
+
+        //end of testing  
+
         // Constructor 
         constructor(string memory  _name) {
             owner = msg.sender;
@@ -297,18 +307,58 @@ contract VotingSystem{
         }
 
         // update Voter
-        function updateVoter(string memory _name) public {
+        function updateVoter(string memory _name) public beforeVotingStarts {
             Voter storage voter = voters[msg.sender];
             require(voter.votersAddress != address(0), "No voter data available.");
             voter.name = _name;
         }
 
         // update candidate
-        function updateCandidate(string memory _name) public {
+        function updateCandidate(string memory _name) public beforeVotingStarts {
             Candidate storage candidate = candidates[msg.sender];
-            require(candidate.candidatesAddress != address(0), "No voter data available.");
+            require(candidate.candidatesAddress != address(0), "No candidate data available.");
             candidate.name = _name;
         }
+
+
+
+
+         // testing 2
+         function searchVoter(string memory _name, address _addr) public view returns (Voter[] memory) {
+             uint count = 0;
+
+             for (uint i = 0; i < votersRegistered.length; i++) {
+             Voter memory v = voters[votersRegistered[i]];
+
+             if (
+            keccak256(bytes(v.name)) == keccak256(bytes(_name)) &&
+            v.votersAddress == _addr
+            ) {
+            count++;
+            }
+           }
+
+          Voter[] memory results = new Voter[](count);
+          uint index = 0;
+
+         for (uint i = 0; i < votersRegistered.length; i++) {
+         Voter memory v = voters[votersRegistered[i]];
+
+        if (
+            keccak256(bytes(v.name)) == keccak256(bytes(_name)) &&
+            v.votersAddress == _addr
+        ) {
+            results[index] = v;
+            index++;
+        }
+       }
+
+       return results;
+       }
+
+
+         
+         // testing 2 end 
 
         // changerowner
         // resetContract

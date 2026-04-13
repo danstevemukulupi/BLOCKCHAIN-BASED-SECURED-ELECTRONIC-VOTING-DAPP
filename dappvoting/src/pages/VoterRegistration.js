@@ -106,6 +106,45 @@ function VoterRegistration() {
   const [voters, setVoters] = useState([]);
   const [contract, setContract] = useState(null);
 
+  // new 
+  const [searchName, setSearchName] = useState('');
+  const [searchAddress, setSearchAddress] = useState('');
+  const [ searchResult, setSearchResult] = useState([]);
+  const [ newName, setNewName] = useState(''); 
+  // end new
+  
+  // find and update voter information
+  const searchVoter = async () => {
+    if (!contract || !searchName || !searchAddress) return;
+
+    try {
+      const result = await contract.searchVoter(searchName, searchAddress);
+      setSearchResult(result);
+    } catch (err) {
+      console.error("Error searching voter:", err);
+
+    }
+  };
+  // end find and update voter information
+
+  // update voter information
+  const updateMyName = async () => {
+    if (!contract || ! newName) return;
+
+    try {
+      const tx = await contract.updateVoter(newName);
+      await tx.wait();
+
+      alert("Updated sucessfully!");
+      setNewName('');
+      getRegisteredVoters();
+    }
+    catch (err) {
+      console.error("Error updating voter information:", err);
+    }
+  };
+  // end update voter information
+
   // Fetch registered voters
   const getRegisteredVoters = async () => {
     if (!contract) return;
@@ -177,6 +216,10 @@ const rejectVoter = async (voterAddress) => {
   }
 };
 
+
+
+// 
+
 // Auto fetch voters & candidates when contract changes
   useEffect(() => {
     const loadContract = async () => {
@@ -240,86 +283,150 @@ useEffect(() => {
      
 
 
+       < div style ={{marginBottom: "30px"}}>
+       <h3>Search Voter</h3>
 
-        <div className="container mt-4 voters-section">
-            <h1>Registered Voters</h1>
+       <input
+        type="text"
+        placeholder="Enter Name"
+        value={searchName}
+        onChange={(e) => setSearchName(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px"}}
 
-  <ul>
-    {voters.map((v, index) => (
-      <li key={index}>
-        {v.name} — {v.votersAddress} <br />
-        Status: {v.status.toString()} <br />
-        Message: {v.message} <br />
+       />
 
-         {v.status.toString() === "0" && (
-          <button onClick={() => approveVoter(v.votersAddress)}>
-            Approve
-          </button> 
-        )}
+       <input
+       type="text"
+        placeholder="Enter wallet address"
+        value={searchAddress}
+        onChange={(e) => setSearchAddress(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px", width: "300px" }}
 
-         {v.status.toString() === "0" && (
-          <button onClick={() => rejectVoter(v.votersAddress)}>
-            Reject
-          </button> 
-        )}
+       />
+
+       </div>
+
+       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap"}}>
+        {
+          searchResult.map((v, index) => (
+            <div
+            key={index}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              padding: "20px",
+              width: "300px",
+              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
+            }}
+            >
+              <h4>{v.name}</h4>
+              <p><b>Address:</b> {v.votersAddress}</p>
+              <p><b>Status:</b> {v.status.toString()}</p>
+              <p><b>Message:</b> {v.message}</p>
+
+              {/* update section */}
+              <input 
+              type="text"
+              placeholder="New name"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              style={{ marginRight: "10px", padding: "5px", width: "100%" }}  
+              />
+
+              <button 
+              onclick={updateMyName}
+              style={{
+                marginTop: "10px",
+                background: "blue",
+                color: "white", 
+                padding: "6px",
+                border: "none",
+                borderRadius: "6px",
+                width: "100%",
+                cursor: "pointer"
+              }}
+              >
+                Update Name
+              </button>
+            </div>
+          ))}
+
+       </div>
+      
 
 
-
-        <hr />
-      </li>
-    ))}
-  </ul>
-
-        </div>  
-
-
-
+       
 
       <div className="admin-container">
-        <h3>Voter Registry</h3>
-        <table>
+        <h3 >Voter Registry</h3>
+    
+        <table className="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Status</th>
+        <th>Message</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
 
-          <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Message</th>
-           
-          </tr>
+    <tbody>
+      {voters.map((v, index) => (
+        <tr key={index}>
+          <td>{v.name}</td>
+            <td>{v.votersAddress}</td>
+            <td>{v.status.toString()}</td>
+            <td>{v.message}</td>
+            <td>
+            {v.status.toString() === "0" && (
 
-          <tr>
+              <div style={{ color: "green", display: "inline-block", marginRight: "10px" }}>
+              <button onClick={() => approveVoter(v.votersAddress)}
+                style= {{ 
+                  background: "green", 
+                  color: "white", 
+                  border: "none", 
+                  borderCollapse: "collapse", 
+                  borderRadius: "8px", 
+                  padding: "5px 10px", 
+                  marginLeft: "10px",
+                  cursor: "pointer"
+                }}>
+                Approve 
+              </button>
+              </div>   
+            )}
 
-          {voters.map((v, index) => (
-            <td  key={index}>
-           {v.name} — {v.votersAddress} <br />
-           Status: {v.status.toString()} <br />
-           Message: {v.message} <br />
-            </td>
-             ))}
+            
+            {v.status.toString() === "0" && (
+             
+              <button onClick={() => rejectVoter(v.votersAddress)}
+              
+              style= {{ 
+                background: "red", 
+                color: "white", 
+                border: "none", 
+                borderCollapse: "collapse", 
+                borderRadius: "8px", 
+                padding: "5px 10px", 
+                marginLeft: "10px",
+                cursor: "pointer"
+              }}>
+              Reject
+              </button> 
+            )}
 
-           {voters.map((v, index) => (
-            <td  key={index}>
-           Status: {v.status.toString()} <br />
-            </td>
-             ))}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
 
-            {voters.map((v, index) => (
-            <td  key={index}>
-              Message: {v.message} <br />
-            </td>
-             ))}
 
-             <td>
+
 
           
-             </td>
-
-             
-
-
-           
-            
-          </tr>
-        </table>
       </div>
 
        <footer className="footer-final">
