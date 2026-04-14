@@ -76,6 +76,11 @@ export default Administrator;
 //import React, { useState } from "react";
 //import { Link } from "react-router-dom";
 
+import { Modal, Button, Form } from 'react-bootstrap';
+
+
+
+
 import './AdministratorPage.css';
 import { ethers } from 'ethers';
 import { useState, useEffect } from 'react';
@@ -111,6 +116,44 @@ function AdministratorPage() {
   const [candidatePhone, setCandidatePhone] = useState('');
   const [voters, setVoters] = useState([]);
   const [candidates, setCandidates] = useState([]);
+
+
+  // reset election
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [resetInput, setResetInput] = useState('');
+
+  // Reset Contract Function
+
+  const resetContract = async () => {
+    if (!contract) return;
+
+    try {
+      const signer = contract.signer;
+
+      // Require wallet re-signn (message signature)
+      const message = "Confirm RESET of election data ";
+      await signer.signMessage(message);
+
+      // Blockchain Reset
+      const tx = await contract.resetContract();
+      await tx.wait();
+
+      alert("Contract successfully reset");
+
+      setShowResetModal(false);
+      setResetInput('');
+
+      // Refresh UI
+      getRegisteredVoters();
+      getRegisteredCandidates();
+
+    } catch (err) {
+      console.error("Error resetting contract:", err);
+      alert("Failed to reset contract."); // added 
+    }
+  }
+
+  // end of reset contract function
 
   // Connect Wallet
   const connectWallet = async () => {
@@ -375,11 +418,22 @@ const getAcceptedCandidates = async () => {
 
             <Nav.Link as={Link} to="/start-election">Start Election</Nav.Link>
 
-            {!walletConnected ? (
+             {!walletConnected ? (
            <button onClick={connectWallet}>Connect Wallet</button>
            ) : (
            <p> connected Wallet {account}</p>
             )}
+
+            <button
+           className="btn btn-danger"
+           onClick={() => setShowResetModal(true)}
+           style={{marginTop: "10px", width: "200px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto"}}
+           >
+
+          🗑️ Reset Election
+        </button>
+
+            
     </div>
   
     <br/>
@@ -441,6 +495,10 @@ const getAcceptedCandidates = async () => {
       </div>
 
       <div className="quick-actions">
+
+        
+      
+
         <h5>Quick Actions</h5>
         <h5>Quick Actions</h5>
         <h5>Quick Actions</h5>
@@ -512,6 +570,47 @@ const getAcceptedCandidates = async () => {
      
      
      </div>
+
+     // modal for election reset
+     <Modal show={showResetModal} onHide={() => setShowResetModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title style={{ color: "red"}}> ⚠️ Dangerous Action</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p><strong>This will DELETE all election data:</strong></p>
+          <ul>
+            <li>All Voters</li>
+            <li>All Candidates</li>
+            <li>All Votes</li>
+            <li>All Election Results</li>
+          </ul>
+
+          <p>Type <strong>RESET</strong> to confirm:</p>
+
+          <Form.Control 
+          type="text"
+          placeholder = "Type RESET to confirm"
+          value={resetInput}
+          onChange={(e) => setResetInput(e.target.value)}
+          />
+          </Modal.Body>
+
+          <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowResetModal(false)}>
+            Cancel
+          </Button>
+
+          <Button 
+          variant="danger" 
+          
+          disabled={resetInput !== "RESET"}
+          onClick={resetContract}
+          >
+            Confirm Reset
+          </Button>
+          </Modal.Footer>
+          </Modal>
      
   
   <footer className="footer-final">

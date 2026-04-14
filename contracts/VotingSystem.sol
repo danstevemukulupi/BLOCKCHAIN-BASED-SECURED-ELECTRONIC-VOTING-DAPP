@@ -440,7 +440,51 @@ contract VotingSystem{
          // end testing 3
 
         // changerowner
-        // resetContract
+
+        // changeOwner function to transfer ownership to a new address
+        function changeOwner(address newOwner) public onlyOwner {
+            require(newOwner != address(0), "New owner cannot be the zero address");
+            owner = newOwner;
+        }
+
+
+
+        // resetcontract function to reset the contract state for a new election
+        function resetContract() public onlyOwner {
+
+            // election can only be reset after the end date
+            require(votingEndTime != 0 && block.timestamp > votingEndTime, "Election is still ongoing. Cannot reset contract.");
+              
+
+            // Reset election details
+            electionName = "";
+            votingStartTime = 0;
+            votingEndTime = 0;
+            resultPublicationTime = 0;
+
+            // Reset candidates
+            for (uint256 i = 0; i < candidatesRegistered.length; i++) {
+                delete candidates[candidatesRegistered[i]];
+            }
+            delete candidatesRegistered;
+            delete acceptedCandidates;
+            delete rejectedCandidates;
+
+            // Reset voters
+            for (uint256 i = 0; i < votersRegistered.length; i++) {
+                delete voters[votersRegistered[i]];
+            }
+            delete votersRegistered;
+            delete acceptedVoters;
+            delete rejectedVoters;
+            delete votersWhoCasted;
+
+            // Reset IDs
+            CandidateID = 1;
+            VoterID = 1;
+        }     
+
+
          // Starting Time and Ending Time of Election
        function startendVoting(uint256 _votingStartTime, uint256 _votingEndTime) public onlyOwner {
          require(votingStartTime == 0, "Voting already scheduled");
