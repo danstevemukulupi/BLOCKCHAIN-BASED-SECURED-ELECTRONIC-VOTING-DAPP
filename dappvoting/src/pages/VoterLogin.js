@@ -178,8 +178,8 @@ const getAcceptedCandidates = async () => {
       <h5>Your portal for participation in the upcoming general election.</h5>
     </div>
 
-   <br/>
-   <br/>
+   
+   
 
    < div style ={{marginBottom: "30px"}}>
        <h3>Search Candidate</h3>

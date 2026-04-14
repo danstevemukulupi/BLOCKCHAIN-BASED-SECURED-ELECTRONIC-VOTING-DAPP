@@ -21,8 +21,49 @@ function CandidateAcceptedList() {
       const [candidates, setCandidates] = useState([]);
       const [contract, setContract] = useState(null);
 
+      const [searchName, setSearchName] = useState('');
+      const [searchAddress, setSearchAddress] = useState('');
+      const [ searchResult, setSearchResult] = useState([]);
+      const [ newName, setNewName] = useState(''); 
+        
+      
+        // search candidate by name or address 
+         const searchCandidate = async () => {
+          if (!contract || !searchName || !searchAddress) return;
+      
+          try {
+            const result = await contract.searchCandidate(searchName, searchAddress);
+            setSearchResult(result);
+          } catch (err) {
+            console.error("Error searching candidate:", err);
+      
+          }
+        };
+
+        // update candidate information 
+  const updateMyName = async () => {
+    if (!contract || ! newName) return;
+
+    try {
+      const tx = await contract.updateCandidate(newName);
+      await tx.wait();
+
+      alert("Updated sucessfully!");
+      setNewName('');
+      getRegisteredCandidates();
+    }
+    catch (err) {
+      console.error("Error updating candidate information:", err);
+    }
+  };
+
+
+
+
+
+
       // Fetch registered candidates
-  const getRegisteredCandidates = async () => {
+     const getRegisteredCandidates = async () => {
     if (!contract) return;
     try {
       const list = await contract.ListofRegisteredCandidates();
@@ -133,6 +174,75 @@ useEffect(() => {
                       </div>
                    <br/>
                    <br/>
+
+
+                   < div style ={{marginBottom: "30px"}}>
+       <h3>Search Verified Candidate</h3>
+
+       <input
+        type="text"
+        placeholder="Enter Candidate Name"
+        value={searchName}
+        onChange={(e) => setSearchName(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px"}}
+
+       />
+
+       <input
+       type="text"
+        placeholder="Enter Candidate address"
+        value={searchAddress}
+        onChange={(e) => setSearchAddress(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px", width: "300px" }}
+
+       />
+       <button
+        onClick={searchCandidate}
+       style={{
+        padding: "6px 12px",
+        background: "purple",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        cursor: "pointer"
+       }}
+       >
+        Search
+
+       </button>
+
+       </div>
+
+       
+       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap"}}>
+        {
+          searchResult.map((c, index) => (
+            <div
+            key={index}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              padding: "20px",
+              width: "auto",
+              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
+            }}
+            >
+              <h4>{c.name}</h4>
+              <p><b>Address:</b> {c.candidatesAddress}</p>
+              <p><b>Status:</b> {c.status.toString()}</p>
+             
+
+             
+            </div>
+          ))}
+
+       </div>
+       <br/>
+       <br/>
+       <br/>
+       <br/>
+
+
             
                   <div className="admin-container">
                     <h3 >Verified Candidate Records</h3>
@@ -164,8 +274,11 @@ useEffect(() => {
                   ))}
                 </tbody>
               </table>
+
             
                   </div>
+                  <br/>
+                  <br/>
             
                    <footer className="footer-final">
                   

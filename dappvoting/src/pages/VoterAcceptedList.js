@@ -19,11 +19,53 @@ function VoterAcceptedList() {
   const [voters, setVoters] = useState([]);
   const [contract, setContract] = useState(null);
 
+  // new 
+  const [searchName, setSearchName] = useState('');
+  const [searchAddress, setSearchAddress] = useState('');
+  const [ searchResult, setSearchResult] = useState([]);
+  const [ newName, setNewName] = useState(''); 
+    // end new
+
+    // find and update voter information
+  const searchVoter = async () => {
+    if (!contract || !searchName || !searchAddress) return;
+
+    try {
+      const result = await contract.searchVoter(searchName, searchAddress);
+      setSearchResult(result);
+    } catch (err) {
+      console.error("Error searching voter:", err);
+
+    }
+  };
+  // end find and update voter information
+
+  // update voter information
+  const updateMyName = async () => {
+    if (!contract || ! newName) return;
+
+    try {
+      const tx = await contract.updateVoter(newName);
+      await tx.wait();
+
+      alert("Updated sucessfully!");
+      setNewName('');
+      getRegisteredVoters();
+    }
+    catch (err) {
+      console.error("Error updating voter information:", err);
+    }
+  };
+  // end update voter information
+
+
+
+
   // Fetch registered voters
   const getRegisteredVoters = async () => {
     if (!contract) return;
     try {
-      const list = await contract.ListofRegisteredVoters();
+      const list = await contract.ListofAcceptedVoters();
       setVoters(list);
     } catch (err) {
       console.error("Error fetching voters:", err);
@@ -90,7 +132,7 @@ const approveVoter = async (voterAddress) => {
           setContract(votigContract);
 
           // automatically load voters
-          const list = await votigContract.ListofRegisteredVoters();
+          const list = await votigContract.ListofAcceptedVoters();
           setVoters(list);
       } catch (err) {
         console.error("Error loading contract:", err);
@@ -122,12 +164,79 @@ useEffect(() => {
                
             <br/>
             <br/>
+
+           
                 
                 <div  className="App-title">
                   <h1 style={{ color: "purple"}}>Verified Voters</h1>
                   <h5>List of voters who have been verified and approved in the system</h5>
       
                 </div>
+             <br/>
+             <br/>
+             < div style ={{marginBottom: "30px"}}>
+       <h3>Search Verified Voter</h3>
+
+       <input
+        type="text"
+        placeholder="Enter Voter Name"
+        value={searchName}
+        onChange={(e) => setSearchName(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px"}}
+
+       />
+
+       <input
+       type="text"
+        placeholder="Enter Voter address"
+        value={searchAddress}
+        onChange={(e) => setSearchAddress(e.target.value)}
+        style={{ marginRight: "10px", padding: "5px", width: "300px" }}
+
+       />
+       <button
+        onClick={searchVoter}
+       style={{
+        padding: "6px 12px",
+        background: "purple",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        cursor: "pointer"
+       }}
+       >
+        Search
+
+       </button>
+
+       </div>
+
+       <div style={{ display: "flex", gap: "20px", flexWrap: "wrap"}}>
+        {
+          searchResult.map((v, index) => (
+            <div
+            key={index}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              padding: "20px",
+              width: "auto",
+              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
+            }}
+            >
+              <h4>{v.name}</h4>
+              <p><b>Address:</b> {v.votersAddress}</p>
+              <p><b>Status:</b> {v.status.toString()}</p>
+           
+
+              
+            </div>
+          ))}
+
+       </div>
+      
+             <br/>
+             <br/>
              <br/>
              <br/>
       
@@ -163,6 +272,9 @@ useEffect(() => {
         </table>
       
             </div>
+            <br/>
+            <br/>
+
       
              <footer className="footer-final">
             

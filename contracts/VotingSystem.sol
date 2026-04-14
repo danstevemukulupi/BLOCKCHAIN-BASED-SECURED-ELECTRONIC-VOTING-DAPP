@@ -187,6 +187,17 @@ contract VotingSystem{
             voter.message = _message;
             acceptedVoters.push(_votersAddress);
 
+          
+
+                // remove from rejected lists
+                    for (uint256 i = 0; i < rejectedVoters.length; i++) {
+                        if (rejectedVoters[i] == _votersAddress) {
+                            rejectedVoters[i] = rejectedVoters[rejectedVoters.length - 1];
+                            rejectedVoters.pop();
+                            break;
+                        }
+                    }
+
         }
         
         // approval of Candidate
@@ -197,6 +208,17 @@ contract VotingSystem{
             candidate.message = _message;
             acceptedCandidates.push(_candidatesAddress);
 
+          
+
+            // remove from rejected lists
+                    for (uint256 i = 0; i < rejectedCandidates.length; i++) {
+                        if (rejectedCandidates[i] == _candidatesAddress) {
+                            rejectedCandidates[i] = rejectedCandidates[rejectedCandidates.length - 1];
+                            rejectedCandidates.pop();
+                            break;
+                        }
+                    }
+
         }
 
         // Reject Voter
@@ -206,6 +228,17 @@ contract VotingSystem{
             voter.status = ConfirmationStatus.Denied;
             voter.message = _message;
             rejectedVoters.push(_votersAddress); 
+
+      
+
+            // remove from approved lists
+                for (uint256 i = 0; i < acceptedVoters.length; i++) {
+                    if (acceptedVoters[i] == _votersAddress) {
+                        acceptedVoters[i] = acceptedVoters[acceptedVoters.length - 1];
+                        acceptedVoters.pop();
+                        break;
+                    }
+                }
         }
 
         // Reject Candidate
@@ -215,6 +248,17 @@ contract VotingSystem{
             candidate.status = ConfirmationStatus.Denied;
             candidate.message = _message;
             rejectedCandidates.push(_candidatesAddress); 
+
+        
+
+            // remove from approved lists
+                for (uint256 i = 0; i < acceptedCandidates.length; i++) {
+                    if (acceptedCandidates[i] == _candidatesAddress) {
+                        acceptedCandidates[i] = acceptedCandidates[acceptedCandidates.length - 1];
+                        acceptedCandidates.pop();
+                        break;
+                    }
+                }
         }
 
         // Starting time and ending time

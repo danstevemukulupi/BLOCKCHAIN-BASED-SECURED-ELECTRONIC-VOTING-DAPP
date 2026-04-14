@@ -279,6 +279,7 @@ useEffect(() => {
           </div>
        <br/>
        <br/>
+       
 
      
 
@@ -288,7 +289,7 @@ useEffect(() => {
 
        <input
         type="text"
-        placeholder="Enter Name"
+        placeholder="Enter Voter Name"
         value={searchName}
         onChange={(e) => setSearchName(e.target.value)}
         style={{ marginRight: "10px", padding: "5px"}}
@@ -297,7 +298,7 @@ useEffect(() => {
 
        <input
        type="text"
-        placeholder="Enter wallet address"
+        placeholder="Enter Voter address"
         value={searchAddress}
         onChange={(e) => setSearchAddress(e.target.value)}
         style={{ marginRight: "10px", padding: "5px", width: "300px" }}
@@ -329,7 +330,7 @@ useEffect(() => {
               border: "1px solid #ccc",
               borderRadius: "12px",
               padding: "20px",
-              width: "300px",
+              width: "auto",
               boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
             }}
             >
@@ -366,10 +367,11 @@ useEffect(() => {
           ))}
 
        </div>
-      
 
-
-       
+       <br/>
+       <br/>
+       <br/>
+       <br/>
 
       <div className="admin-container">
         <h3 >Voter Registry</h3>
@@ -437,11 +439,10 @@ useEffect(() => {
     </tbody>
   </table>
 
-
-
-
           
       </div>
+       <br/>
+       <br/>
 
        <footer className="footer-final">
       
