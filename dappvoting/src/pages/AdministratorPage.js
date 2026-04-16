@@ -92,6 +92,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 
+import { uploadToPinata } from '../utils/pinatra';
+import axios from 'axios';
+
 
 
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
@@ -109,11 +112,23 @@ function AdministratorPage() {
   const [voterAge, setVoterAge] = useState('');
   const [voterEmail, setVoterEmail] = useState('');
   const [voterPhone, setVoterPhone] = useState('');
+  const [voterhomeAddress, setVoterHomeAddress] = useState('');
+  const [voternationalId, setVoterNationalId] = useState('');
+ 
 
   const [candidateName, setCandidateName] = useState('');
   const [candidateAge, setCandidateAge] = useState('');
   const [candidateEmail, setCandidateEmail] = useState('');
   const [candidatePhone, setCandidatePhone] = useState('');
+  const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+  const [politicalParty, setPoliticalParty] = useState('');
+  const [goalsManifesto, setGoalsManifesto] = useState('');
+  const [vision, setVision] = useState('');
+  const [experience, setExperience] = useState('');
+  const [candidatenationalId, setCandidateNationalId] = useState('');
+ 
+
+
   const [voters, setVoters] = useState([]);
   const [candidates, setCandidates] = useState([]);
 
@@ -121,6 +136,23 @@ function AdministratorPage() {
   // reset election
   const [showResetModal, setShowResetModal] = useState(false);
   const [resetInput, setResetInput] = useState('');
+
+
+  const [ipfsHash, setIpfsHash] = useState("");
+  // call backend from react to send email notification to voters and candidates when they are approved or rejected by admin
+  const sendEmailNotification = async (to, subject, text) => {
+    try {
+      await axios.post('http://localhost:5000/send-email', {
+        to,
+        subject,
+        text
+      });
+      console.log('Email sent successfully');
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  };
+
 
   // Reset Contract Function
 
@@ -218,7 +250,7 @@ function AdministratorPage() {
   };
 
   // Register Voter
-  const registerVoter = async () => {
+  /*const registerVoter = async () => {
     //if (!contract || !voterName) return;
     if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone) return;
     try {
@@ -238,10 +270,51 @@ function AdministratorPage() {
     } catch (err) {
       console.error("Error registering voter:", err);
     }
+  };*/
+
+
+
+  // register voter new version with IPFS hash 
+  const registerVoter = async () => {
+    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
+
+    try {
+      // Upload voter data to IPFS and get the hash
+      const ipfsVoterData = {
+        name: voterName,
+        age: voterAge,
+        email: voterEmail,
+        phone: voterPhone,
+        address: voterhomeAddress,
+        nationalId: voternationalId,
+       
+      };
+
+      // Upload to IPFS and get the hash
+      const ipfsHash = await uploadToPinata(ipfsVoterData);
+
+      // Register voter and store only the IPFS hash on blockchain
+      const tx = await contract.registerVoter(ipfsHash);
+      await tx.wait();
+      alert("Registration submitted. Waiting for admin approval.");
+
+      setVoterName('');
+      setVoterAge('');
+      setVoterEmail(''); 
+      setVoterPhone('');
+      setVoterHomeAddress('');
+      setVoterNationalId('');
+      
+
+      getRegisteredVoters();
+    } catch (err) {
+      console.error("Error registering voter:", err);
+    }
   };
 
 
-const approveVoter = async (voterAddress) => {
+
+/*const approveVoter = async (voterAddress) => {
   if (!contract) return;
   try {
     const tx = await contract.approveVoter(
@@ -257,9 +330,28 @@ const approveVoter = async (voterAddress) => {
   } catch (err) {
     console.error("Error approving voter:", err);
   }
+};*/
+
+// approve voter with email notification
+const approveVoter = async (voterAddress, voterEmail) => {
+  const tx = await contract.approveVoter(
+    voterAddress,
+    "You are approved to vote"
+  );
+  await tx.wait();
+
+  // Send email notification
+  await sendEmailNotification(voterEmail, "Voter Approval", "You have been approved to vote.");
+  //alert("Voter approved!");
+
+  getRegisteredVoters();
 };
 
-const rejectVoter = async (voterAddress) => {
+
+
+
+
+/*const rejectVoter = async (voterAddress) => {
   if (!contract) return;
   try {
     const tx = await contract.rejectVoter(
@@ -276,6 +368,19 @@ const rejectVoter = async (voterAddress) => {
   } catch (err) {
     console.error("Error rejecting voter:", err);
   }
+};*/
+
+// reject voter with email notification
+const rejectVoter = async (voterAddress, voterEmail) => {
+  const tx = await contract.rejectVoter(
+    voterAddress,
+    "You are not approved to vote"
+  );
+  await tx.wait();
+  // Send email notification
+  await sendEmailNotification(voterEmail, "Voter Rejection", "Your voter application has been rejected. Please update your details and try again.");
+  //alert("Voter rejected!");
+  getRegisteredVoters();
 };
 
 
@@ -296,7 +401,7 @@ const getAcceptedVoters = async () => {
 
 
   // Register Candidate
-  const registerCandidate = async () => {
+  /*const registerCandidate = async () => {
     if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
     //if (!contract || !candidateName ) return;
     try {
@@ -316,7 +421,59 @@ const getAcceptedVoters = async () => {
     } catch (err) {
       console.error("Error registering candidate:", err);
     }
-  };
+  };*/
+
+  // register candidate new version with IPFS hash
+  const registerCandidate = async () => {
+    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience ||  !candidatenationalId ) return;
+
+    try {
+      // Upload candidate data to IPFS and get the hash
+      const ipfsCandidateData = {
+        name: candidateName, 
+        age: candidateAge,
+        email: candidateEmail,
+        phone: candidatePhone,
+        address: candidatehomeAddress,
+        politicalParty: politicalParty,
+        goalsManifesto: goalsManifesto,
+        vision: vision, 
+        experience: experience,
+        nationalId: candidatenationalId,
+      
+       
+      };
+
+      // Upload to IPFS and get the hash
+      const ipfsHash = await uploadToPinata(ipfsCandidateData);
+
+      // Register candidate and store only the IPFS hash on blockchain
+      const tx = await contract.registerCandidate(ipfsHash);
+      await tx.wait();
+      alert("Registration submitted. Waiting for admin approval.");
+
+      setCandidateName('');
+      setCandidateAge('');
+      setCandidateEmail('');
+      setCandidatePhone('');
+      setCandidateHomeAddress('');
+      setPoliticalParty('');
+      setGoalsManifesto('');
+      setVision('');
+      setExperience('');
+      setCandidateNationalId('');
+
+      getRegisteredCandidates();
+    } catch (err) {
+      console.error("Error registering candidate:", err);
+    }
+    };
+
+
+
+
+
+
 
 // approve candidate 
   const approveCandidate = async (candidateAddress) => {
@@ -511,11 +668,11 @@ const getAcceptedCandidates = async () => {
      
 
       <div className="container mt-4 voters-section">
-  <h2>Registered Voters</h2>
+ {/*} <h2>Registered Voters</h2>*/}
 
   {/*<button onClick={getRegisteredVoters}>Load Registered Voters</button>*/}
 
-  <ul>
+  {/*<ul>
     {voters.map((v, index) => (
       <li key={index}>
         {v.name} — {v.votersAddress} <br />
@@ -552,7 +709,7 @@ const getAcceptedCandidates = async () => {
         <hr />
       </li>
     ))}
-  </ul>
+  </ul>*/}
   
  </div>
   <br/>
@@ -571,7 +728,7 @@ const getAcceptedCandidates = async () => {
      
      </div>
 
-     // modal for election reset
+     {/* modal for election reset*/}
      <Modal show={showResetModal} onHide={() => setShowResetModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "red"}}> ⚠️ Dangerous Action</Modal.Title>

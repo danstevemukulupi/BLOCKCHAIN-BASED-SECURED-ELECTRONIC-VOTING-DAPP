@@ -27,12 +27,18 @@ contract VotingSystem{
         //bool votedRoundTwo;
         bool alreadyVoted;
 
-        string name;
-        uint256 age;
-        string email;
-        string phone;
+        // off coz ipfs
+        //string name;
+        //uint256 age;
+        //string email;
+        //string phone;
+        // off end of ipfs 
+
         string message;
-        //string ipfs;
+
+        // on coz ipfs
+        string ipfsHash; // all personal data stored here 
+        // on end of ipfs 
 
         uint256 registeredId;
         address votersAddress;
@@ -42,22 +48,25 @@ contract VotingSystem{
 
    // Candidate Bookeeping 
    struct Candidate {
-        string name;
-        //string ipfs;
-        string message;
-        uint256 age;
-        string email;
-        string phone;
+        //string name;
+       
+        //string message;
+        //uint256 age;
+        //string email;
+        //string phone;
         //string bio;
         //string goals;
         //string experience;
         //string vision;
 
+        
 
         uint256 registeredId;
         uint256 voteCalculation;
         address candidatesAddress;
         ConfirmationStatus status;
+        string ipfsHash; // all personal data stored here manifesto/goals/documents etc 
+        string message;
 
    }
 
@@ -122,7 +131,7 @@ contract VotingSystem{
        
 
         // Register a voter 
-    function registerVoter(string memory _name, uint256 _age, string memory _email, string memory _phone) public {
+    function registerVoter(string memory _ipfsHash) public {
 
         //require(voters[msg.sender].votersAddress == address(0), // after 
         //"You have already registered as a voter.");
@@ -131,48 +140,72 @@ contract VotingSystem{
             /*votedRoundOne: false,
             votedRoundTwo: false,
             alreadyVoted: false,*/
-            alreadyVoted: false,
+            //alreadyVoted: false,
 
-            name: _name,
-            age: _age,
-            email: _email,
-            phone: _phone,
-            message: "Registration is awaiting approval",
+            //name: _name, off coz ipfs
+            //age: _age, off coz ipfs
+            //email: _email, off coz ipfs
+            //phone: _phone, off coz ipfs
+            //message: "Registration is awaiting approval",
+
+            alreadyVoted: false,
             registeredId: VoterID,
             votersAddress: msg.sender,
-            status: ConfirmationStatus.Awaiting
+            status: ConfirmationStatus.Awaiting,
+
+            ipfsHash: _ipfsHash, // all personal data stored here
+            message: "Registration is awaiting approval"
+
+
+           
         });
 
         voters[msg.sender] = newVoter; // good 
+       // new 
+        //voters[msg.sendert].status == Accepted;
+
         votersRegistered.push(msg.sender); // good 
-        VoterID++; // good 
+        VoterID++; // good
+
+        
 
         //voters[VoterID] = newVoter; // after 
         //votersRegistered.push(VoterID);
         //VoterID++;
+
+
+      
+
+
     }
 
         
 
         // Register a candidate
-    function registerCandidate(string memory _name, uint256 _age, string memory _email, string memory _phone) public {
+    function registerCandidate(string  memory _ipfsHash) public {
         Candidate memory newCandidate = Candidate({
-            name: _name,
-            age: _age,
-            email: _email,
-            phone: _phone,
+            //name: _name,
+            //age: _age,
+            //email: _email,
+            //phone: _phone,
+           
            // bio: _bio,
             //goals: _goals,
             //experience: _experience,
             //vision: _vision,
-            message: "Registration is awaiting approval",
+          
             registeredId: CandidateID,
             voteCalculation: 0,
             candidatesAddress: msg.sender,
-            status: ConfirmationStatus.Awaiting
+            status: ConfirmationStatus.Awaiting,
+            ipfsHash: _ipfsHash,
+             message: "Registration is awaiting approval"
         });
 
         candidates[msg.sender] = newCandidate;
+
+        // new 
+        //candidates[msg.sender].status == Accepted; 
         candidatesRegistered.push(msg.sender);
         CandidateID++;
     }
@@ -332,50 +365,67 @@ contract VotingSystem{
         }
 
         // Get Voter
-        function findVoter(address _votersAddress) public view returns (Voter memory) {
-            //return voters[_votersAddress];
+        //function findVoter(address _votersAddress) public view returns (Voter memory) {
+            //return voters[_votersAddress]; no more
 
-            Voter memory voter = voters[_votersAddress];
-           require(voter.votersAddress != address(0), "Voter not found");
-           require(voter.status == ConfirmationStatus.Accepted, "Voter is not accepted");
-           return voter;
-        }
+            //Voter memory voter = voters[_votersAddress];
+           //require(voter.votersAddress != address(0), "Voter not found");
+           //require(voter.status == ConfirmationStatus.Accepted, "Voter is not accepted");
+           //return voter;
+        //}
 
         // Get Candidate
-        function findCandidate(address _candidatesAddress) public view returns (Candidate memory) {
-            //return candidates[_candidatesAddress];
-            Candidate memory candidate = candidates[_candidatesAddress];
-            require(candidate.candidatesAddress != address(0), "Candidate not found");
-            require(candidate.status == ConfirmationStatus.Accepted, "Candidate is not accepted");
-             return candidate;
-        }
+        //function findCandidate(address _candidatesAddress) public view returns (Candidate memory) {
+            //return candidates[_candidatesAddress];no more
+
+            //Candidate memory candidate = candidates[_candidatesAddress];
+            //require(candidate.candidatesAddress != address(0), "Candidate not found");
+            //require(candidate.status == ConfirmationStatus.Accepted, "Candidate is not accepted");
+             //return candidate;
+        //}
 
         // update Voter
-        function updateVoter(string memory _name) public beforeVotingStarts {
+        /*function updateVoter(string memory _name) public beforeVotingStarts {
             Voter storage voter = voters[msg.sender];
             require(voter.votersAddress != address(0), "No voter data available.");
             voter.name = _name;
-        }
+        }*/
+
+       // update Voter ipfs hash
+       function updateVoter(string memory _ipfsHash) public beforeVotingStarts {
+       Voter storage voter = voters[msg.sender];
+       require(voter.votersAddress != address(0), "No voter data available.");
+       voter.ipfsHash = _ipfsHash;
+       }
+
+
 
         // update candidate
-        function updateCandidate(string memory _name) public beforeVotingStarts {
+        /*function updateCandidate(string memory _name) public beforeVotingStarts {
             Candidate storage candidate = candidates[msg.sender];
             require(candidate.candidatesAddress != address(0), "No candidate data available.");
             candidate.name = _name;
-        }
+        }*/
+
+       // update candidate ipfs hash 
+       function updateCandidate(string memory _ipfsHash) public beforeVotingStarts {
+        Candidate storage candidate = candidates[msg.sender];
+        require(candidate.candidatesAddress != address(0), "No candidate data available.");
+        candidate.ipfsHash = _ipfsHash;
+       }
 
 
 
 
          // testing 2
-         function searchVoter(string memory _name, address _addr) public view returns (Voter[] memory) {
+         function searchVoter(string memory _ipfsHash, address _addr) public view returns (Voter[] memory) {
              uint count = 0;
 
              for (uint i = 0; i < votersRegistered.length; i++) {
              Voter memory v = voters[votersRegistered[i]];
 
              if (
-            keccak256(bytes(v.name)) == keccak256(bytes(_name)) &&
+            keccak256(bytes(v.ipfsHash)) == keccak256(bytes(_ipfsHash)) &&
             v.votersAddress == _addr
             ) {
             count++;
@@ -389,7 +439,7 @@ contract VotingSystem{
          Voter memory v = voters[votersRegistered[i]];
 
         if (
-            keccak256(bytes(v.name)) == keccak256(bytes(_name)) &&
+            keccak256(bytes(v.ipfsHash)) == keccak256(bytes(_ipfsHash)) &&
             v.votersAddress == _addr
         ) {
             results[index] = v;
@@ -405,14 +455,15 @@ contract VotingSystem{
          // testing 2 end 
 
          // testing 3 
-           function searchCandidate(string memory _name, address _addr) public view returns (Candidate[] memory) {
+         // old function searchCandidate(string memory _name, address _addr) public view returns (Candidate[] memory)
+           function searchCandidate(string memory _ipfsHash, address _addr) public view returns (Candidate[] memory) {
              uint count = 0;
 
              for (uint i = 0; i < candidatesRegistered.length; i++) {
              Candidate memory c = candidates[candidatesRegistered[i]];
 
              if (
-            keccak256(bytes(c.name)) == keccak256(bytes(_name)) &&
+            keccak256(bytes(c.ipfsHash)) == keccak256(bytes(_ipfsHash)) &&
             c.candidatesAddress == _addr
             ) {
             count++;
@@ -426,7 +477,9 @@ contract VotingSystem{
          Candidate memory c = candidates[candidatesRegistered[i]];
 
         if (
-            keccak256(bytes(c.name)) == keccak256(bytes(_name)) &&
+            //keccak256(bytes(c.name)) == keccak256(bytes(_name)) old 
+            //keccak256(bytes(c.ipfsHash)) == keccak256(bytes(_ipfsHash)) new 
+            keccak256(bytes(c.ipfsHash)) == keccak256(bytes(_ipfsHash)) &&
             c.candidatesAddress == _addr
         ) {
             results[index] = c;
@@ -542,7 +595,7 @@ contract VotingSystem{
             return leadingCandidate;
         }
         // Winning Candidate
-        function winningCandidate() public view returns (Candidate memory) {
+        /*function winningCandidate() public view returns (Candidate memory) {
             //require(block.timestamp > votingEndTime, "Voting not finished  yet.");
             //return CurrentVotingStatus();
             require(acceptedCandidates.length > 0, "No Candidates accepted for election.");
@@ -561,7 +614,28 @@ contract VotingSystem{
                 });
             }
             return CurrentVotingStatus();
-        }
+        }*/
+
+       // winning new version ipfs
+       function winningCandidate() public view returns (Candidate memory) {
+    require(acceptedCandidates.length > 0, "No Candidates accepted for election.");
+
+    if (block.timestamp < votingEndTime) {
+        return Candidate({
+            registeredId: 0,
+            voteCalculation: 0,
+            candidatesAddress: address(0),
+            status: ConfirmationStatus.Awaiting,
+            ipfsHash: "",
+            message: "Please wait until election ends"
+        });
+    }
+
+    return CurrentVotingStatus();
+}
+
+
+
 
        // Result Publication time 
          function setResultPublicationTime(uint256 _resultPublicationTime) public onlyOwner {

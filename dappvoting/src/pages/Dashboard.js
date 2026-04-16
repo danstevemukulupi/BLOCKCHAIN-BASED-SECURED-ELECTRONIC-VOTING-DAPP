@@ -54,6 +54,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './Dashboard.css';
+import { uploadToPinata } from '../utils/pinatra';
 
 
 
@@ -71,11 +72,24 @@ function Dashboard() {
   const [voterAge, setVoterAge] = useState('');
   const [voterEmail, setVoterEmail] = useState('');
   const [voterPhone, setVoterPhone] = useState('');
+  const [voterhomeAddress, setVoterHomeAddress] = useState('');
+  const [voternationalId, setVoterNationalId] = useState('');
+
 
   const [candidateName, setCandidateName] = useState('');
   const [candidateAge, setCandidateAge] = useState('');
   const [candidateEmail, setCandidateEmail] = useState('');
   const [candidatePhone, setCandidatePhone] = useState('');
+  const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+  const [politicalParty, setPoliticalParty] = useState('');
+  const [goalsManifesto, setGoalsManifesto] = useState('');
+  const [vision, setVision] = useState('');
+  const [experience, setExperience] = useState('');
+  const [candidatenationalId, setCandidateNationalId] = useState('');
+
+
+  const [ipfsHash, setIpfsHash] = useState("");
+
   const [voters, setVoters] = useState([]);
   const [candidates, setCandidates] = useState([]);
 
@@ -139,7 +153,7 @@ function Dashboard() {
   };
 
   // Register Voter
-  const registerVoter = async () => {
+  /*const registerVoter = async () => {
     //if (!contract || !voterName) return; // 1. it was her
     if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone) return;// uncommented
     try {
@@ -161,10 +175,48 @@ function Dashboard() {
     } catch (err) {
       console.error("Error registering voter:", err);
     }
+  };*/
+
+   // Register voter new version with IPFS hash
+  const registerVoter = async () => {
+    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
+
+    try {
+      // Upload voter data to IPFS and get the hash
+      const ipfsVoterData = {
+        name: voterName,
+        age: voterAge,
+        email: voterEmail,
+        phone: voterPhone,
+        address: voterhomeAddress,
+        nationalId: voternationalId,
+      
+      };
+
+      // Upload to IPFS and get the hash
+      const ipfsHash = await uploadToPinata(ipfsVoterData);
+
+      // Register voter and store only the IPFS hash on blockchain
+      const tx = await contract.registerVoter(ipfsHash);
+      await tx.wait();
+      alert("Registration submitted. Waiting for admin approval.");
+
+      setVoterName('');
+      setVoterAge('');
+      setVoterEmail(''); 
+      setVoterPhone('');
+      setVoterHomeAddress('');
+      setVoterNationalId('');
+     
+
+      getRegisteredVoters();
+    } catch (err) {
+      console.error("Error registering voter:", err);
+    }
   };
 
   // Register Candidate
-  const registerCandidate = async () => {
+  /*const registerCandidate = async () => {
     if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
     //if (!contract || !candidateName ) return;
     try {
@@ -184,7 +236,60 @@ function Dashboard() {
     } catch (err) {
       console.error("Error registering candidate:", err);
     }
-  };
+  };*/
+
+  // Register candidate new version with IPFS hash
+  const registerCandidate = async () => {
+    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience ||  !candidatenationalId ) return;
+
+    try {
+      // Upload candidate data to IPFS and get the hash
+      const ipfsCandidateData = {
+        name: candidateName, 
+        age: candidateAge,
+        email: candidateEmail,
+        phone: candidatePhone,
+        address: candidatehomeAddress,
+        politicalParty: politicalParty,
+        goalsManifesto: goalsManifesto,
+        vision: vision, 
+        experience: experience,
+        nationalId: candidatenationalId,
+     
+       
+      };
+
+      // Upload to IPFS and get the hash
+      const ipfsHash = await uploadToPinata(ipfsCandidateData);
+
+      // Register candidate and store only the IPFS hash on blockchain
+      const tx = await contract.registerCandidate(ipfsHash);
+      await tx.wait();
+      alert("Registration submitted. Waiting for admin approval.");
+
+      setCandidateName('');
+      setCandidateAge('');
+      setCandidateEmail('');
+      setCandidatePhone('');
+      setCandidateHomeAddress('');
+      setPoliticalParty('');
+      setGoalsManifesto('');
+      setVision('');
+      setExperience('');
+      setCandidateNationalId('');
+
+      getRegisteredCandidates();
+    } catch (err) {
+      console.error("Error registering candidate:", err);
+    }
+    };
+
+
+
+  
+
+
+
 
   // Vote
   const voteForCandidate = async (candidateAddress) => {
@@ -271,7 +376,12 @@ function Dashboard() {
                   <li> View election results</li>
                 </ul>
 
-                <button className="voter-btn">Voter Login</button>
+                <button className="voter-btn">
+                  <Link to="/voter-login"  className="login-link">
+                 Voter Login
+                </Link>
+                </button>
+                
                 </div>
 
               <div className="candidate">
@@ -307,7 +417,7 @@ function Dashboard() {
           </div>
 
 
-
+       {/*}
         <div className="form-container">
           <h2>Voter Registration</h2>
           <input
@@ -346,20 +456,21 @@ function Dashboard() {
             Already registered? <Link to="/voter-login"  className="login-link">
             Login
             </Link>
-          </p>
+          </p> */}
 
     
-          <ul>
+          {/*<ul>*/}
             {/*{ voters.map((v, index) => ( 
               <li key={index}>          
                 {v.name} — {v.votersAddress} — Status: {v.status.toString()} — Message: {v.message}
               </li>
-            ))}*/}
+            ))}*/} {/*</header>
           </ul> 
 
           
-        </div>
+        </div>*/}
 
+        {/*
         <div className="form-container">
           <h2>Candidate Registration</h2>
           <input
@@ -400,16 +511,17 @@ function Dashboard() {
             Login
             </Link>
           </p>
-          {/*<h3>Registered Candidates</h3>*/}
-         {/* <ul>
+
+          <h3>Registered Candidates</h3>
+          <ul>
             {candidates.map((c, index) => (
               <li key={index}>
                 {c.name} — {c.candidatesAddress} — Status: {c.status}
                 <button onClick={() => voteForCandidate(c.candidatesAddress)}>Vote</button>
               </li>
             ))}
-          </ul>*/}
-        </div>
+          </ul>
+        </div>*/}
       </header>
       
       <footer className="footer-final">
