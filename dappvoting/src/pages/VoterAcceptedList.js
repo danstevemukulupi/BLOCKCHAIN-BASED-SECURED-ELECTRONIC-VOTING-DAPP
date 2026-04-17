@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import './VoterAcceptedList.css';
+import axios from 'axios';
 
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
@@ -16,7 +17,10 @@ function VoterAcceptedList() {
   const [voterAge, setVoterAge] = useState('');
   const [voterEmail, setVoterEmail] = useState('');
   const [voterPhone, setVoterPhone] = useState('');
+  const [voterhomeAddress, setVoterHomeAddress] = useState('');
+  const [voternationalId, setVoterNationalId] = useState('');
   const [voters, setVoters] = useState([]);
+
   const [contract, setContract] = useState(null);
 
   // new 
@@ -66,19 +70,95 @@ function VoterAcceptedList() {
     if (!contract) return;
     try {
       const list = await contract.ListofAcceptedVoters();
-      setVoters(list);
+      
+      const votersWithDetails = await Promise.all(
+        list.map(async (v) => {
+
+          console.log("FULL VOTER OBJECT:", v); 
+          console.log("HASH FROM CONTRACT:", v.ipfsHash); 
+          try {
+            // fetch details from backend using IPFS hash 
+            const res = await axios.get(`http://localhost:5000/voter/${v.ipfsHash}`);
+
+            return {
+              ...v,
+              voterName: res.data.name,
+              voterAge: res.data.age,
+              voterEmail: res.data.email,
+              voterPhone: res.data.phone,
+              voterHomeAddress: res.data.address,
+              voterNationalId: res.data.nationalId,
+            };
+            } catch (err) {
+              console.error("Error fetching voter details from backend:", err);
+
+              // fallback if IPFs fails
+              return {
+                ...v,
+                voterName: "N/A",
+                voterAge: "N/A",
+                voterEmail: "N/A",
+                voterPhone: "N/A",
+                voterHomeAddress: "N/A",
+                voterNationalId: "N/A",
+              };
+            }
+          
+        })
+      );
+
+      setVoters(votersWithDetails);
     } catch (err) {
       console.error("Error fetching voters:", err);
     }
   };
 
+
+
   // Register Voter
   const registerVoter = async () => {
     //if (!contract || !voterName) return;
-    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone) return;
+    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
     try {
-      //const tx = await contract.registerVoter(voterName);
-      const tx = await contract.registerVoter(voterName, parseInt(voterAge), voterEmail, voterPhone);
+
+       // Upload voter data to IPFS and get the hash
+        const ipfsVoterData = {
+        name: voterName,
+        age: voterAge,
+        email: voterEmail,
+        phone: voterPhone,
+        address: voterhomeAddress,
+        nationalId: voternationalId,
+      
+      };
+
+       // Upload to IPFS and get the hash
+        const response = await axios.post(
+  "http://localhost:5000/upload",
+  ipfsVoterData
+);
+
+console.log("UPLOAD RESPONSE:", response.data);
+
+// HARD CHECK
+if (!response.data || !response.data.IpfsHash) {
+  throw new Error("IPFS upload failed or missing IpfsHash");
+}
+
+const ipfsHash = response.data.IpfsHash;
+
+
+console.log("FULL IPFS HASH BEFORE CONTRACT:", ipfsHash);
+console.log("FINAL IPFS HASH:", ipfsHash);
+
+if (typeof ipfsHash !== "string") {
+  throw new Error("Invalid IPFS hash type");
+}
+
+
+     
+      // Register voter and store only the IPFS hash on blockchain
+      const tx = await contract.registerVoter(ipfsHash);
       await tx.wait();
       alert(`Voter ${voterName} registered!`);
     
@@ -87,11 +167,16 @@ function VoterAcceptedList() {
       setVoterAge('');
       setVoterEmail('');
       setVoterPhone('');
+      setVoterHomeAddress('');
+      setVoterNationalId('');
+
       getRegisteredVoters();
     } catch (err) {
       console.error("Error registering voter:", err);
     }
   };
+
+
 
 // approve voter
 const approveVoter = async (voterAddress) => {
@@ -247,7 +332,12 @@ useEffect(() => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Address</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Home Address</th>
+              <th>National ID</th>
+              <th>Wallet Address</th>
               <th>Status</th>
               <th>Message</th>
               <th>Decision</th>
@@ -257,12 +347,17 @@ useEffect(() => {
           <tbody>
             {voters.map((v, index) => (
               <tr key={index}>
-                <td>{v.name}</td>
-                  <td>{v.votersAddress}</td>
-                  <td>{v.status.toString()}</td>
-                  <td>{v.message}</td>
-                  <td >
-                    < span class="check-emoji">✅</span>
+                <td>{v.voterName}</td>
+                <td>{v.voterAge}</td>
+                <td>{v.voterEmail}</td>
+                <td>{v.voterPhone}</td>
+                <td>{v.voterHomeAddress}</td>
+                <td>{v.voterNationalId}</td>
+                <td>{v.votersAddress}</td>
+                <td>{v.status.toString()}</td>
+                <td>{v.message}</td>
+                <td >
+                  < span className="check-emoji">✅</span>
                   </td>
                   <td>
                 </td>

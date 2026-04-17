@@ -16,7 +16,7 @@ import axios from 'axios';
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 function VoterLogin() {
-    const [walletConnected, setWalletConnected] = useState(false);
+     const [walletConnected, setWalletConnected] = useState(false);
    
       const [voterName, setVoterName] = useState('');
       const [voterAge, setVoterAge] = useState('');

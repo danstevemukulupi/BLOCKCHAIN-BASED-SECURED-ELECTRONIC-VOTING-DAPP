@@ -361,7 +361,12 @@ function Dashboard() {
                     <li> Result management</li>
                 </ul>
 
-                <button className="admin-btn">Admin Access</button>
+                <button className="admin-btn">
+                  <Link to="/administrator-page">
+                  Administrator Access
+                  </Link>
+                </button>
+                
                 </div>
 
 
@@ -394,7 +399,14 @@ function Dashboard() {
                   <li> Visison and mission</li>
                   <li> View election results</li>
                 </ul>
-                <button className="candidate-btn">Candidate Login</button>
+
+                <button className="candidate-btn">
+                  <Link to="/candidate-login" className="login-link">
+                    Candidate Login
+                  </Link>
+                </button>
+
+                
                 </div>
           </div>
 

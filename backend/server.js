@@ -94,11 +94,54 @@ app.post("/upload", async (req, res) => {
   }
 });
 
-
-
 // routes
 app.use("/api", emailRoutes);
+
+// get voters list from the contract
+const fetch = require("node-fetch");
+
+app.get("/voter/:hash", async (req, res) => {
+  try {
+    const hash = req.params.hash;
+
+    const response = await fetch(`https://ipfs.io/ipfs/${hash}`);
+    const data = await response.json();
+
+    res.json(data);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch from IPFS" });
+  }
+});
+
+//get candidates list from the contract
+//const fetch = require("node-fetch");
+
+app.get("/candidate/:hash", async (req, res) => {
+  try {
+    const hash = req.params.hash;
+
+    const response = await fetch(`https://ipfs.io/ipfs/${hash}`);
+    const data = await response.json();
+
+    res.json(data);
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch from IPFS" });
+  }
+});
+
+
+
+
+
+
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
+
+
+
