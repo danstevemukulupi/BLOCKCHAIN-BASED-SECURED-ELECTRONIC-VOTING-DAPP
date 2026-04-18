@@ -106,7 +106,7 @@ function CandidateRejectedList() {
   const getRegisteredCandidates = async () => {
       if (!contract) return;
       try {
-        const list = await contract.ListofRegisteredCandidates();
+        const list = await contract.ListofRejectedCandidates();
         
         const candidatesWithDetails = await Promise.all(
           list.map(async (c) => {

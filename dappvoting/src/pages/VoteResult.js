@@ -131,6 +131,8 @@ function VoteResult() {
       
       <br/>
       <br/>
+      <br/>
+      
       
       <div className="voter-container">
       <h1 style={{ color: "purple"}}>Official Election Results</h1>
@@ -139,20 +141,28 @@ function VoteResult() {
 
       <br/>
       <br/>
-
+    
+    
+    
     <Container className="mt-4">
-      <h2>🏆 Winning Candidate</h2>
+    
 
       {Candidates === null ? ( 
-        <p>Loading....</p>
+        <h1 className="winner-loading">Winner Candidate Loading....</h1>
 
       ): Candidates.candidatesAddress === ethers.constants.AddressZero? (
         <p>⏳ Election not finished yet</p>
       ) : ( 
 
+     
         <div>
-          <p><strong>Name:</strong> {Candidates.name}</p>
-          <p><strong>Votes:</strong> {Candidates.voteCalculation.toString()}</p>
+           <h1 className="congratulations"> CONGRATULATIONS </h1>
+           <h1 className="cup">🏆</h1>
+           <br/>
+           <br/>
+           <p className="winner">Winner </p>
+          <p className="winner-name"><strong>Name:</strong> {Candidates.name}</p>
+          <p className="winner-votes"><strong>Votes:</strong> {Candidates.voteCalculation.toString()}</p>
         </div>
       )}
     </Container>
@@ -177,11 +187,6 @@ function VoteResult() {
       
     </div>
 
-
-     <div className="voter-content">
-
-     </div>
-    
     <footer className="footer-final">
       
         <div className='footer-container'>

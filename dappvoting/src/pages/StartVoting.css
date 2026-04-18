@@ -1,34 +1,236 @@
 
-.navbarColour {
-  background-color: lightskyblue !important;
-  padding: 8px;
-}
+.topnav {
+  background-color: lightgray;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  align-items: center;
+  display: flex;
 
-.navbarColour .nav-link,
-.navbarColour .navbar-brand,
-.navbarColour .dropdown-toggle {
-  background-color: purple;
-  color: white !important;
-  padding: 10px 16px;
+   
   
+}
 
-  font-size: 15px;
+.topnav h3 {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+} 
+
+.topnav img {
+    height: 70px;
+    width: auto;
+}
+
+.topnav button {
+    margin-left: auto;
+    
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  
+}
+
+body {
+    margin: 0;
+   height: 80%;
+   
+    
+}
+
+.topnav button {
+  margin-right: 10px;
+}
+
+.voter-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+
+
+.voter-content {
+    background-color: lightblue;
+     height: 400px;
+    display: grid;
+    grid-template-columns: auto auto ;
+    padding: 5px;
+    gap: 20px; 
+    width: 100%;
+    margin-top: 70px;
+   
 
 }
 
-.navbarColour .nav-link:hover,
-.navbarColour .dropdown-toggle:hover {
-  background-color: #ddd !important;
-  color: blue !important;
+.voter-content div {
+    background-color: #f1f1f1;
+     color: #000;
+     padding: 20px;
+     font-size: 24px;
+     text-align: center;
+     border-radius: 8px;
+     margin-top: 50px;
+     margin-left: 20px;
+     margin-right: 20px;
+     margin-bottom: 50px;
+      
 }
 
-.my-center-nav {
-  margin: 0 auto;
+
+
+
+.voting-section{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: lightgray;
+    padding: 10px;
+    gap: 30px;
+    color: black;
+    text-align: center;
+    margin: 5px auto;
+ 
+  
+  
+    
+}
+    
+
+
+.voting-section-child  {
+    background-color: white;
+    color: black;
+    font-size: 24px;
+    text-align: left;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    border-top: 50px solid purple;
+    margin: 0;
+    padding: 15px;
+    
+    
+    
 }
 
+.voting-section-child {
+    list-style-type: disc;
+    text-align: left;
+  
+    margin-top: 20px;
+    margin-bottom: 20px;
+   
+   
+    
+    
+}
 
-.container {
-  margin-top: 10px;
-  background-color: purple;
+ 
+
+.status-center {
+    text-align: center;
+    font-weight: bold;
+    color: blue;
+   
+}
+
+.vote-button{
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 100px;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin: 5px auto;
+
+    
+        
+}
+
+.secure-voting{
+    text-align: center;
+    color: purple;;
+}
+.enc-An-i {
+    text-align: center;
+    color: blue;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.footer {
+    background-color: rgb(63, 59, 59);
+    text-align: center;
+    color: black;
+    padding: 100px;
+    margin: auto;
+}
+
+.footer-final{
+    background-color: lightgray;
+    color: black;
+    padding: 40px 20px;
+    margin-bottom: auto;
+    margin-top: auto;
+    
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+.footer-column h1 {
+    margin-bottom: 10px;
+}
+
+.footer-column h5 {
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin: 6px 0;
+    font-size: 14px;
 
 }
+
+.footer-column h5:hover {
+    color: purple; 
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: black; 
+    margin-top: 30px;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    font-size: 13px;
+    color: black;
+}
+

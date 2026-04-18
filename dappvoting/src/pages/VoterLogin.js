@@ -419,6 +419,8 @@ if (typeof ipfsHash !== "string") {
           <NavDropdown.Divider />
         </NavDropdown>
 
+        <Link to="/start-voting">Vote</Link>
+
         {!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
         ): (
