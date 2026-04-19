@@ -106,6 +106,12 @@ body {
     font-size: 50px;
     text-align: center;
 }
+
+.winner-political {
+    font-size: 50px;
+    text-align: center;
+
+}
 .winner {
     font-size: 80px;
     text-align: center;
@@ -124,6 +130,24 @@ body {
 .cup{
     font-size: 200px;
     text-align: center;
+}
+
+.total-candidate {
+    font-size: 50px;
+    text-align: center;
+    color: black;
+}
+
+.total-voter {
+    font-size: 50px;
+    text-align: center;
+    color: black;
+}
+
+.election-not-finished {
+    font-size: 50px;
+    text-align: center;
+    color: orange;
 }
 
 

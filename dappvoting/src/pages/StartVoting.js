@@ -9,6 +9,7 @@ import {ethers } from 'ethers';
 import { useState, useEffect } from 'react';
 import VotingArtifact from '../abi/VotingSystem.json';
 //import { use } from 'chai';
+import axios from 'axios';
 
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
@@ -26,11 +27,25 @@ const [candidateName, setCandidateName] = useState('');
       const [candidateAge, setCandidateAge] = useState('');
       const [candidateEmail, setCandidateEmail] = useState('');
       const [candidatePhone, setCandidatePhone] = useState('');
+     
+      const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+      const [politicalParty, setPoliticalParty] = useState('');
+      const [goalsManifesto, setGoalsManifesto] = useState('');
+      const [vision, setVision] = useState('');
+      const [experience, setExperience] = useState('');
+      const [candidatenationalId, setCandidateNationalId] = useState('');
+      
+
+
       const [candidates, setCandidates] = useState([]);
       const [contract, setContract] = useState(null);
 
+      const [hasVoted, setHasVoted] = useState(false);
+      const [selectedCandidate, setSelectedCandidate] = useState(null);
+
+      
       // Fetch registered candidates
-  const getRegisteredCandidates = async () => {
+  {/*const getRegisteredCandidates = async () => {
     if (!contract) return;
     try {
       const list = await contract.ListofRegisteredCandidates();
@@ -59,7 +74,139 @@ const [candidateName, setCandidateName] = useState('');
     } catch (err) {
       console.error("Error registering candidate:", err);
     }
+  };*/}
+
+
+  // 2 new
+  // Fetch registered candidates with details from backend
+  const getRegisteredCandidates = async () => {
+      if (!contract) return;
+      try {
+        const list = await contract.ListofAcceptedCandidates();
+        
+        const candidatesWithDetails = await Promise.all(
+          list.map(async (c) => {
+  
+            console.log("FULL CANDIDATE OBJECT:", c); 
+            console.log("HASH FROM CONTRACT:", c.ipfsHash); 
+            try {
+              // fetch details from backend using IPFS hash 
+              const res = await axios.get(`http://localhost:5000/candidate/${c.ipfsHash}`);
+  
+              return {
+                ...c,
+                candidateName: res.data.name,
+                candidateAge: res.data.age,
+                candidateEmail: res.data.email,
+                candidatePhone: res.data.phone,
+                candidateHomeAddress: res.data.address,
+                politicalParty: res.data.politicalParty,
+                goalsManifesto: res.data.goalsManifesto,
+                vision: res.data.vision,
+                experience: res.data.experience,
+                candidateNationalId: res.data.nationalId,
+              };
+              } catch (err) {
+                console.error("Error fetching candidate details from backend:", err);
+  
+                // fallback if IPFs fails
+                return {
+                  ...c,
+                  candidateName: "N/A",
+                  candidateAge: "N/A",
+                  candidateEmail: "N/A",
+                  candidatePhone: "N/A",
+                  candidateHomeAddress: "N/A",
+                  politicalParty: "N/A",
+                  goalsManifesto: "N/A",
+                  vision: "N/A",
+                  experience: "N/A",
+                  candidateNationalId: "N/A",
+                };
+              }
+            
+          })
+        );
+  
+        setCandidates(candidatesWithDetails);
+      } catch (err) {
+        console.error("Error fetching candidates:", err);
+      }
+    };
+  
+  // end 
+
+  // register candidate with IPFS
+  const registerCandidate = async () => {
+    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience || !candidatenationalId) return;
+
+    try {
+          // 1. Upload candidate details to backend (which will store on IPFS)
+          const ipfsCandidateData = {
+            name: candidateName,
+            age: candidateAge,
+            email: candidateEmail,
+            phone: candidatePhone,
+            address: candidatehomeAddress,
+            politicalParty: politicalParty,
+            goalsManifesto: goalsManifesto,
+            vision: vision,
+            experience: experience,
+            nationalId: candidatenationalId
+          };
+
+          // Upload to IPFS and get the hash
+        const response = await axios.post(
+  "http://localhost:5000/upload",
+  ipfsCandidateData
+);
+
+console.log("UPLOAD RESPONSE:", response.data);
+
+// HARD CHECK
+if (!response.data || !response.data.IpfsHash) {
+  throw new Error("IPFS upload failed or missing IpfsHash");
+}
+
+const ipfsHash = response.data.IpfsHash;
+
+
+console.log("FULL IPFS HASH BEFORE CONTRACT:", ipfsHash);
+console.log("FINAL IPFS HASH:", ipfsHash);
+
+if (typeof ipfsHash !== "string") {
+  throw new Error("Invalid IPFS hash type");
+}
+
+
+     
+      // Register candidate and store only the IPFS hash on blockchain
+      const tx = await contract.registerCandidate(ipfsHash);
+      await tx.wait();
+      alert(`Candidate ${candidateName} registered!`);
+    
+    
+      setCandidateName('');
+      setCandidateAge('');
+      setCandidateEmail('');
+      setCandidatePhone('');
+      setCandidateHomeAddress('');
+      setPoliticalParty('');
+      setGoalsManifesto('');
+      setVision('');
+      setExperience('');
+      setCandidateNationalId('');
+
+      getRegisteredCandidates();
+    } catch (err) {
+      console.error("Error registering candidate:", err);
+    }
   };
+
+  // new end 2
+
+
+
 
   // approve candidate 
   const approveCandidate = async (candidateAddress) => {
@@ -159,6 +306,10 @@ const [candidateName, setCandidateName] = useState('');
          await tx.wait();
           alert("Vote cast successfully!");
 
+          // update the button state after voting 
+          setHasVoted(true);
+          setSelectedCandidate(candidateAddress);
+
       } catch (error) {
         console.error("Voting error:", error); 
       }
@@ -181,7 +332,8 @@ const [candidateName, setCandidateName] = useState('');
 
     setContract(votingContract);
 
-    const list = await votingContract.ListofRegisteredCandidates();
+    //const list = await votingContract.ListofRegisteredCandidates(); old 
+    const list = await votingContract.ListofAcceptedCandidates(); // new
     setCandidates(list);
     //await getApprovedCandidates(votingContract);
     const start = await votingContract.votingStartTime();
@@ -211,6 +363,15 @@ const [candidateName, setCandidateName] = useState('');
     return () => clearInterval(interval);
 
   }, []);
+
+  // new 
+  useEffect(() => {
+    if(contract) {
+      getRegisteredCandidates();
+    }
+  }, [contract])
+
+  //end new
 
 
     return(
@@ -291,15 +452,19 @@ const [candidateName, setCandidateName] = useState('');
   <div className="voting-section">
     {candidates.map((c, index) => (
       <div className="voting-section-child" key={index}>
-        <strong>{c.name}</strong><br />
-        Address: {c.candidatesAddress}<br />
-        Votes: {c.voteCalculation.toString()}<br />
+        <strong>{c.candidateName}</strong><br />
+        {c.politicalParty}<br/>
+        {/*Address: {c.candidatesAddress}<br />*/}
+        {/*Votes: {c.voteCalculation.toString()}<br />*/}
 
         <button
           onClick={() => voteForCandidate(c.candidatesAddress)}
           className="vote-button"
+         
         >
-          Vote
+          {selectedCandidate === c.candidatesAddress ? "Voted" : "Vote" }
+
+          {/*Vote*/}
         </button>
       </div>
     ))}
