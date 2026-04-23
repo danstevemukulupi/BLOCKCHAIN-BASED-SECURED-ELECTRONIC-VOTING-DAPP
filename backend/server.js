@@ -139,8 +139,15 @@ app.get("/candidate/:hash", async (req, res) => {
 
 
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+//app.listen(5000, () => { // working good
+  //console.log("Server running on port 5000"); // working good
+
+  // trying new port for deployment
+  const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+
 });
 
 
