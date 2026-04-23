@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config(); // added 1
 
 module.exports = {
   paths: {
@@ -14,4 +15,11 @@ module.exports = {
       viaIR: true
     }
   },
+
+  networks: {
+    sepolia: {
+      url: process.env.SEPOLIA_RPC_URL, // added 2
+      accounts: [process.env.PRIVATE_KEY] // added 3
+    }, // added4
+  }, // added 5
 };
