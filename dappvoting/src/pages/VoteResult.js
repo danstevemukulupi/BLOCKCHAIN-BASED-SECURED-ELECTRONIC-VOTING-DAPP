@@ -27,11 +27,24 @@ function VoteResult() {
       const [experience, setExperience] = useState('');
       const [candidatenationalId, setCandidateNationalId] = useState('');
       const [Candidates, setCandidates] = useState(null);
-      const [Voters, setVoters] = useState([]);
+
+
+
+
+
+      const [voterName, setVoterName] = useState('');
+      const [voterAge, setVoterAge] = useState('');
+      const [voterEmail, setVoterEmail] = useState('');
+      const [voterPhone, setVoterPhone] = useState('');
+      const [voterhomeAddress, setVoterHomeAddress] = useState('');
+      const [voternationalId, setVoterNationalId] = useState('');
+      const [voters, setVoters] = useState([]);
 
       const [contract, setContract] = useState(null);
 
-  const loadCandidateWinner = async () => {
+      const [winner, setWinner] = useState(null); 
+
+    const loadCandidateWinner = async () => {
     //try {
       ///const contract = await getContract();
       //setContract(contract);
@@ -45,6 +58,19 @@ function VoteResult() {
         setCandidates(result);
 
       //}
+
+      // Fetch winner details from backend using IPFS hash
+      const res = await axios.get(`http://localhost:5000/candidate/${result.ipfsHash}`);
+      setWinner({
+        result,
+        candidateName: res.data.name,
+        candidatePoliticalParty: res.data.politicalParty,
+        voteCalculation: result.voteCalculation.toString(),
+      });
+       
+    
+
+
 
       //setWinner(data);
     } catch (error) {
@@ -184,18 +210,132 @@ if (typeof ipfsHash !== "string") {
   // end Fetch registered candidates 
   // end new
 
-  // new 2
+  // new 
+  // Fetch registered voters
+  const getRegisteredVoters = async () => {
+    if (!contract) return;
+    try {
+      const list = await contract.ListofAcceptedVoters();
+      
+      const votersWithDetails = await Promise.all(
+        list.map(async (v) => {
+
+          console.log("FULL VOTER OBJECT:", v); 
+          console.log("HASH FROM CONTRACT:", v.ipfsHash); 
+          try {
+            // fetch details from backend using IPFS hash 
+            const res = await axios.get(`http://localhost:5000/voter/${v.ipfsHash}`);
+
+            return {
+              ...v,
+              voterName: res.data.name,
+              voterAge: res.data.age,
+              voterEmail: res.data.email,
+              voterPhone: res.data.phone,
+              voterHomeAddress: res.data.address,
+              voterNationalId: res.data.nationalId,
+            };
+            } catch (err) {
+              console.error("Error fetching voter details from backend:", err);
+
+              // fallback if IPFs fails
+              return {
+                ...v,
+                voterName: "N/A",
+                voterAge: "N/A",
+                voterEmail: "N/A",
+                voterPhone: "N/A",
+                voterHomeAddress: "N/A",
+                voterNationalId: "N/A",
+              };
+            }
+          
+        })
+      );
+
+      setVoters(votersWithDetails);
+    } catch (err) {
+      console.error("Error fetching voters:", err);
+    }
+  };
+
+  // Register Voter
+  const registerVoter = async () => {
+    //if (!contract || !voterName) return;
+    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
+    try {
+
+       // Upload voter data to IPFS and get the hash
+        const ipfsVoterData = {
+        name: voterName,
+        age: voterAge,
+        email: voterEmail,
+        phone: voterPhone,
+        address: voterhomeAddress,
+        nationalId: voternationalId,
+      
+      };
+
+       // Upload to IPFS and get the hash
+        const response = await axios.post(
+  "http://localhost:5000/upload",
+  ipfsVoterData
+);
+
+console.log("UPLOAD RESPONSE:", response.data);
+
+// HARD CHECK
+if (!response.data || !response.data.IpfsHash) {
+  throw new Error("IPFS upload failed or missing IpfsHash");
+}
+
+const ipfsHash = response.data.IpfsHash;
+
+
+console.log("FULL IPFS HASH BEFORE CONTRACT:", ipfsHash);
+console.log("FINAL IPFS HASH:", ipfsHash);
+
+if (typeof ipfsHash !== "string") {
+  throw new Error("Invalid IPFS hash type");
+}
+
+
+     
+      // Register voter and store only the IPFS hash on blockchain
+      const tx = await contract.registerVoter(ipfsHash);
+      await tx.wait();
+      alert(`Voter ${voterName} registered!`);
+    
+    
+      setVoterName('');
+      setVoterAge('');
+      setVoterEmail('');
+      setVoterPhone('');
+      setVoterHomeAddress('');
+      setVoterNationalId('');
+
+      getRegisteredVoters();
+    } catch (err) {
+      console.error("Error registering voter:", err);
+    }
+  };
+
+  // Auto fetch voters & candidates when contract changes
+  useEffect(() => {
+    if (contract) {
+      getRegisteredVoters();
+      getRegisteredCandidates();
+    }
+  }, [contract]);
+
+  // end 
+  
+
+  
+
   
 
   // end new 2
-
-
-  
-
-
-
-
-
 
  // trying 
  // Auto fetch voters & candidates when contract changes
@@ -228,6 +368,7 @@ if (typeof ipfsHash !== "string") {
 
  // end of trying
 
+ 
 
 
 
@@ -299,10 +440,10 @@ if (typeof ipfsHash !== "string") {
     <Container className="mt-4">
     
 
-      {Candidates === null ? ( 
+      {winner === null ? ( 
         <h1 className="winner-loading">Winner Candidate Loading....</h1>
 
-      ): Candidates.candidatesAddress === ethers.constants.AddressZero? (
+      ): winner.candidatesAddress === ethers.constants.AddressZero? (
         <p className="election-not-finished">⏳ Election not finished yet</p>
       ) : ( 
 
@@ -312,13 +453,23 @@ if (typeof ipfsHash !== "string") {
            <h1 className="cup">🏆</h1>
            <br/>
            <br/>
+
+            <div>
+          <p className="winner">Winner </p> 
+          <br/>
+          <br/> 
+          <p className="winner-name"><strong>{winner.candidateName}</strong></p>
+          <p className="winner-political"><strong>{winner.candidatePoliticalParty}</strong></p>
+          <p className="winner-votes"><strong>Votes:</strong> {winner.voteCalculation.toString()}</p>
+          </div>
+          <br/>
+          <br />
+
           <p className="total-candidate"><strong>Total Candidates: {Candidates.length}</strong></p>
-          <p className="total-voter"><strong>Total Voters: {Voters.length}</strong></p>
-          <p className="winner">Winner </p>
-          <p className="winner-name"><strong>{Candidates.candidateName}</strong></p>
-      
-          <p className="winner-political"><strong>{Candidates.candidatePoliticalParty}</strong></p>
-          <p className="winner-votes"><strong>Votes:</strong> {Candidates.voteCalculation.toString()}</p>
+          <p className="total-voter"><strong>Total Voters: {voters.length}</strong></p>
+        
+
+          
 
         </div>
       )}
