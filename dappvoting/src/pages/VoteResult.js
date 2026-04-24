@@ -8,7 +8,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './VoteResult.css';
-import { use } from 'chai';
+//import { use } from 'chai';
 import axios from 'axios';
 
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
