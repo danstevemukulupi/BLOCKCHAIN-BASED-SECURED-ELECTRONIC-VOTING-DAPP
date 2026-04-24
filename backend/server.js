@@ -65,6 +65,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Root test
+app.get("/", (req, res) => {
+  res.send("Welcome to the Mapovote backend server!");
+});
+
 // routes 
 app.post("/upload", async (req, res) => {
   try {
