@@ -240,9 +240,7 @@ function VoterLogin() {
       // Upload to IPFS and get the hash
       {/*const ipfsHash = await uploadToPinata(ipfsVoterData);*/}
 
-  const response = await axios.post(
-  "http://localhost:5000/upload",
-  ipfsVoterData
+  const response = await axios.post(`${process.env.REACT_APP_API_URL}/upload`,ipfsVoterData
 );
 
 console.log("UPLOAD RESPONSE:", response.data);

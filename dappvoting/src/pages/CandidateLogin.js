@@ -151,10 +151,7 @@ const handleLogin = (e) => {
 
       
       // Hard-Copied IPFs upload Endpoint. Update to IPFS to get real hash.
-      const response = await axios.post(
-  "http://localhost:5000/upload",
-  ipfsCandidateData
-);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/upload`, ipfsCandidateData );
 
 console.log("UPLOAD RESPONSE:", response.data);
 

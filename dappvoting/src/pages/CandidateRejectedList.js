@@ -115,7 +115,7 @@ function CandidateRejectedList() {
             console.log("HASH FROM CONTRACT:", c.ipfsHash); 
             try {
               // fetch details from backend using IPFS hash 
-              const res = await axios.get(`http://localhost:5000/candidate/${c.ipfsHash}`);
+              const res = await axios.get(`${process.env.REACT_APP_API_URL}/candidate/${c.ipfsHash}`);
   
               return {
                 ...c,
@@ -180,10 +180,7 @@ function CandidateRejectedList() {
           };
 
           // Upload to IPFS and get the hash
-        const response = await axios.post(
-  "http://localhost:5000/upload",
-  ipfsCandidateData
-);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/upload`, ipfsCandidateData );
 
 console.log("UPLOAD RESPONSE:", response.data);
 

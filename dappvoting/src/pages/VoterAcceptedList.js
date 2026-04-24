@@ -78,7 +78,7 @@ function VoterAcceptedList() {
           console.log("HASH FROM CONTRACT:", v.ipfsHash); 
           try {
             // fetch details from backend using IPFS hash 
-            const res = await axios.get(`http://localhost:5000/voter/${v.ipfsHash}`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/voter/${v.ipfsHash}`);
 
             return {
               ...v,
@@ -133,10 +133,7 @@ function VoterAcceptedList() {
       };
 
        // Upload to IPFS and get the hash
-        const response = await axios.post(
-  "http://localhost:5000/upload",
-  ipfsVoterData
-);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/upload`,ipfsVoterData);
 
 console.log("UPLOAD RESPONSE:", response.data);
 

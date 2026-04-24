@@ -116,7 +116,7 @@ function CandidateAcceptedList() {
             console.log("HASH FROM CONTRACT:", c.ipfsHash); 
             try {
               // fetch details from backend using IPFS hash 
-              const res = await axios.get(`http://localhost:5000/candidate/${c.ipfsHash}`);
+              const res = await axios.get(`${process.env.REACT_APP_API_URL}/candidate/${c.ipfsHash}`);
   
               return {
                 ...c,

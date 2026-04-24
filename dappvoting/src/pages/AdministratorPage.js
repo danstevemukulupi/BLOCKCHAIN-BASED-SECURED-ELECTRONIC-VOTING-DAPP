@@ -142,7 +142,7 @@ function AdministratorPage() {
   // call backend from react to send email notification to voters and candidates when they are approved or rejected by admin
   const sendEmailNotification = async (to, subject, text) => {
     try {
-      await axios.post('http://localhost:5000/send-email', {
+      await axios.post('${process.env.REACT_APP_API_URL}/api/send-email', {
         to,
         subject,
         text
