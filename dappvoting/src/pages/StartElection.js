@@ -91,6 +91,8 @@ function StartElection() {
       alert('Election time set successfully!');
     } catch (error) {
       console.error('Error setting election time:', error);
+      console.error("REASON:", error.reason);
+      console.error("MESSAGE:", error.message);
       alert('Failed to set election time. Please try again.');
     }
   }
