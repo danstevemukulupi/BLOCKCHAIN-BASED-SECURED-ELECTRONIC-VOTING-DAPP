@@ -84,18 +84,22 @@ function StartElection() {
 
     try {
       //  added 1
-      const now = Math.floor(Date.now() / 1000);
+      //const now = Math.floor(Date.now() / 1000);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const block = await provider.getBlock("latest");
+    const now = block.timestamp;
+
 
       const startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
       const endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
 
       // added 2
+      console.log("Blockchain NOW:", now);
       console.log("Start:", startTimestamp);
-      console.log("Now:", now);
 
       // added 3
         if (startTimestamp <= now) {
-      alert("Start time must be in the future");
+      alert("Start time must be in the future (based on current blockchain time)");
       return;
     }
 
