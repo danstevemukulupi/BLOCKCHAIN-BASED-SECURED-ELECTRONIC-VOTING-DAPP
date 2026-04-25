@@ -99,11 +99,13 @@ function StartElection() {
 
       // added 3
         if (startTimestamp <= now) {
+          startTimestamp = now + 60; // Set start time to 1 minute in the future
       alert("Start time must be in the future (based on current blockchain time)");
       return;
     }
 
     if (endTimestamp <= startTimestamp) {
+      endTimestamp = startTimestamp + 3600; // Set end time to 1 hour after start time
       alert("End time must be after start time");
       return;
     }
@@ -114,9 +116,16 @@ function StartElection() {
       await tx.wait();
       alert('Election time set successfully!');
     } catch (error) {
+
       console.error('Error setting election time:', error);
       console.error("REASON:", error.reason);
       console.error("MESSAGE:", error.message);
+
+      console.log("NOW (block):", now);
+      console.log("START:", startTimestamp);
+      console.log("DIFF:", startTimestamp - now);
+
+
       alert('Failed to set election time. Please try again.');
     }
   }
