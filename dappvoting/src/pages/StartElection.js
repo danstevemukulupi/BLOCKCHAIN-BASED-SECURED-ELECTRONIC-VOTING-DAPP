@@ -83,8 +83,28 @@ function StartElection() {
     if (!contract) return;
 
     try {
+      //  added 1
+      const now = Math.floor(Date.now() / 1000);
+
       const startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
       const endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
+
+      // added 2
+      console.log("Start:", startTimestamp);
+      console.log("Now:", now);
+
+      // added 3
+        if (startTimestamp <= now) {
+      alert("Start time must be in the future");
+      return;
+    }
+
+    if (endTimestamp <= startTimestamp) {
+      alert("End time must be after start time");
+      return;
+    }
+
+
 
       const tx = await contract.startendVoting(startTimestamp, endTimestamp);
       await tx.wait();
