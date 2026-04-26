@@ -90,8 +90,8 @@ function StartElection() {
     const now = block.timestamp;
 
 
-      let startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
-      let endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
+      const startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
+      const endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
 
       // added 2
       console.log("Blockchain NOW:", now);
@@ -120,9 +120,9 @@ function StartElection() {
       console.error("MESSAGE:", error.message);
 
       // this can be deleted after debugging 
-      console.log("NOW (block):", now);
-      console.log("START:", startTimestamp);
-      console.log("DIFF:", startTimestamp - now);
+      //console.log("NOW (block):", now);
+      //console.log("START:", startTimestamp);
+      //console.log("DIFF:", startTimestamp - now);
 
 
       alert('Failed to set election time. Please try again.');
