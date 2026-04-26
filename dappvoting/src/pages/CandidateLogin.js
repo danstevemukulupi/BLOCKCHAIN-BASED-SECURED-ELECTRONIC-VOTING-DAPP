@@ -14,7 +14,9 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+//const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+// SEPOLIA ADDRESS
+const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
 
 function CandidateLogin() {
 
