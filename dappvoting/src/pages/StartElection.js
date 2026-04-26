@@ -90,8 +90,8 @@ function StartElection() {
     const now = block.timestamp;
 
 
-      const startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
-      const endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
+      let startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
+      let endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
 
       // added 2
       console.log("Blockchain NOW:", now);
@@ -99,13 +99,11 @@ function StartElection() {
 
       // added 3
         if (startTimestamp <= now) {
-          startTimestamp = now + 60; // Set start time to 1 minute in the future
       alert("Start time must be in the future (based on current blockchain time)");
       return;
     }
 
     if (endTimestamp <= startTimestamp) {
-      endTimestamp = startTimestamp + 3600; // Set end time to 1 hour after start time
       alert("End time must be after start time");
       return;
     }
@@ -121,6 +119,7 @@ function StartElection() {
       console.error("REASON:", error.reason);
       console.error("MESSAGE:", error.message);
 
+      // this can be deleted after debugging 
       console.log("NOW (block):", now);
       console.log("START:", startTimestamp);
       console.log("DIFF:", startTimestamp - now);
