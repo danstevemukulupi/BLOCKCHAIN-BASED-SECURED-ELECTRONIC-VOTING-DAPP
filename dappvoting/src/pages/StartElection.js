@@ -137,8 +137,7 @@ function StartElection() {
     } catch (error) {
 
       console.error('Error setting election time:', error);
-      console.error("REASON:", error.reason);
-      console.error("MESSAGE:", error.message);
+ 
 
       // this can be deleted after debugging 
       //console.log("NOW (block):", now);
@@ -146,7 +145,7 @@ function StartElection() {
       //console.log("DIFF:", startTimestamp - now);
 
 
-      alert('Failed to set election time. Please try again.');
+      alert('Failed to set election time. Please try again.'+ (error.reason || error.message));
     }
   }
 
