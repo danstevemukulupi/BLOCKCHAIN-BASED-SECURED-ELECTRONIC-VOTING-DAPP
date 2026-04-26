@@ -108,8 +108,9 @@ const fetch = require("node-fetch");
 app.get("/voter/:hash", async (req, res) => {
   try {
     const hash = req.params.hash;
+    console.log("Fetching hash:", hash);
 
-    const response = await fetch(`https://ipfs.io/ipfs/${hash}`,
+    const response = await axios.get(`https://api.pinata.cloud/data/pinList?hashContains=${hash}`,
       {
         headers: {
           pinata_api_key: process.env.PINATA_API_KEY,
