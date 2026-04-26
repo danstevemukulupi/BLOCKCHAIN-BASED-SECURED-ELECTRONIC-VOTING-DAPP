@@ -25,6 +25,8 @@ function StartElection() {
   const [contract, setContract] = useState(null);
   const [account, setAccount] = useState("");
 
+  const [blockchainTime, setBlockchainTime] = useState(null);
+
   // Connect to MetaMask and set up the contract
  {/* const connectWallet = async () => {
     if (!window.ethereum) {
@@ -51,6 +53,8 @@ function StartElection() {
     setContract(votingContract);
   };*/}
 
+  // testing
+ 
   // New Connect to Wallet 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -63,6 +67,14 @@ function StartElection() {
         const signer = provider.getSigner();
         const votingContract = new ethers.Contract(contractAddress, VotingArtifact.abi, signer);
         setContract(votingContract);
+
+        // Get the current blockchain time begin
+         const block = await provider.getBlock("latest");
+        const blockTime = new Date(block.timestamp * 1000);
+        setBlockchainTime(blockTime.toLocaleString());
+        // end 
+
+
 
         console.log("Wallet connected:", accounts[0]);
       } catch (err) {
@@ -93,16 +105,24 @@ function StartElection() {
       const startTimestamp = Math.floor(new Date(startTime).getTime() / 1000);
       const endTimestamp = Math.floor(new Date(endTime).getTime() / 1000); 
 
+      // trying
+      const diff = startTimestamp - now; 
+
       // added 2
-      console.log("Blockchain NOW:", now);
-      console.log("Start:", startTimestamp);
-      console.log("Diff (seconds):", startTimestamp - now); 
+      console.log("Blockchain NOW:", now, new Date(now * 1000).toLocaleString());
+      console.log("Start:", startTimestamp, new Date(startTimestamp * 1000).toLocaleString());
+      console.log("Diff (seconds):", diff); 
 
       // added 3 must be at least 5 minutes in the future 
-        if (startTimestamp <= now + 300) {
-      alert("Start time must be in the future (based on current blockchain time)");
-      return;
-    }
+    if (diff <= 300) {
+        alert(
+          `❌ Start time is too close or in the past!\n\n` +
+          `Blockchain current time: ${new Date(now * 1000).toLocaleString()}\n` +
+          `Your selected time:      ${new Date(startTimestamp * 1000).toLocaleString()}\n\n` +
+          `Please select a time at least 5 minutes AFTER the blockchain time shown above.`
+        );
+        return;
+      }
 
     if (endTimestamp <= startTimestamp) {
       alert("End time must be after start time");
@@ -175,6 +195,20 @@ function StartElection() {
          
         <div className="time-date-set-container">
           <h3 > Election Time and Date </h3>
+
+     {/* Show blockchain time so user knows what to pick */}
+     {blockchainTime && (
+    <div style={{ 
+      background: "#f0f0f0", 
+      padding: "10px", 
+      borderRadius: "8px", 
+      marginBottom: "15px",
+      fontSize: "14px"
+     }}>
+      🕐 Current blockchain time: <strong>{blockchainTime}</strong><br/>
+      <small>Your start time must be after this time.</small>
+    </div>
+    )}
       <br/>
 
       <Label>Start Time</Label>
