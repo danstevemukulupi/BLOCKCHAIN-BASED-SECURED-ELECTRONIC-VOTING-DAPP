@@ -133,6 +133,17 @@ app.get("/voter/:hash", async (req, res) => {
   }
 });
 
+app.get("/debug-env", (req, res) => {
+  res.json({
+    pinata_key_set: !!process.env.PINATA_API_KEY,
+    pinata_secret_set: !!process.env.PINATA_SECRET_API_KEY,
+    pinata_key_preview: process.env.PINATA_API_KEY?.slice(0, 6) + "...",
+  });
+});
+
+
+
+
 //get candidates list from the contract
 //const fetch = require("node-fetch");
 
