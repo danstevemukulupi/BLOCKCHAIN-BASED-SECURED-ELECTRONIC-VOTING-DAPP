@@ -109,10 +109,37 @@ app.get("/voter/:hash", async (req, res) => {
   try {
     const hash = req.params.hash;
 
-    const response = await fetch(`https://ipfs.io/ipfs/${hash}`);
-    const data = await response.json();
+    //const response = await fetch(`https://ipfs.io/ipfs/${hash}`);
+    //const data = await response.json();
 
+    //res.json(data);
+     const gateways = [
+      `https://gateway.pinata.cloud/ipfs/${hash}`,
+      `https://cloudflare-ipfs.com/ipfs/${hash}`,
+      `https://ipfs.io/ipfs/${hash}`,
+    ];
+
+    let data = null;
+    for (const url of gateways) {
+      try {
+        const response = await fetch(url, { timeout: 5000 });
+        if (response.ok) {
+          data = await response.json();
+          break;
+        }
+      } catch (e) {
+        continue; // 
+      }
+    }
+
+    if (!data) return res.status(500).json({ error: "All gateways failed" });
     res.json(data);
+
+
+
+
+
+
 
   } catch (err) {
     console.error(err);
