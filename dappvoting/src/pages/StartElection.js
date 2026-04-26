@@ -99,11 +99,7 @@ function StartElection() {
       //const now = Math.floor(Date.now() / 1000);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    // First increase time by 800 seconds
-    await provider.send("evm_increaseTime", [800]);
 
-    // Second mine a block to apply the time increase
-    await provider.send("evm_mine", []);
 
     const block = await provider.getBlock("latest");
     const now = block.timestamp;
