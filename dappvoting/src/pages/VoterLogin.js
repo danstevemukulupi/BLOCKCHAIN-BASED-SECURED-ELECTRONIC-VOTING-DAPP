@@ -13,7 +13,9 @@ import axios from 'axios';
 
 
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+//const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+// sepolia address
+const contractAddress = "0x65F5f54d2E24F9C9B9919D4e3cDe3fBe533D7bD5"
 
 function VoterLogin() {
      const [walletConnected, setWalletConnected] = useState(false);
