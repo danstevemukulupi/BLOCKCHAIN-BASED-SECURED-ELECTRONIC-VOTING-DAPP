@@ -96,9 +96,10 @@ function StartElection() {
       // added 2
       console.log("Blockchain NOW:", now);
       console.log("Start:", startTimestamp);
+      console.log("Diff (seconds):", startTimestamp - now); 
 
-      // added 3
-        if (startTimestamp <= now) {
+      // added 3 must be at least 5 minutes in the future 
+        if (startTimestamp <= now + 300) {
       alert("Start time must be in the future (based on current blockchain time)");
       return;
     }
