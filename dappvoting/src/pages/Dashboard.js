@@ -323,14 +323,15 @@ function Dashboard() {
           </a>
           <h2 style={{ color: "purple" }}>MapoVote</h2>
           <Link to="/">Home</Link>
-          <Link to="/administrator-page">Administrator</Link>
           <Link to="/help-infos">Help & Info</Link>
 
-           {!walletConnected ? (
+           {/*{!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
         ) : (
           <p>Wallet connected: {account}</p>
-        )}
+        )}*/}
+
+
         </div>
        <br/>
        <br/>
@@ -423,7 +424,7 @@ function Dashboard() {
               
               <img src="./pics/Trust-security-mapo.png" alt="trust" width={700} />
               <img src="./pics/voter-candidate.png" alt="trust" width={700} />
-              <img src="./pics/victory2.png" alt="trust" width={500} />
+
            
             
            

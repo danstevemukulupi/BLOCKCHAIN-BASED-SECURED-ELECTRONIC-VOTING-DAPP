@@ -140,6 +140,10 @@ body {
     
  
 }
+
+.App-title h1 {
+    text-align: center;
+}
 .voter-btn {
     background-color:  lightskyblue;
     color: white;
