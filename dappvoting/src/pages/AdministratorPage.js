@@ -143,6 +143,7 @@ function AdministratorPage() {
 
   const [ipfsHash, setIpfsHash] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [checkedAdmin, setCheckedAdmin] = useState(false);
 
   // call backend from react to send email notification to voters and candidates when they are approved or rejected by admin
   const sendEmailNotification = async (to, subject, text) => {
@@ -237,6 +238,7 @@ function AdministratorPage() {
           
         }
 
+        setCheckedAdmin(true); // Mark that we've checked admin status 
         console.log("Connected account:", userAccount);
 
         //console.log("Wallet connected:", accounts[0]);
@@ -587,11 +589,35 @@ const getAcceptedCandidates = async () => {
   }, [contract]);
 
 
-if (walletConnected && !isAdmin) {
+// 🚫 Not connected → show request access
+if (!walletConnected) {
+  return (
+    <div style={{ padding: "50px", textAlign: "center" }}>
+      <h2>🔐 Admin Access Required</h2>
+      <p>Please connect your admin wallet to continue.</p>
+
+      <button onClick={connectWallet}>
+        Connect Admin Wallet
+      </button>
+    </div>
+  );
+}
+
+// 🚫 Connected but not admin → deny
+if (walletConnected && checkedAdmin && !isAdmin) {
   return (
     <div style={{ padding: "50px", textAlign: "center" }}>
       <h2>⛔ Access Denied</h2>
       <p>This page is restricted to the contract owner.</p>
+    </div>
+  );
+}
+
+// ⏳ Optional: loading state
+if (walletConnected && !checkedAdmin) {
+  return (
+    <div style={{ padding: "50px", textAlign: "center" }}>
+      <p>Checking admin permissions...</p>
     </div>
   );
 }
@@ -602,6 +628,7 @@ if (walletConnected && !isAdmin) {
    
 
      <div className="App"> 
+     
     
     <div className="topnav">
       <a>
