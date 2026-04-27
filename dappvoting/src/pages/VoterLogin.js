@@ -222,6 +222,12 @@ function VoterLogin() {
       return;
     }
 
+    // Age Validation 
+    if (parseInt(voterAge) < 18) { 
+      alert("You must be at least 18 years old to register as a voter.");
+      return;
+    }
+
     if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) {
       alert("Please fill in all voter registration fields.");
       return;
@@ -505,6 +511,7 @@ if (typeof ipfsHash !== "string") {
               type="number"
               name="age"
               placeholder="Age" 
+              min="18"
               value={voterAge}
               onChange={(e) => setVoterAge(e.target.value)}
             />
