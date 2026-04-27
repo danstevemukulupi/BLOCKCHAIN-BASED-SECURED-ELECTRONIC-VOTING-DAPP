@@ -361,11 +361,11 @@ function Dashboard() {
                     <li> Result management</li>
                 </ul>
 
-              
-                  <Link to="/administrator-page" className="admin-btn">
+                <button className="admin-btn">
+                  <Link to="/administrator-page" >
                   Administrator Access
                   </Link>
-               
+                </button>
                 
                 </div>
 
