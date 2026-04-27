@@ -458,7 +458,7 @@ contract VotingSystem{
 
        // new search voter function with voter address only 
        function searchVoter(address _addr) public view returns (Voter memory) {
-        // require(voters[_addr].votersAddress != address(0), "Voter not found");
+        //require(voters[_addr].votersAddress != address(0), "Voter not found");
         return voters[_addr];
        }
 

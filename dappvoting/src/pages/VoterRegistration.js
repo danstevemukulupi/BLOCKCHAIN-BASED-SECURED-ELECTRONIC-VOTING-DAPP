@@ -131,7 +131,7 @@ function VoterRegistration() {
     try {
       const result = await contract.searchVoter(searchAddress);
 
-      if (result.voterAddresss === "0x0000000000000000000000000000000000000000") {
+      if (result.votersAddress === "0x0000000000000000000000000000000000000000") {
         alert("Voter not found!");
         setSearchResult([]);
         return;
