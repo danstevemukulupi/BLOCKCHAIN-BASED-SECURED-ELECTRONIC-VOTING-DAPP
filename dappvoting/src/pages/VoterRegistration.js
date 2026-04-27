@@ -131,7 +131,9 @@ function VoterRegistration() {
     try {
       const result = await contract.searchVoter(searchAddress);
 
-      if (result.votersAddress === "0x0000000000000000000000000000000000000000") {
+      console.log("SEARCH RESULT FROM CONTRACT:", result);
+
+      if (!result || result.votersAddress === ethers.constants.AddressZero) {
         alert("Voter not found!");
         setSearchResult([]);
         return;
@@ -139,6 +141,7 @@ function VoterRegistration() {
       setSearchResult([result]);
     } catch (err) {
       console.error("Error searching voter:", err);
+      setSearchResult([]); 
 
     }
   };
