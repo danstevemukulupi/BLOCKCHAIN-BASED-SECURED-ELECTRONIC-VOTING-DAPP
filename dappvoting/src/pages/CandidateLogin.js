@@ -130,6 +130,12 @@ const handleLogin = (e) => {
       return;
     }
 
+    // Age Validation 
+    if (parseInt(candidateAge) < 18) {
+      alert("You must be at least 18 years old to register as a candidate.");
+      return;
+    }
+
     if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty  || !goalsManifesto || !vision || !experience || !candidatenationalId ) {
       alert("Please fill in all candidate registration fields.");
       return;
@@ -297,10 +303,18 @@ const tx = await contract.registerCandidate(ipfsHash);
             <input 
               type="number"
               name="age"
-              placeholder="Age" 
+              placeholder="Age"
+              min="18" 
               value={candidateAge}
               onChange={(e) => setCandidateAge(e.target.value)}
             />
+             {/* Age Validation */}
+            {candidateAge && candidateAge < 18 && ( 
+              <p style={{ color: "red", fontSize: "14px" }}>
+                ⚠️ You must be 18 or older to register as a candidate.
+              </p>
+              
+            )}
 
             <input 
               type="email"

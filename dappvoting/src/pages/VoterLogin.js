@@ -515,6 +515,13 @@ if (typeof ipfsHash !== "string") {
               value={voterAge}
               onChange={(e) => setVoterAge(e.target.value)}
             />
+            {/* Age Validation */}
+            {voterAge && voterAge < 18 && ( 
+              <p style={{ color: "red", fontSize: "14px" }}>
+                ⚠️ You must be 18 or older to register as a voter.
+              </p>
+              
+            )}
             <input 
               type="email"
               name="email"
