@@ -145,7 +145,7 @@ function VoterRegistration() {
   // end find and update voter information
 
   // update voter information
-  const updateMyName = async () => {
+  const updateMyName = async (voterAddress) => {
     if (!contract) return;
 
     try {
