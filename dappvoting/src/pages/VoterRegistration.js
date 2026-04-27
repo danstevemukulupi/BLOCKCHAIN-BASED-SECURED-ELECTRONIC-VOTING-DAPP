@@ -117,7 +117,12 @@ function VoterRegistration() {
   const [searchAddress, setSearchAddress] = useState('');
   const [ searchResult, setSearchResult] = useState([]);
   const [ newName, setNewName] = useState(''); 
+
+  const [votingStartTime, setVotingStartTime] = useState(0);
+
   // end new
+  // 
+  const currentTime = Math.floor(Date.now() / 1000);
   
   // find and update voter information
   const searchVoter = async () => {
@@ -125,6 +130,12 @@ function VoterRegistration() {
 
     try {
       const result = await contract.searchVoter(searchAddress);
+
+      if (result.voterAddresss === "0x0000000000000000000000000000000000000000") {
+        alert("Voter not found!");
+        setSearchResult([]);
+        return;
+      }
       setSearchResult([result]);
     } catch (err) {
       console.error("Error searching voter:", err);
@@ -135,7 +146,7 @@ function VoterRegistration() {
 
   // update voter information
   const updateMyName = async () => {
-    if (!contract || ! newName) return;
+    if (!contract) return;
 
     try {
       const updatedData = {
@@ -151,14 +162,18 @@ function VoterRegistration() {
         updatedData
       )
 
-      if (!response.data || !response.data.IpfsHash) {
-        throw new Error("Failed to upload voter data to IPFS");
+      if (!response.data?.IpfsHash) {
+        throw new Error("IPFS upload failed or missing IpfsHash");
 
       }
 
       const newIpfsHash = response.data.IpfsHash;
 
-      const tx = await contract.updateVoter(newName);
+      const tx = await contract.updateVoter(
+        voterAddress,
+        newIpfsHash
+      );
+
       await tx.wait();
 
       alert("Updated sucessfully!");
@@ -393,6 +408,12 @@ const rejectVoter = async (voterAddress) => {
 
           setContract(votigContract);
 
+          // get current time in seconds
+          
+          // get start time 
+          const startTime = await votigContract.votingStartTime();
+          setVotingStartTime(Number(startTime));
+
           // automatically load voters
           const list = await votigContract.ListofRegisteredVoters();
           setVoters(list);
@@ -496,16 +517,17 @@ useEffect(() => {
               />
 
               <button 
-              onClick={updateMyName} 
+              onClick={() => updateMyName(v.votersAddress)} 
+              disabled={currentTime >= votingStartTime}
               style={{
                 marginTop: "10px",
-                background: "blue",
+                background: currentTime >= votingStartTime ? "gray" : "blue",
                 color: "white", 
                 padding: "6px",
                 border: "none",
                 borderRadius: "6px",
                 width: "100%",
-                cursor: "pointer"
+                cursor: currentTime >= votingStartTime ? "not-allowed" : "pointer"
               }}
               >
                 Update Name
