@@ -142,6 +142,8 @@ function AdministratorPage() {
 
 
   const [ipfsHash, setIpfsHash] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
   // call backend from react to send email notification to voters and candidates when they are approved or rejected by admin
   const sendEmailNotification = async (to, subject, text) => {
     try {
@@ -160,7 +162,12 @@ function AdministratorPage() {
   // Reset Contract Function
 
   const resetContract = async () => {
-    if (!contract) return;
+    if (!contract || !isAdmin) {
+      alert("Only the admin can reset the contract.");
+       return;
+
+    }
+     
 
     try {
       const signer = contract.signer;
@@ -195,15 +202,44 @@ function AdministratorPage() {
     if (window.ethereum) {
       try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setAccount(accounts[0]);
+        const userAccount = accounts[0]; 
+
+
+        setAccount(userAccount); 
+        //setAccount(accounts[0]);
         setWalletConnected(true);
 
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const network = await provider.getNetwork();
+
+        // network check sepolia
+        if (network.chainId !== 11155111) { // Sepolia chain ID
+          alert("Please connect to the Sepolia network!");
+          return;
+        }
+
+
+        //const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
         const votingContract = new ethers.Contract(contractAddress, VotingArtifact.abi, signer);
         setContract(votingContract);
 
-        console.log("Wallet connected:", accounts[0]);
+
+        // admin check 
+        const owner = await votingContract.owner();
+
+        if (owner.toLowerCase() === userAccount.toLowerCase()) { 
+          setIsAdmin(true);
+          console.log("✅ Admin connected");
+        } else {
+          setIsAdmin(false);
+          alert("⛔ You are not the admin.");
+          
+        }
+
+        console.log("Connected account:", userAccount);
+
+        //console.log("Wallet connected:", accounts[0]);
       } catch (err) {
         console.error("Error connecting wallet:", err);
       }
@@ -549,6 +585,16 @@ const getAcceptedCandidates = async () => {
       getRegisteredCandidates();
     }
   }, [contract]);
+
+
+if (walletConnected && !isAdmin) {
+  return (
+    <div style={{ padding: "50px", textAlign: "center" }}>
+      <h2>⛔ Access Denied</h2>
+      <p>This page is restricted to the contract owner.</p>
+    </div>
+  );
+}
 
 
   return (

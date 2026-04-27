@@ -405,6 +405,8 @@ const rejectVoter = async (voterAddress) => {
 // Auto fetch voters & candidates when contract changes
   useEffect(() => {
     const loadContract = async () => {
+      
+
       try {
         //const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545"); // hardhat local node 
 
