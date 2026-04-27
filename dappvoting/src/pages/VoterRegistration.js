@@ -129,8 +129,17 @@ function VoterRegistration() {
     if (!contract || !searchAddress) return;
 
     try {
-      const result = await contract.searchVoter(searchAddress);
 
+      // clean (handles, tabs, spaces, newlines
+      const cleanAddress = searchAddress.replace(/\s/g, "");
+
+      // validates address 
+      if (!ethers.utils.isAddress(cleanAddress)) {
+        alert("Invalid wallet address format!"); 
+        return; 
+      }
+
+      const result = await contract.searchVoter(cleanAddress);
       console.log("SEARCH RESULT FROM CONTRACT:", result);
 
       if (!result || result.votersAddress === ethers.constants.AddressZero) {
@@ -471,7 +480,7 @@ useEffect(() => {
        type="text"
         placeholder="Enter Wallet Address"
         value={searchAddress}
-        onChange={(e) => setSearchAddress(e.target.value)}
+        onChange={(e) => setSearchAddress(e.target.value.replace(/\s/g, ""))} // remove spaces
         style={{ marginRight: "10px", padding: "5px", width: "300px" }}
 
        />
