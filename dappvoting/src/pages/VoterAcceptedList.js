@@ -258,6 +258,8 @@ useEffect(() => {
                 </div>
              <br/>
              <br/>
+
+             {/*}
              < div style ={{marginBottom: "30px"}}>
        <h3>Search Verified Voter</h3>
 
@@ -317,7 +319,7 @@ useEffect(() => {
             </div>
           ))}
 
-       </div>
+       </div>*/}
       
              <br/>
              <br/>

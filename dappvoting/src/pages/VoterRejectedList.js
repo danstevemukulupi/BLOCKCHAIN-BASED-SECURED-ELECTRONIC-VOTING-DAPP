@@ -298,6 +298,7 @@ if (typeof ipfsHash !== "string") {
                    <br/>
                    <br/>
 
+              {/* 
                    < div style ={{marginBottom: "30px"}}>
        <h3>Search Rejected Voter</h3>
 
@@ -358,6 +359,7 @@ if (typeof ipfsHash !== "string") {
           ))}
 
        </div>
+       */}
 
        <br/>
        <br/>

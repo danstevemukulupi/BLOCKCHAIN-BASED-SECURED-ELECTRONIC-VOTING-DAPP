@@ -216,7 +216,7 @@ const tx = await contract.registerCandidate(ipfsHash);
        </a>
         <h2 style={{ color: "purple" }}>MapoVote</h2>
         <Link to="/">Home</Link>
-        <Link to="/candidate-profile">Profile</Link>
+        {/*<Link to="/candidate-profile">Profile</Link>*/}
         <NavDropdown title="Election" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>   
               <NavDropdown.Divider />

@@ -640,7 +640,6 @@ if (walletConnected && !checkedAdmin) {
               <NavDropdown.Item as={Link} to="/voter-Registration">List of Registered Voters</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/voter-accepted-list">List of Approved Voters</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/voter-rejected-list">List of Rejected Voters</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/voter-finderr">Find Voter</NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Candidates " id="basic-nav-dropdown">

@@ -58,7 +58,7 @@ body {
 
 
 .candidate-content {
-    background-color: lightblue;
+    background-color: white;
      height: 400px;
     display: grid;
     grid-template-columns: auto auto ;

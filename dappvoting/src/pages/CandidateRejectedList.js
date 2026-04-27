@@ -315,6 +315,7 @@ useEffect(() => {
                    <br/>
                    <br/>
 
+        {/*
                     < div style ={{marginBottom: "30px"}}>
        <h3>Search Rejected Candidate</h3>
 
@@ -376,6 +377,8 @@ useEffect(() => {
           ))}
 
        </div>
+       */}
+
        <br/>
        <br/>
        <br/>

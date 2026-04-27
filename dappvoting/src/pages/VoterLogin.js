@@ -413,13 +413,12 @@ if (typeof ipfsHash !== "string") {
         </a>
         <h2 style={{ color: "purple" }}>MapoVote</h2>
         <Link to="/">Home</Link>
-        <Link to="/voter-profile">Profile</Link>
+        {/*<Link to="/voter-profile">Profile</Link>*/}
 
         <NavDropdown title="Election" id="basic-nav-dropdown">
-          <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>  
-          <NavDropdown.Item as={Link} to="/candidate-accepted-list">View Candidates</NavDropdown.Item>
           <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>
-          <NavDropdown.Item as={Link} to="/vote-info">How To Vote</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/vote-info">How To Vote</NavDropdown.Item> 
+          <NavDropdown.Item as={Link} to="/candidate-accepted-list">View Candidates</NavDropdown.Item>
           <NavDropdown.Item as={Link} to="/vote-status">Voting Status</NavDropdown.Item>
           <NavDropdown.Item as={Link} to="/vote-result">Election Result</NavDropdown.Item> 
           <NavDropdown.Divider />

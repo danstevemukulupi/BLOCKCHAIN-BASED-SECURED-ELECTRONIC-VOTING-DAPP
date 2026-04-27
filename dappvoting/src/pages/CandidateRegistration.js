@@ -458,6 +458,7 @@ useEffect(() => {
              <br/>
              <br/>
 
+            {/* 
              < div style ={{marginBottom: "30px"}}>
        <h3>Search Candidate</h3>
 
@@ -514,7 +515,11 @@ useEffect(() => {
               <p><b>Status:</b> {c.status.toString()}</p>
               <p><b>Message:</b> {c.message}</p>
 
-              {/* update section */}
+              */}
+
+              {/* update section */} 
+              
+              {/* 
               <input 
               type="text"
               placeholder="New name"
@@ -542,6 +547,9 @@ useEffect(() => {
           ))}
 
        </div>
+       */}
+
+     
        <br/>
        <br/>
        <br/>

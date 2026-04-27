@@ -473,7 +473,7 @@ useEffect(() => {
 
      
 
-
+   {/*}
        < div style ={{marginBottom: "30px"}}>
        <h3>Search Voter</h3>
 
@@ -502,7 +502,9 @@ useEffect(() => {
        </button>
 
        </div>
+       */}
 
+       {/*}
        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap"}}>
         {
           searchResult.map((v, index) => (
@@ -519,9 +521,10 @@ useEffect(() => {
               <h4>{v.name}</h4>
               <p><b>Address:</b> {v.votersAddress}</p>
               <p><b>Status:</b> {v.status.toString()}</p>
-              <p><b>Message:</b> {v.message}</p>
+              <p><b>Message:</b> {v.message}</p>*/}
 
               {/* update section */}
+              {/*}
               <input 
               type="text"
               placeholder="New name"
@@ -549,7 +552,7 @@ useEffect(() => {
             </div>
           ))}
 
-       </div>
+       </div>*/}
 
        <br/>
        <br/>
