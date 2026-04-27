@@ -418,7 +418,7 @@ contract VotingSystem{
 
 
          // testing 2
-         function searchVoter(string memory _ipfsHash, address _addr) public view returns (Voter[] memory) {
+         /*function searchVoter(string memory _ipfsHash, address _addr) public view returns (Voter[] memory) {
              uint count = 0;
 
              for (uint i = 0; i < votersRegistered.length; i++) {
@@ -448,6 +448,12 @@ contract VotingSystem{
        }
 
        return results;
+       }*/
+
+       // new search voter function with voter address only 
+       function searchVoter(address _addr) public view returns (Voter memory) {
+        require(voters[_addr].votersAddress != address(0), "Voter not found");
+        return voters[_addr];
        }
 
 

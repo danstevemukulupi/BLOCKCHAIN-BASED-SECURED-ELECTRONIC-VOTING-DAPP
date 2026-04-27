@@ -121,11 +121,11 @@ function VoterRegistration() {
   
   // find and update voter information
   const searchVoter = async () => {
-    if (!contract || !searchName || !searchAddress) return;
+    if (!contract || !searchAddress) return;
 
     try {
-      const result = await contract.searchVoter(searchName, searchAddress);
-      setSearchResult(result);
+      const result = await contract.searchVoter(searchAddress);
+      setSearchResult([result]);
     } catch (err) {
       console.error("Error searching voter:", err);
 
@@ -138,6 +138,26 @@ function VoterRegistration() {
     if (!contract || ! newName) return;
 
     try {
+      const updatedData = {
+        name: newName,
+        age: voterAge,
+        email: voterEmail,
+        phone: voterPhone,
+        address: voterhomeAddress,
+        nationalId: voternationalId,
+      }; 
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/upload`,
+        updatedData
+      )
+
+      if (!response.data || !response.data.IpfsHash) {
+        throw new Error("Failed to upload voter data to IPFS");
+
+      }
+
+      const newIpfsHash = response.data.IpfsHash;
+
       const tx = await contract.updateVoter(newName);
       await tx.wait();
 
@@ -422,18 +442,10 @@ useEffect(() => {
        < div style ={{marginBottom: "30px"}}>
        <h3>Search Voter</h3>
 
-       <input
-        type="text"
-        placeholder="Enter Voter Name"
-        value={searchName}
-        onChange={(e) => setSearchName(e.target.value)}
-        style={{ marginRight: "10px", padding: "5px"}}
-
-       />
 
        <input
        type="text"
-        placeholder="Enter Voter address"
+        placeholder="Enter Wallet Address"
         value={searchAddress}
         onChange={(e) => setSearchAddress(e.target.value)}
         style={{ marginRight: "10px", padding: "5px", width: "300px" }}
@@ -484,7 +496,7 @@ useEffect(() => {
               />
 
               <button 
-              onClick={() => updateMyName(v.votersAddress)} 
+              onClick={updateMyName} 
               style={{
                 marginTop: "10px",
                 background: "blue",
