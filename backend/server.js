@@ -97,6 +97,20 @@ app.get("/candidate/:hash", (req, res) => {
   }
 });
 
+
+// annoucement 
+let announcement = "";
+
+app.post("/announcement", (req, res) => {
+  announcement = req.body.message;
+  res.json({ message: announcement });
+});
+
+app.get("/announcement", (req, res) => {
+  res.json({ message: announcement });
+}); 
+
+
 app.use("/api", emailRoutes);
 
 const PORT = process.env.PORT || 5000;

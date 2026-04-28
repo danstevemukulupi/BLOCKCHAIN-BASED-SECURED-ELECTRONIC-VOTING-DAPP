@@ -145,6 +145,24 @@ function AdministratorPage() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [checkedAdmin, setCheckedAdmin] = useState(false);
 
+  const [announcement, setAnnouncement] = useState("");
+  const [savedAnnouncement, setSavedAnnouncement] = useState("");
+
+  // Announcement function 
+  const saveAnnouncement = async () => {
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_API_URL}/announcement`,
+      { message: announcement }
+    );
+
+    setSavedAnnouncement(res.data.message);
+    alert("Announcement saved!");
+  } catch (err) {
+    console.error(err);
+  }
+};
+
   // call backend from react to send email notification to voters and candidates when they are approved or rejected by admin
   const sendEmailNotification = async (to, subject, text) => {
     try {
@@ -740,6 +758,29 @@ if (walletConnected && !checkedAdmin) {
       </div>
 
     </div>
+
+
+
+    {/*Annoucement */}
+    <div className="announcement-box">
+  <h3>📢 Admin Announcement</h3>
+
+  <textarea
+    placeholder="Write announcement here..."
+    value={announcement}
+    onChange={(e) => setAnnouncement(e.target.value)}
+  />
+
+  <button onClick={saveAnnouncement}>
+    Publish
+  </button>
+
+  <div className="preview">
+    <strong>Preview:</strong>
+    <p>{announcement}</p>
+    </div>
+    </div>
+
      
 
       <div className="container mt-4 voters-section">

@@ -54,6 +54,25 @@ function VoterLogin() {
       const [loggedIn, setLoggedIn] = useState(false); 
       const [ipfsHash, setIpfsHash] = useState("");
 
+      const [announcement, setAnnouncement] = useState("");
+
+      // annoucement 
+      useEffect(() => {
+  const fetchAnnouncement = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/announcement`
+      );
+      setAnnouncement(res.data.message);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchAnnouncement();
+}, []);
+
+
       
       
       {/*const [resolvedCandidates, setResolvedCandidates] = useState([]); 
@@ -576,6 +595,11 @@ if (typeof ipfsHash !== "string") {
             <h1 style={{ color: "purple" }}>Welcome, Voter!</h1>
             <h5>Your portal for participation in the upcoming general election.</h5>
           </div>
+
+          <div className="announcement-display">
+  <h3>📢 Latest Announcement</h3>
+  <p>{announcement || "No announcements yet."}</p>
+</div>
 
           {/*<div style={{ marginBottom: "30px" }}>
             <h3>Search Candidate</h3>
