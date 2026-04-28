@@ -336,8 +336,8 @@ function Dashboard() {
        <br/>
       {/* For the title and description of the dapp, and the buttons for how it works and current results */}
       <div className="App-title">
-        <h1 style={{ color: "purple"}}>Empowering the Voice</h1>
-        <h1 style={{ color: "lightskyblue"}}>of the Community</h1>
+        <h1 style={{ color: "purple", textAlign: "center" }}>Empowering the Voice</h1>
+        <h1 style={{ color: "lightskyblue", textAlign: "center" }}>of the Community</h1>
         <br/>
         <p style={{ color: "black" }}>MapoVote uses blockchain technology to guarantee secure, transparent, and tamper-proof voting.
           <br/>Built for national elections, it upholds the highest standards of integrity-ensuring every citizen's voice is heard, protected, and counted</p>
@@ -346,7 +346,13 @@ function Dashboard() {
   <button style={{ background: "purple", color: "white" }}>
     Help & Info
   </button>
-    </Link>      <button>Current Results</button>
+    </Link>      
+    
+    <Link to="/vote-result">
+    <button style={{ background: "lightskyblue", color: "white" }}>
+      Current Results
+      </button>
+      </Link>
 
 
         <br/>
@@ -368,8 +374,8 @@ function Dashboard() {
                 </ul>
 
                 
-                  <Link to="/administrator-page" className="admin-btn" >
-                  <button> 
+                  <Link to="/administrator-page"  >
+                  <button className="admin-btn"> 
                   Administrator Access
                   </button>
                   </Link>
@@ -411,8 +417,10 @@ function Dashboard() {
                 </ul>
 
                 
-                  <Link to="/candidate-login" className="login-link" className="candidate-btn">
+                  <Link to="/candidate-login" className="login-link">
+                  <button  className="candidate-btn"> 
                     Candidate Login
+                  </button>
                   </Link>
              
 
