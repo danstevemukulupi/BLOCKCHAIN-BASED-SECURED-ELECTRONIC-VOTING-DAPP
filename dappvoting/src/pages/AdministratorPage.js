@@ -671,7 +671,7 @@ if (walletConnected && !checkedAdmin) {
              {!walletConnected ? (
            <button onClick={connectWallet}>Connect Wallet</button>
            ) : (
-           <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", }}>Wallet Connected</p> // display connected wallet <p> connected Wallet {account}</p>
+           <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}>🟢</p> // display connected wallet <p> connected Wallet {account}</p>
           
             )}
 
