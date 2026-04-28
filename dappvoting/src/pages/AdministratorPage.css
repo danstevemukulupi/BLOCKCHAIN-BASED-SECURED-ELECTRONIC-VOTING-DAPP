@@ -90,10 +90,15 @@ body {
 
 .admin-container {
     text-align: center;
-     border-radius: 8px;
-     margin-left: 20px;
-     margin-right: 20px;
-     height: 90px;
+     border-radius: 12px;
+
+     margin: 30px 20px; /* top/bottom + left/right */
+     padding: 25px;
+
+     background:  #f8f9fa;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+     height: auto;
      width: auto;
 
 }
