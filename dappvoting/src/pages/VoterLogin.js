@@ -475,10 +475,8 @@ if (typeof ipfsHash !== "string") {
         <h2 style={{ color: "purple" }}>MapoVote</h2>
         <Link to="/">Home</Link>
         
-        <NavDropdown title="Election" id="basic-nav-dropdown">
-          <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>  
-          <NavDropdown.Item as={Link} to="/vote-info">How To register</NavDropdown.Item>
-         
+        <NavDropdown title="Registration" id="basic-nav-dropdown">
+          <NavDropdown.Item as={Link} to="/election-info">How To register</NavDropdown.Item>  
           <NavDropdown.Divider />
         </NavDropdown>
 
@@ -684,9 +682,12 @@ if (typeof ipfsHash !== "string") {
               </div>
             ))}
           </div>*/}
+          
+          <br/>
+          <br/>
+          <br/>
 
-          <div className="voter-content">
-          </div>
+     
 
           <footer className="footer-final">
             <div className='footer-container'>
