@@ -57,38 +57,6 @@ body {
 }
 
 
-
-
-.voter-content {
-    background-color: white;
-     height: 400px;
-    display: grid;
-    grid-template-columns: auto auto ;
-    padding: 5px;
-    gap: 20px; 
-    width: 100%;
-    margin-top: 70px;
-   
-
-}
-
-.voter-content div {
-    background-color: #f1f1f1;
-     color: #000;
-     padding: 20px;
-     font-size: 24px;
-     text-align: center;
-     border-radius: 8px;
-     margin-top: 50px;
-     margin-left: 20px;
-     margin-right: 20px;
-     margin-bottom: 50px;
-      
-}
-
-
-
-
 .voting-section{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
