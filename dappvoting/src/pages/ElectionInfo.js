@@ -4,8 +4,29 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import './ElectionInfo.css';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 function ElectionInfo() {
+
+  const [announcement, setAnnouncement] = useState("");
+
+       // annoucement 
+      useEffect(() => {
+  const fetchAnnouncement = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/announcement`
+      );
+      setAnnouncement(res.data.message);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchAnnouncement();
+}, []);
+
 
     return(
         <div className="App">
@@ -24,10 +45,20 @@ function ElectionInfo() {
       <h1 style={{ color: "purple"}}>Election Information</h1>
       <h5>A comprehensive overview of the electoral process, including voting details, candidate information, and important deadlines.</h5>
     </div>
+    <br/>
+    <br/>
+    
+     <div className="announcement-display">
+  <h3>📢 Latest Announcement</h3>
+  <p>{announcement || "No announcements yet."}</p>
+  </div>
+
+    <br/>
+    <br/>
 
 
      <div className="voter-content">
-      
+
        {/* GETTING STARTED */}
   <div className="info-card">
     <h2>🔐 Getting Started with MapoVote</h2>
@@ -164,9 +195,10 @@ function ElectionInfo() {
       System guarantees transparency, tamper-proof records, and decentralized verification.
     </p>
   </div>
-
-
      </div>
+     <br/>
+     <br/>
+     <br/>
     
     <footer className="footer-final">
       
