@@ -226,7 +226,7 @@ const tx = await contract.registerCandidate(ipfsHash);
         {!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
         ): (
-          <p>Wallet connected: {account}</p>
+          <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}>🟢</p>
 
         )}  
     </div>
