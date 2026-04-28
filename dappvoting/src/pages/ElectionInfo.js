@@ -27,6 +27,144 @@ function ElectionInfo() {
 
 
      <div className="voter-content">
+      
+       {/* GETTING STARTED */}
+  <div className="info-card">
+    <h2>🔐 Getting Started with MapoVote</h2>
+
+    <h4>1. Install MetaMask Wallet</h4>
+    <ul>
+      <li>Download MetaMask (Chrome, Edge, Firefox)</li>
+      <li>Create a new wallet account</li>
+      <li>Securely store your recovery phrase</li>
+      <li>Connect to the Sepolia Test Network</li>
+    </ul>
+
+    <p className="info-note">
+      👉 Your wallet acts as your digital identity in the system.
+    </p>
+  </div>
+
+  {/* REGISTRATION */}
+  <div className="info-card">
+    <h2>🧾 Registration Process</h2>
+    <p>
+      All users must register before accessing the platform as either a:
+    </p>
+    <ul>
+      <li>👤 Voter</li>
+      <li>🏛️ Candidate</li>
+    </ul>
+
+    <p className="warning">
+      ⚠️ Registration requires a connected MetaMask wallet.
+    </p>
+  </div>
+
+  {/* VOTER */}
+  <div className="info-card">
+    <h2>👤 Voter Registration Requirements</h2>
+    <ul>
+      <li>Full Name</li>
+      <li>Age (must be 18 or older)</li>
+      <li>Email Address</li>
+      <li>Phone Number</li>
+      <li>Residential Address</li>
+      <li>National ID Number</li>
+    </ul>
+
+    <div className="info-sub">
+      <h4>🧠 Important Notes</h4>
+      <ul>
+        <li>Wallet must be connected before registration</li>
+        <li>Data is stored securely on IPFS</li>
+        <li>Only a hash is stored on the blockchain</li>
+      </ul>
+    </div>
+  </div>
+
+  {/* CANDIDATE */}
+  <div className="info-card">
+    <h2>🏛️ Candidate Registration Requirements</h2>
+    <ul>
+      <li>Full Name</li>
+      <li>Age</li>
+      <li>Email Address</li>
+      <li>Phone Number</li>
+      <li>Residential Address</li>
+      <li>Political Party</li>
+      <li>Goals / Manifesto</li>
+      <li>Vision</li>
+      <li>Experience</li>
+      <li>National ID Number</li>
+    </ul>
+
+    <div className="info-sub">
+      <h4>🧠 Important Notes</h4>
+      <ul>
+        <li>Same approval process as voters</li>
+        <li>Information helps voters make decisions</li>
+      </ul>
+    </div>
+  </div>
+
+  {/* CONFIRMATION */}
+  <div className="info-card">
+    <h2>⚙️ Registration Confirmation</h2>
+    <ul>
+      <li>MetaMask popup will appear → Confirm transaction</li>
+      <li>Browser alert will show confirmation message</li>
+      <li>Click OK to proceed</li>
+    </ul>
+  </div>
+
+  {/* APPROVAL */}
+  <div className="info-card">
+    <h2>⏳ Approval Process</h2>
+    <ul>
+      <li>Reviewed by Administrator</li>
+      <li>May take up to 1 hour</li>
+      <li>Result:</li>
+      <li>✅ Approved</li>
+      <li>❌ Rejected</li>
+    </ul>
+  </div>
+
+  {/* ACCESS */}
+  <div className="info-card">
+    <h2>🔑 Accessing Your Account</h2>
+    <ul>
+      <li>Click "Connect Wallet"</li>
+      <li>Use the same MetaMask account</li>
+    </ul>
+
+    <p className="success">✅ Approved users gain dashboard access</p>
+    <p className="error">❌ Unapproved users cannot access the system</p>
+  </div>
+
+  {/* WALLET STATUS */}
+  <div className="info-card">
+    <h2>🟢 Wallet Connection Status</h2>
+    <p>
+      A green indicator confirms:
+    </p>
+    <p className="success">“Wallet Connected”</p>
+  </div>
+
+  {/* SECURITY */}
+  <div className="info-card">
+    <h2>🔐 Security & Transparency</h2>
+    <ul>
+      <li>All actions recorded on blockchain</li>
+      <li>Smart contracts ensure integrity</li>
+      <li>Data stored securely using IPFS</li>
+    </ul>
+
+    <p className="info-note">
+      System guarantees transparency, tamper-proof records, and decentralized verification.
+    </p>
+  </div>
+
 
      </div>
     
