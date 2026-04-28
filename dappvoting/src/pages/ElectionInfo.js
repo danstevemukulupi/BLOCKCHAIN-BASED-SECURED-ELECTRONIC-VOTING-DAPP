@@ -15,9 +15,7 @@ function ElectionInfo() {
        </a>
         <h2 style={{ color: "purple" }}>MapoVote</h2>
         <Link to="/">Home</Link>
-        <Link to="/voter-profile">Profile</Link>
-     
-       
+      
     </div>
     <br/>
     <br/>
