@@ -56,6 +56,21 @@ body {
     padding: 20px;
 }
 
+.how-to-vote-container {
+     flex: 1;
+     display: flex; 
+}
+
+.how-to-vote-container ol {
+      padding-left: 20px;
+
+}
+
+.how-to-vote-container h4 {
+    margin-top: 15px;
+    color: purple;
+}
+
 
 
 

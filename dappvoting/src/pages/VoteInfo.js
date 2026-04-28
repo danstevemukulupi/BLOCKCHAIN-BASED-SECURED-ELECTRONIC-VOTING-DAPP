@@ -37,7 +37,6 @@ function VoteInfo() {
        </a>
         <h2 style={{ color: "purple" }}>MapoVote</h2>
         <Link to="/">Home</Link>
-        <Link to="/voter-profile">Profile</Link>
        
        
     </div>
@@ -62,8 +61,56 @@ function VoteInfo() {
 
 
 
-     <div className="voter-content">
+     <div className="how-to-vote-container">
+      <h2>🗳️ How to Vote</h2>
+
+  <ul>
+    <li>Each voter is allowed <b>one vote per registered wallet</b></li>
+    <li>Wait until the election is officially started by the administrator</li>
+    <li>Once active, the list of approved candidates will be displayed</li>
+    <li>Ensure you are connected using your <b>approved MetaMask account</b></li>
+  </ul>
+
+  <h4>📌 Voting Steps</h4>
+  <ol>
+    <li>Select your preferred candidate</li>
+    <li>Click the <b>"Vote"</b> button</li>
+    <li>A MetaMask popup will appear</li>
+    <li>Review and click <b>"Confirm"</b> to submit your vote</li>
+    <li>A browser alert will confirm: <b>"You have voted successfully"</b></li>
+  </ol>
+
+  <h4>⚠️ Important Rules</h4>
+  <ul>
+    <li>You can only vote <b>once</b></li>
+    <li>Your vote <b>cannot be changed or undone</b></li>
+    <li>Duplicate voting is automatically prevented by the blockchain</li>
+  </ul>
+
+  <h4>📊 After Voting</h4>
+  <ul>
+    <li>Wait for the election period to end</li>
+    <li>Visit the dashboard to view results</li>
+    <li>You will see:</li>
+    <ul>
+      <li>Winner’s name</li>
+      <li>Political party</li>
+      <li>Total votes received</li>
+      <li>Total number of candidates</li>
+      <li>Total number of voters</li>
+    </ul>
+  </ul>
+
+  <p className="info-note">
+    All votes are securely recorded on the blockchain, ensuring fairness, transparency, 
+    and that every vote is counted exactly once.
+  </p>
+
      </div>
+
+     <br/>
+     <br/>
+     <br/>
     
     <footer className="footer-final">
       
