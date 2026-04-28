@@ -399,16 +399,16 @@ useEffect(() => {
                   <tr>
                     <th>Name</th>
                     <th>Age</th>
-                    <th>Email</th>
+        
                     <th>Phone</th>
                     <th>Home Address</th>
                     <th>Political Party</th>
                     <th>Goals/Manifesto</th>
                     <th>Vision</th>
                     <th>Experience</th>
-                    <th>National ID</th>
-                    <th>Wallet Address</th>
-                    <th>Status</th>
+                    
+                   
+                   
                     <th>Message</th>
                     <th>Decision</th>
                   </tr>
@@ -419,16 +419,15 @@ useEffect(() => {
                     <tr key={index}>
                       <td>{c.candidateName}</td>
                       <td>{c.candidateAge}</td>
-                      <td>{c.candidateEmail}</td>
+                      
                       <td>{c.candidatePhone}</td>
                       <td>{c.candidateHomeAddress}</td>
                       <td>{c.politicalParty}</td>
                       <td>{c.goalsManifesto}</td>
                       <td>{c.vision}</td>
                       <td>{c.experience}</td>
-                      <td>{c.candidateNationalId}</td>
-                      <td>{c.candidatesAddress}</td>
-                      <td>{c.status.toString()}</td>
+                      
+                      
                       <td>{c.message}</td>
                         <td >
                           < span className="check-emoji">✅</span>
