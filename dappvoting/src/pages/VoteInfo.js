@@ -62,32 +62,43 @@ function VoteInfo() {
 
 
      <div className="how-to-vote-container">
-      <h2>🗳️ How to Vote</h2>
 
+      <div className="info-card">
+      <h2>🗳️ 1.  How to Vote</h2>
   <ul>
     <li>Each voter is allowed <b>one vote per registered wallet</b></li>
     <li>Wait until the election is officially started by the administrator</li>
     <li>Once active, the list of approved candidates will be displayed</li>
     <li>Ensure you are connected using your <b>approved MetaMask account</b></li>
   </ul>
+  </div>
 
-  <h4>📌 Voting Steps</h4>
-  <ol>
-    <li>Select your preferred candidate</li>
-    <li>Click the <b>"Vote"</b> button</li>
-    <li>A MetaMask popup will appear</li>
-    <li>Review and click <b>"Confirm"</b> to submit your vote</li>
-    <li>A browser alert will confirm: <b>"You have voted successfully"</b></li>
-  </ol>
-
-  <h4>⚠️ Important Rules</h4>
+  <div className="info-card">
+  <h2>⚠️ 2. Important Rules</h2>
   <ul>
     <li>You can only vote <b>once</b></li>
     <li>Your vote <b>cannot be changed or undone</b></li>
     <li>Duplicate voting is automatically prevented by the blockchain</li>
   </ul>
+  </div>
 
-  <h4>📊 After Voting</h4>
+  
+
+  <div className="info-card">
+  <h2>📌 3. Voting Steps</h2>
+  <ul>
+    <li>Select your preferred candidate</li>
+    <li>Click the <b>"Vote"</b> button</li>
+    <li>A MetaMask popup will appear</li>
+    <li>Review and click <b>"Confirm"</b> to submit your vote</li>
+    <li>A browser alert will confirm: <b>"You have voted successfully"</b></li>
+  </ul>
+  </div>
+
+  
+
+  <div className="info-card">
+  <h2>📊 4. After Voting</h2>
   <ul>
     <li>Wait for the election period to end</li>
     <li>Visit the dashboard to view results</li>
@@ -105,6 +116,7 @@ function VoteInfo() {
     All votes are securely recorded on the blockchain, ensuring fairness, transparency, 
     and that every vote is counted exactly once.
   </p>
+  </div> 
 
      </div>
 
