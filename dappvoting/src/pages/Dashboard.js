@@ -322,8 +322,7 @@ function Dashboard() {
 
           </a>
           <h2 style={{ color: "purple" }}>MapoVote</h2>
-          <Link to="/">Home</Link>
-          <Link to="/help-infos">Help & Info</Link>
+       
 
            {/*{!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
@@ -343,7 +342,7 @@ function Dashboard() {
         <p style={{ color: "black" }}>MapoVote uses blockchain technology to guarantee secure, transparent, and tamper-proof voting.
           <br/>Built for national elections, it upholds the highest standards of integrity-ensuring every citizen's voice is heard, protected, and counted</p>
 
-        <button style={{ background: "purple", color: "white" }}>How it Works</button> <button>Current Results</button>
+        <button style={{ background: "purple", color: "white" }}>Help & Info</button> <button>Current Results</button>
         <br/>
         <br/>
         </div>
@@ -362,11 +361,11 @@ function Dashboard() {
                     <li> Result management</li>
                 </ul>
 
-                <button className="admin-btn">
-                  <Link to="/administrator-page" >
+                
+                  <Link to="/administrator-page" className="admin-btn" >
                   Administrator Access
                   </Link>
-                </button>
+                
                 
                 </div>
 
