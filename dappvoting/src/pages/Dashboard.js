@@ -342,7 +342,11 @@ function Dashboard() {
         <p style={{ color: "black" }}>MapoVote uses blockchain technology to guarantee secure, transparent, and tamper-proof voting.
           <br/>Built for national elections, it upholds the highest standards of integrity-ensuring every citizen's voice is heard, protected, and counted</p>
 
-        <button style={{ background: "purple", color: "white" }}>Help & Info</button> <button>Current Results</button>
+      <Link to="/administrator-page">
+  <button style={{ background: "purple", color: "white" }}>
+    Help & Info
+  </button>
+    </Link>      <button>Current Results</button>
         <br/>
         <br/>
         </div>
@@ -381,11 +385,11 @@ function Dashboard() {
                   <li> View election results</li>
                 </ul>
 
-                <button className="voter-btn">
-                  <Link to="/voter-login"  className="login-link">
+                
+                <Link to="/voter-login"  className="login-link" className="voter-btn" >
                  Voter Login
                 </Link>
-                </button>
+               
                 
                 </div>
 
@@ -400,11 +404,11 @@ function Dashboard() {
                   <li> View election results</li>
                 </ul>
 
-                <button className="candidate-btn">
-                  <Link to="/candidate-login" className="login-link">
+                
+                  <Link to="/candidate-login" className="login-link" className="candidate-btn">
                     Candidate Login
                   </Link>
-                </button>
+             
 
                 
                 </div>
