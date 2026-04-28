@@ -271,10 +271,13 @@ const tx = await contract.registerCandidate(ipfsHash);
 
             <button onClick={connectWallet} className="btn-login">
               Connect Wallet
+              
+              
+
             </button>
 
 
-            {account && <p>Wallet: {account}</p>}
+            {account && <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}>🟢</p>}
             <p style={{ color: "orange" }}>
               ⚠️ Only approved candidates can enter
             </p>
