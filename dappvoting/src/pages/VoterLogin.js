@@ -448,7 +448,7 @@ if (typeof ipfsHash !== "string") {
         {!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
         ): (
-          <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}>🟢</p>
+          <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", margin: "auto" }}>🟢</p>
 
         )}
         
