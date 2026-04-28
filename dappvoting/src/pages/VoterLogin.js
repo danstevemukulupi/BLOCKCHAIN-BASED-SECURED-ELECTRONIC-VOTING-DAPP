@@ -499,9 +499,6 @@ if (typeof ipfsHash !== "string") {
 
               
             </button>
-
-
-            {account && <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}>🟢</p>}
             <p style={{ color: "orange" }}>
               ⚠️ Only approved voters can enter
             </p>
