@@ -4,6 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import './VoteInfo.css';
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 function VoteInfo() {
 
