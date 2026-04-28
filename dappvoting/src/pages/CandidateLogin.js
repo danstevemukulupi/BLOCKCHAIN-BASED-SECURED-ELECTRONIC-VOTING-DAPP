@@ -226,7 +226,7 @@ const tx = await contract.registerCandidate(ipfsHash);
         {!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
         ): (
-          <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}>🟢</p>
+          <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "20px", width: "20px", height: "20px", backgroundColor: "green", borderRadius: "50%", padding: "10px" }}>🟢</p>
 
         )}  
     </div>
@@ -272,7 +272,7 @@ const tx = await contract.registerCandidate(ipfsHash);
             <button onClick={connectWallet} className="btn-login">
               Connect Wallet
 
-              {account && <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto" }}>🟢</p>}
+              {account && <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "auto", width: "20px", height: "20px", backgroundColor: "green", borderRadius: "50%" }}>🟢</p>}
               
               
             </button>
