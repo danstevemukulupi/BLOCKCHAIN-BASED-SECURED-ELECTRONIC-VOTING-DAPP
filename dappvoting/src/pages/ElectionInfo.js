@@ -57,7 +57,7 @@ function ElectionInfo() {
     <br/>
 
 
-     <div className="voter-content">
+     <div className="voter-info-container">
 
        {/* GETTING STARTED */}
   <div className="info-card">
