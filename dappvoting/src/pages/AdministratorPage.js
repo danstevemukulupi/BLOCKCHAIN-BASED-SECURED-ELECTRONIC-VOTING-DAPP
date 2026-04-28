@@ -693,8 +693,8 @@ if (walletConnected && !checkedAdmin) {
     <br/>
      
      <div className="admin-container">
-      <h1 style={{ color: "purple"}}>Admin Dashboard</h1>
-      <h5>Manage voters and candidates, and start the election.</h5>
+      <h1 style={{ color: "purple", textAlign: "center" }}>Admin Dashboard</h1>
+      <h5 style={{ textAlign: "center" }}>Manage voters and candidates, and start the election.</h5>
     </div>
 
     <div className="voter-stats">
