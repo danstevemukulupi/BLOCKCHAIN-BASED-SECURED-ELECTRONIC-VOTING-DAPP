@@ -671,7 +671,8 @@ if (walletConnected && !checkedAdmin) {
              {!walletConnected ? (
            <button onClick={connectWallet}>Connect Wallet</button>
            ) : (
-           <p> connected Wallet {account}</p>
+           <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", }}>Wallet Connected</p> // display connected wallet <p> connected Wallet {account}</p>
+          
             )}
 
             <button
@@ -686,6 +687,7 @@ if (walletConnected && !checkedAdmin) {
             
     </div>
   
+    <br/>
     <br/>
     <br/>
     <br/>
@@ -734,29 +736,6 @@ if (walletConnected && !checkedAdmin) {
     </div>
 
     <div className="upcomingstatus">
-
-      <div className="upelection">
-        <h5>Upcoming Election</h5>
-        <h5>Upcoming Election</h5>
-        <h5>Upcoming Election</h5>
-        <h5>Upcoming Election</h5>
-        <h5>Upcoming Election</h5>
-        <h5>Upcoming Election</h5>
-      </div>
-
-      <div className="quick-actions">
-
-        
-      
-
-        <h5>Quick Actions</h5>
-        <h5>Quick Actions</h5>
-        <h5>Quick Actions</h5>
-        <h5>Quick Actions</h5>
-        <h5>Quick Actions</h5>
-        <h5>Quick Actions</h5>
-      </div>
-
     </div>
 
 
@@ -831,17 +810,6 @@ if (walletConnected && !checkedAdmin) {
   <br/>
   <br/>
    <div className="admin-content">
-      
-        <h2>Admin Actions</h2>
-        <p>Use the dropdowns above to manage voters and candidates, and start the election.</p>
-        <h2>Admin Actions</h2>
-        <p>Use the dropdowns above to manage voters and candidates, and start the election.</p>
-        <h2>Admin Actions</h2>
-        <p>Use the dropdowns above to manage voters and candidates, and start the election.</p>
-        <h2>Admin Actions</h2>
-        <p>Use the dropdowns above to manage voters and candidates, and start the election.</p>
-     
-     
      </div>
 
      {/* modal for election reset*/}

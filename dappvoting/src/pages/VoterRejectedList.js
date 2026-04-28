@@ -412,6 +412,8 @@ if (typeof ipfsHash !== "string") {
                   </div>
                   <br/>
                   <br/>
+                  <br/>
+                  <br/> 
             
                    <footer className="footer-final">
                   

@@ -87,6 +87,21 @@ body {
 }
 
 
+.announcement-box, .announcement-display {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px;
+  background: #f9f9f9;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+
 
 .footer {
     background-color: lightgray;

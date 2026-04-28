@@ -7,6 +7,25 @@ import './VoteInfo.css';
 
 function VoteInfo() {
 
+   const [announcement, setAnnouncement] = useState("");
+   
+      // annoucement 
+      useEffect(() => {
+  const fetchAnnouncement = async () => {
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/announcement`
+      );
+      setAnnouncement(res.data.message);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchAnnouncement();
+}, []);
+
+
     return(
 
        <div className="App">
@@ -28,9 +47,20 @@ function VoteInfo() {
       <h5>Step-by-step instructions on how to participate in the electoral process, from registration to casting your ballot.</h5>
     </div>
 
+    <br/>
+    <br/>
+
+    <div className="announcement-display">
+  <h3>📢 Latest Announcement</h3>
+  <p>{announcement || "No announcements yet."}</p>
+  </div>
+  <br/>
+  <br/>
+
+
+
 
      <div className="voter-content">
-
      </div>
     
     <footer className="footer-final">
