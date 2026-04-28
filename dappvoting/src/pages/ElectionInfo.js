@@ -195,6 +195,21 @@ function ElectionInfo() {
       System guarantees transparency, tamper-proof records, and decentralized verification.
     </p>
   </div>
+    {/* DECENTRALIZED IDENTITY */}
+   <div className="info-card">
+  <h2>🌐 Decentralized Identity</h2>
+  <ul>
+    <li>Your MetaMask wallet acts as your unique digital identity</li>
+    <li>No usernames or passwords required</li>
+    <li>Authentication is done through secure wallet signatures</li>
+  </ul>
+
+  <p className="info-note">
+    This ensures that each user is uniquely identified, prevents duplicate registrations, 
+    and eliminates reliance on centralized login systems.
+  </p>
+</div>
+
      </div>
      <br/>
      <br/>
