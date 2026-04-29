@@ -725,9 +725,7 @@ if (typeof ipfsHash !== "string") {
           <div className="voter-login-content">      
       </div>
 
-      <br/>
-      <br/>
-      <br/>
+     
      
 
           <footer className="footer-final">
