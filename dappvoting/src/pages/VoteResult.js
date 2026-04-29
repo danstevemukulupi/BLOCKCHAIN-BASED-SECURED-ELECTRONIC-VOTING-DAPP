@@ -45,6 +45,8 @@ function VoteResult() {
 
       const [winner, setWinner] = useState(null); 
 
+      
+
     const loadCandidateWinner = async () => {
     //try {
       ///const contract = await getContract();
@@ -56,7 +58,7 @@ function VoteResult() {
 
       try {
         const result = await contract.winningCandidate();
-        setCandidates(result);
+        setCandidates([result]);
 
       //}
 
