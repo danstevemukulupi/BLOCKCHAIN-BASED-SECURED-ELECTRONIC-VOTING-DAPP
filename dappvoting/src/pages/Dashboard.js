@@ -439,8 +439,8 @@ function Dashboard() {
                <li>Accessible to all</li>
              </ul>
               
-              <img src="./pics/Trust-security-mapo.png" alt="trust" width={700} />
-              <img src="./pics/voter-candidate.png" alt="trust" width={700} />
+              <img src="./pics/Trust-security-mapo.png" alt="trust" className="response-img" />
+              <img src="./pics/voter-candidate.png" alt="trust" className="response-img" />
 
            
             
@@ -554,6 +554,9 @@ function Dashboard() {
           </ul>
         </div>*/}
       </header>
+
+      <div className="dash-section"> 
+      </div>
       
       <footer className="footer-final">
         <div className='footer-container'>
