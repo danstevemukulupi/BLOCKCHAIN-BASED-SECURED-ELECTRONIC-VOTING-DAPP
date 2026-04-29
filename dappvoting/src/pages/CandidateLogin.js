@@ -462,6 +462,9 @@ const tx = await contract.registerCandidate(ipfsHash);
 
      <div className="candidate-content">
       </div>
+      <br/>
+      <br/>
+      <br/>
 
     <footer className="footer-final">
         <div className='footer-container'>
