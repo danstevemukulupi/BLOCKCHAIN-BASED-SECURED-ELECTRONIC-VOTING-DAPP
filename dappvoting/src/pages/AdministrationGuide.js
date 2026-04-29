@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
-import './Administration.css';
+import './AdministrationGuide.css';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
