@@ -175,7 +175,7 @@ textarea {
 
 .voter-login-content {
     background-color: white;
-     height: 100px;
+     height: 200px;
     display: grid;
     grid-template-columns: auto auto ;
     padding: 5px;
@@ -206,7 +206,7 @@ textarea {
   display: flex;
   justify-content: center;
   padding: 40px 20px;
-  min-height: 300px;
+  min-height: 400px;
 }
 
 .profile-card {
