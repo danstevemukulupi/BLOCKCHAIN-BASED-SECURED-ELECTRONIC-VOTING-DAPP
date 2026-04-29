@@ -218,7 +218,8 @@ const tx = await contract.registerCandidate(ipfsHash);
         <Link to="/">Home</Link>
         {/*<Link to="/candidate-profile">Profile</Link>*/}
         <NavDropdown title="Election" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>   
+              <NavDropdown.Item as={Link} to="/vote-status">Voting Status</NavDropdown.Item> 
+              <NavDropdown.Item as={Link} to="/vote-result">Election Result</NavDropdown.Item>   
               <NavDropdown.Divider />
             </NavDropdown>
 

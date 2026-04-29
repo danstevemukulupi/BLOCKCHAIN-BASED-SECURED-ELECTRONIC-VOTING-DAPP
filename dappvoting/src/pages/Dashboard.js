@@ -348,9 +348,9 @@ function Dashboard() {
   </button>
     </Link>      
     
-    <Link to="/vote-result">
+    <Link to="/vote-info">
     <button style={{ background: "lightskyblue", color: "white" }}>
-      Current Results
+      How To Vote
       </button>
       </Link>
 

@@ -389,9 +389,7 @@ if (typeof ipfsHash !== "string") {
             <img src="./pics/MapoVote-nobackground.png" alt="logo" width={150} height={60} />
        </a>
         <h2 style={{ color: "purple" }}>MapoVote</h2>
-        <Link to="/">Home</Link>
-        <Link to="/voter-profile">Profile</Link>
-       
+        <Link to="/">Home</Link>   
        
     </div>
     <br/>
@@ -485,7 +483,7 @@ if (typeof ipfsHash !== "string") {
         <br/>    
         <br/>
         <br/>
-        <div className="voter-content">
+        <div className="voter-start-content">
        </div>
      
     

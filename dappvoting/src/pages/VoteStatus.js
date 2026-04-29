@@ -455,7 +455,7 @@ if (typeof ipfsHash !== "string") {
 
         
          
-        <br/>
+      
         <br/>
         <br/>
 

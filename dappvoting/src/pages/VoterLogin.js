@@ -435,7 +435,6 @@ if (typeof ipfsHash !== "string") {
         {/*<Link to="/voter-profile">Profile</Link>*/}
 
         <NavDropdown title="Election" id="basic-nav-dropdown">
-          <NavDropdown.Item as={Link} to="/election-info">Election Info</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/vote-info">How To Vote</NavDropdown.Item> 
           <NavDropdown.Item as={Link} to="/candidate-accepted-list">View Candidates</NavDropdown.Item>
           <NavDropdown.Item as={Link} to="/vote-status">Voting Status</NavDropdown.Item>
@@ -595,10 +594,7 @@ if (typeof ipfsHash !== "string") {
             <h5>Your portal for participation in the upcoming general election.</h5>
           </div>
 
-          <div className="announcement-display">
-  <h3>📢 Latest Announcement</h3>
-  <p>{announcement || "No announcements yet."}</p>
-</div>
+ 
 
           {/*<div style={{ marginBottom: "30px" }}>
             <h3>Search Candidate</h3>
