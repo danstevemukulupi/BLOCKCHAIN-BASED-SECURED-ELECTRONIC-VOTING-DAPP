@@ -328,3 +328,5 @@ function AdministrationGuide() {
 
     )
 }
+
+export default AdministrationGuide;
