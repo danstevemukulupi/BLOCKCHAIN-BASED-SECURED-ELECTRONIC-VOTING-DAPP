@@ -386,7 +386,7 @@ if (typeof ipfsHash !== "string") {
       <h1 style={{ color: "purple"}}>Current Voting Status</h1>
       <h5 className="enc-An-i">Trustworthy.Irreversible</h5>
     </div>
-    <br/>
+    
     
 
 
@@ -429,7 +429,7 @@ if (typeof ipfsHash !== "string") {
       )}*/}
 
       
-      <br/>
+     
       <br/>
 
       <div> 
@@ -457,6 +457,10 @@ if (typeof ipfsHash !== "string") {
         <br/>    
         <br/>
         <br/>
+        <br/>
+
+         <div className="vote-status-content">
+      </div>
         
      
     
