@@ -240,7 +240,8 @@ function StartElection() {
 
        </div>
 
-       <div className="admin-container"></div>
+       <div className="start-election-container"> 
+       </div>
 
        <footer className="footer-final">
       

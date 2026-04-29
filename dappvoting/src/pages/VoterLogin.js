@@ -529,7 +529,7 @@ if (typeof ipfsHash !== "string") {
             <input 
               type="text"
               name="name"
-              placeholder="Name" 
+              placeholder="Full Name" 
               value={voterName}
               onChange={(e) => setVoterName(e.target.value)}
             />
