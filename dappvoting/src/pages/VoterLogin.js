@@ -722,8 +722,7 @@ if (typeof ipfsHash !== "string") {
       <br/>
            
          
-          <div className="voter-login-content">
-            
+          <div className="voter-login-content">      
       </div>
      
 
