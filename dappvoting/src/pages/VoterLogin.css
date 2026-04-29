@@ -1,4 +1,16 @@
 
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+
 .topnav {
   background-color: lightgray;
   position: fixed;
@@ -162,10 +174,7 @@ textarea {
   margin-bottom: 10px;
 }
 
-.announcement-display {
-    flex: 1;
-    display: flex;
-}
+
 
 
 
@@ -183,7 +192,6 @@ textarea {
     background-color: lightgray;
     color: black;
     padding: 40px 20px;
-    margin-bottom: auto;
     margin-top: auto;
   
     
