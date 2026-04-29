@@ -27,7 +27,7 @@ function VoteResult() {
       const [vision, setVision] = useState('');
       const [experience, setExperience] = useState('');
       const [candidatenationalId, setCandidateNationalId] = useState('');
-      const [candidates, setCandidates] = useState(null);
+      const [candidates, setCandidates] = useState([]);
 
 
 
