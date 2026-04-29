@@ -18,17 +18,16 @@ const contractAddress = "0x65F5f54d2E24F9C9B9919D4e3cDe3fBe533D7bD5"
 function VoteResult() {
   const [candidateName, setCandidateName] = useState('');
       const [candidateAge, setCandidateAge] = useState('');
-      const [candidateEmail, setCandidateEmail] = useState('');
-      const [candidatePhone, setCandidatePhone] = useState('');
-      
+      const [candidateGender, setCandidateGender] = useState('');
+      const [candidateCountry, setCandidateCountry] = useState('');
 
-      const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+      const [candidateCounty, setCandidateCounty] = useState('');
       const [politicalParty, setPoliticalParty] = useState('');
       const [goalsManifesto, setGoalsManifesto] = useState('');
       const [vision, setVision] = useState('');
       const [experience, setExperience] = useState('');
       const [candidatenationalId, setCandidateNationalId] = useState('');
-      const [Candidates, setCandidates] = useState(null);
+      const [candidates, setCandidates] = useState(null);
 
 
 
@@ -36,9 +35,9 @@ function VoteResult() {
 
       const [voterName, setVoterName] = useState('');
       const [voterAge, setVoterAge] = useState('');
-      const [voterEmail, setVoterEmail] = useState('');
-      const [voterPhone, setVoterPhone] = useState('');
-      const [voterhomeAddress, setVoterHomeAddress] = useState('');
+      const [voterGender, setVoterGender] = useState('');
+      const [voterCountry, setVoterCountry] = useState('');
+      const [voterCounty, setVoterCounty] = useState('');
       const [voternationalId, setVoterNationalId] = useState('');
       const [voters, setVoters] = useState([]);
 
@@ -103,9 +102,9 @@ function VoteResult() {
                 ...c,
                 candidateName: res.data.name,
                 candidateAge: res.data.age,
-                candidateEmail: res.data.email,
-                candidatePhone: res.data.phone,
-                candidateHomeAddress: res.data.address,
+                candidateGender: res.data.gender,
+                candidateCountry: res.data.country,
+                candidateCounty: res.data.county,
                 politicalParty: res.data.politicalParty,
                 goalsManifesto: res.data.goalsManifesto,
                 vision: res.data.vision,
@@ -120,9 +119,9 @@ function VoteResult() {
                   ...c,
                   candidateName: "N/A",
                   candidateAge: "N/A",
-                  candidateEmail: "N/A",
-                  candidatePhone: "N/A",
-                  candidateHomeAddress: "N/A",
+                  candidateGender: "N/A",
+                  candidateCountry: "N/A",
+                  candidateCounty: "N/A",
                   politicalParty: "N/A",
                   goalsManifesto: "N/A",
                   vision: "N/A",
@@ -144,16 +143,16 @@ function VoteResult() {
 
   // register candidate with IPFS
   const registerCandidate = async () => {
-    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience || !candidatenationalId) return;
+    if (!contract || !candidateName || !candidateAge || !candidateGender || !candidateCountry || !candidateCounty || !politicalParty || !goalsManifesto || !vision || !experience || !candidatenationalId) return;
 
     try {
           // 1. Upload candidate details to backend (which will store on IPFS)
           const ipfsCandidateData = {
             name: candidateName,
             age: candidateAge,
-            email: candidateEmail,
-            phone: candidatePhone,
-            address: candidatehomeAddress,
+            gender: candidateGender,
+            country: candidateCountry,
+            county: candidateCounty,
             politicalParty: politicalParty,
             goalsManifesto: goalsManifesto,
             vision: vision,
@@ -194,9 +193,9 @@ if (typeof ipfsHash !== "string") {
     
       setCandidateName('');
       setCandidateAge('');
-      setCandidateEmail('');
-      setCandidatePhone('');
-      setCandidateHomeAddress('');
+      setCandidateGender('');
+      setCandidateCountry('');
+      setCandidateCounty('');
       setPoliticalParty('');
       setGoalsManifesto('');
       setVision('');
@@ -232,9 +231,9 @@ if (typeof ipfsHash !== "string") {
               ...v,
               voterName: res.data.name,
               voterAge: res.data.age,
-              voterEmail: res.data.email,
-              voterPhone: res.data.phone,
-              voterHomeAddress: res.data.address,
+              voterGender: res.data.gender,
+              voterCountry: res.data.country,
+              voterCounty: res.data.county,
               voterNationalId: res.data.nationalId,
             };
             } catch (err) {
@@ -245,9 +244,9 @@ if (typeof ipfsHash !== "string") {
                 ...v,
                 voterName: "N/A",
                 voterAge: "N/A",
-                voterEmail: "N/A",
-                voterPhone: "N/A",
-                voterHomeAddress: "N/A",
+                voterGender: "N/A",
+                voterCountry: "N/A",
+                voterCounty: "N/A",
                 voterNationalId: "N/A",
               };
             }
@@ -264,16 +263,16 @@ if (typeof ipfsHash !== "string") {
   // Register Voter
   const registerVoter = async () => {
     //if (!contract || !voterName) return;
-    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
+    if (!contract || !voterName || !voterAge || !voterGender || !voterCountry || !voterCounty || !voternationalId ) return;
     try {
 
        // Upload voter data to IPFS and get the hash
         const ipfsVoterData = {
         name: voterName,
         age: voterAge,
-        email: voterEmail,
-        phone: voterPhone,
-        address: voterhomeAddress,
+        gender: voterGender,
+        country: voterCountry,
+        county: voterCounty,
         nationalId: voternationalId,
       
       };
@@ -309,9 +308,9 @@ if (typeof ipfsHash !== "string") {
     
       setVoterName('');
       setVoterAge('');
-      setVoterEmail('');
-      setVoterPhone('');
-      setVoterHomeAddress('');
+      setVoterGender('');
+      setVoterCountry('');
+      setVoterCounty('');
       setVoterNationalId('');
 
       getRegisteredVoters();
@@ -465,7 +464,7 @@ if (typeof ipfsHash !== "string") {
           <br/>
           <br />
 
-          <p className="total-candidate"><strong>Total Candidates: {Candidates.length}</strong></p>
+          <p className="total-candidate"><strong>Total Candidates: {candidates.length}</strong></p>
           <p className="total-voter"><strong>Total Voters: {voters.length}</strong></p>
         
 

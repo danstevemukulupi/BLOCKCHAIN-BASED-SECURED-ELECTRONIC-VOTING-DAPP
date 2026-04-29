@@ -25,10 +25,10 @@ function VoteStatus() {
   // trying to load candidates
 const [candidateName, setCandidateName] = useState('');
       const [candidateAge, setCandidateAge] = useState('');
-      const [candidateEmail, setCandidateEmail] = useState('');
-      const [candidatePhone, setCandidatePhone] = useState('');
+      const [candidateGender, setCandidateGender] = useState('');
+      const [candidateCountry, setCandidateCountry] = useState('');
 
-      const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+      const [candidateCounty, setCandidateCounty] = useState('');
       const [politicalParty, setPoliticalParty] = useState('');
       const [goalsManifesto, setGoalsManifesto] = useState('');
       const [vision, setVision] = useState('');
@@ -89,9 +89,9 @@ const [candidateName, setCandidateName] = useState('');
                 ...c,
                 candidateName: res.data.name,
                 candidateAge: res.data.age,
-                candidateEmail: res.data.email,
-                candidatePhone: res.data.phone,
-                candidateHomeAddress: res.data.address,
+                candidateGender: res.data.gender,
+                candidateCountry: res.data.country,
+                candidateCounty: res.data.county,
                 politicalParty: res.data.politicalParty,
                 goalsManifesto: res.data.goalsManifesto,
                 vision: res.data.vision,
@@ -106,9 +106,9 @@ const [candidateName, setCandidateName] = useState('');
                   ...c,
                   candidateName: "N/A",
                   candidateAge: "N/A",
-                  candidateEmail: "N/A",
-                  candidatePhone: "N/A",
-                  candidateHomeAddress: "N/A",
+                  candidateGender: "N/A",
+                  candidateCountry: "N/A",
+                  candidateCounty: "N/A",
                   politicalParty: "N/A",
                   goalsManifesto: "N/A",
                   vision: "N/A",
@@ -130,16 +130,16 @@ const [candidateName, setCandidateName] = useState('');
 
   // register candidate with IPFS
   const registerCandidate = async () => {
-    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience || !candidatenationalId) return;
+    if (!contract || !candidateName || !candidateAge || !candidateGender || !candidateCountry || !candidateCounty || !politicalParty || !goalsManifesto || !vision || !experience || !candidatenationalId) return;
 
     try {
           // 1. Upload candidate details to backend (which will store on IPFS)
           const ipfsCandidateData = {
             name: candidateName,
             age: candidateAge,
-            email: candidateEmail,
-            phone: candidatePhone,
-            address: candidatehomeAddress,
+            gender: candidateGender,
+            country: candidateCountry,
+            county: candidateCounty,
             politicalParty: politicalParty,
             goalsManifesto: goalsManifesto,
             vision: vision,
@@ -180,9 +180,9 @@ if (typeof ipfsHash !== "string") {
     
       setCandidateName('');
       setCandidateAge('');
-      setCandidateEmail('');
-      setCandidatePhone('');
-      setCandidateHomeAddress('');
+      setCandidateGender('');
+      setCandidateCountry('');
+      setCandidateCounty('');
       setPoliticalParty('');
       setGoalsManifesto('');
       setVision('');

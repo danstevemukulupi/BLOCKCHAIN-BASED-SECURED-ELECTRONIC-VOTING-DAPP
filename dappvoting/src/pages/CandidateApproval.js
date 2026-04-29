@@ -17,8 +17,8 @@ function CandidateApproval() {
 
     const [candidateName, setCandidateName] = useState('');
     const [candidateAge, setCandidateAge] = useState('');
-    const [candidateEmail, setCandidateEmail] = useState('');
-    const [candidatePhone, setCandidatePhone] = useState('');
+    const [candidateGender, setCandidateGender] = useState('');
+    const [candidateCountry, setCandidateCountry] = useState('');
     const [candidates, setCandidates] = useState([]);
     const [contract, setContract] = useState(null);
 
@@ -35,19 +35,19 @@ function CandidateApproval() {
 
   // Register Candidate
   const registerCandidate = async () => {
-    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone) return;
+    if (!contract || !candidateName || !candidateAge || !candidateGender || !candidateCountry) return;
     //if (!contract || !candidateName ) return;
     try {
       //const tx = await contract.registerCandidate(candidateName);
-      const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateEmail, candidatePhone);
+      const tx = await contract.registerCandidate(candidateName, parseInt(candidateAge), candidateGender, candidateCountry);
       await tx.wait();
       alert(`Candidate ${candidateName} registered!`);
     
 
       setCandidateName('');
       setCandidateAge('');
-      setCandidateEmail('');
-      setCandidatePhone('');
+      setCandidateGender('');
+      setCandidateCountry('');
       getRegisteredCandidates();
     } catch (err) {
       console.error("Error registering candidate:", err);

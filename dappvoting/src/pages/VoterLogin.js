@@ -22,9 +22,9 @@ function VoterLogin() {
    
       const [voterName, setVoterName] = useState('');
       const [voterAge, setVoterAge] = useState('');
-      const [voterEmail, setVoterEmail] = useState('');
-      const [voterPhone, setVoterPhone] = useState('');
-      const [voterhomeAddress, setVoterHomeAddress] = useState('');
+      const [voterGender, setVoterGender] = useState('');
+      const [voterCountry, setVoterCountry] = useState('');
+      const [voterCounty, setVoterCounty] = useState('');
       const [voternationalId, setVoterNationalId] = useState('');
       const [voters, setVoters] = useState([]);
 
@@ -33,9 +33,9 @@ function VoterLogin() {
 
       const [candidateName, setCandidateName] = useState('');
       const [candidateAge, setCandidateAge] = useState('');
-      const [candidateEmail, setCandidateEmail] = useState('');
-      const [candidatePhone, setCandidatePhone] = useState('');
-      const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+      const [candidateGender, setCandidateGender] = useState('');
+      const [candidateCountry, setCandidateCountry] = useState('');
+      const [candidateCounty, setCandidateCounty] = useState('');
       const [politicalParty, setPoliticalParty] = useState('');
       const [goalsManifesto, setGoalsManifesto] = useState('');
       const [vision, setVision] = useState('');
@@ -207,15 +207,11 @@ function VoterLogin() {
   // verification end 
 
 
-
-
-     
-
-      const handleLogin = (e) => {
+      {/*const handleLogin = (e) => {
         e.preventDefault();
         console.log("Voter Email:", voterEmail, "Voter Password:", voterPassword);
         alert("Voter logged in successfully!");
-      };
+      };*/}
 
       {/*const searchCandidate = async () => {
         if (!contract || !searchName || !searchAddress) return;
@@ -261,7 +257,7 @@ function VoterLogin() {
       return;
     }
 
-    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) {
+    if (!contract || !voterName || !voterAge || !voterGender || !voterCountry || !voterCounty || !voternationalId ) {
       alert("Please fill in all voter registration fields.");
       return;
     }
@@ -271,9 +267,9 @@ function VoterLogin() {
       const ipfsVoterData = {
         name: voterName,
         age: voterAge,
-        email: voterEmail,
-        phone: voterPhone,
-        address: voterhomeAddress,
+        gender: voterGender,
+        country: voterCountry,
+        county: voterCounty,
         nationalId: voternationalId,
       
       };
@@ -308,9 +304,9 @@ if (typeof ipfsHash !== "string") {
 
       setVoterName('');
       setVoterAge('');
-      setVoterEmail(''); 
-      setVoterPhone('');
-      setVoterHomeAddress('');
+      setVoterGender('');
+      setVoterCountry('');
+      setVoterCounty('');
       setVoterNationalId('');
      
 
@@ -553,26 +549,27 @@ if (typeof ipfsHash !== "string") {
               
             )}
             <input 
-              type="email"
-              name="email"
-              placeholder="Email" 
-              value={voterEmail}
-              onChange={(e) => setVoterEmail(e.target.value)}
+              type="text"
+              name="gender"
+              placeholder="Gender" 
+              value={voterGender}
+              onChange={(e) => setVoterGender(e.target.value)}
             />
             <input 
               type="text"
-              name="phone"
-              placeholder="Phone" 
-              value={voterPhone}
-              onChange={(e) => setVoterPhone(e.target.value)}
+              name="country"
+              placeholder="Country" 
+              value={voterCountry}
+              onChange={(e) => setVoterCountry(e.target.value)}
             />
             <input 
               type="text"
-              name="address"
-              placeholder="Address" 
-              value={voterhomeAddress}
-              onChange={(e) => setVoterHomeAddress(e.target.value)}
+              name="county"
+              placeholder="County" 
+              value={voterCounty}
+              onChange={(e) => setVoterCounty(e.target.value)}
             />
+           
             <input 
               type="text"
               name="nationalId"
@@ -706,9 +703,9 @@ if (typeof ipfsHash !== "string") {
       <div className="profile-grid">
         <p><b>Name:</b> {voterProfile.name}</p>
         <p><b>Age:</b> {voterProfile.age}</p>
-        <p><b>Email:</b> {voterProfile.email}</p>
-        <p><b>Phone:</b> {voterProfile.phone}</p>
-        <p><b>Address:</b> {voterProfile.address}</p>
+        <p><b>Gender:</b> {voterProfile.gender}</p>
+        <p><b>Country:</b> {voterProfile.country}</p>
+        <p><b>County:</b> {voterProfile.county}</p>
         <p><b>National ID:</b> {voterProfile.nationalId}</p>
       </div>
 

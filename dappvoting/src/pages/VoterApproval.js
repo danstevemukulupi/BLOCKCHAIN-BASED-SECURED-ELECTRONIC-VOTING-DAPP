@@ -103,8 +103,8 @@ function VoterApproval() {
 
   const [voterName, setVoterName] = useState('');
   const [voterAge, setVoterAge] = useState('');
-  const [voterEmail, setVoterEmail] = useState('');
-  const [voterPhone, setVoterPhone] = useState('');
+  const [voterGender, setVoterGender] = useState('');
+  const [voterCountry, setVoterCountry] = useState('');
   const [voters, setVoters] = useState([]);
   const [contract, setContract] = useState(null);
 
@@ -122,18 +122,18 @@ function VoterApproval() {
   // Register Voter
   const registerVoter = async () => {
     //if (!contract || !voterName) return;
-    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone) return;
+    if (!contract || !voterName || !voterAge || !voterGender || !voterCountry) return;
     try {
       //const tx = await contract.registerVoter(voterName);
-      const tx = await contract.registerVoter(voterName, parseInt(voterAge), voterEmail, voterPhone);
+      const tx = await contract.registerVoter(voterName, parseInt(voterAge), voterGender, voterCountry);
       await tx.wait();
       alert(`Voter ${voterName} registered!`);
     
     
       setVoterName('');
       setVoterAge('');
-      setVoterEmail('');
-      setVoterPhone('');
+      setVoterGender('');
+      setVoterCountry('');
       getRegisteredVoters();
     } catch (err) {
       console.error("Error registering voter:", err);

@@ -70,17 +70,17 @@ function Dashboard() {
 
   const [voterName, setVoterName] = useState('');
   const [voterAge, setVoterAge] = useState('');
-  const [voterEmail, setVoterEmail] = useState('');
-  const [voterPhone, setVoterPhone] = useState('');
-  const [voterhomeAddress, setVoterHomeAddress] = useState('');
+  const [voterGender, setVoterGender] = useState('');
+  const [voterCountry, setVoterCountry] = useState('');
+  const [voterCounty, setVoterCounty] = useState('');
   const [voternationalId, setVoterNationalId] = useState('');
 
 
   const [candidateName, setCandidateName] = useState('');
   const [candidateAge, setCandidateAge] = useState('');
-  const [candidateEmail, setCandidateEmail] = useState('');
-  const [candidatePhone, setCandidatePhone] = useState('');
-  const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+  const [candidateGender, setCandidateGender] = useState('');
+  const [candidateCountry, setCandidateCountry] = useState('');
+  const [candidateCounty, setCandidateCounty] = useState('');
   const [politicalParty, setPoliticalParty] = useState('');
   const [goalsManifesto, setGoalsManifesto] = useState('');
   const [vision, setVision] = useState('');
@@ -179,16 +179,16 @@ function Dashboard() {
 
    // Register voter new version with IPFS hash
   const registerVoter = async () => {
-    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
+    if (!contract || !voterName || !voterAge || !voterGender || !voterCountry || !voterCounty ||  !voternationalId ) return;
 
     try {
       // Upload voter data to IPFS and get the hash
       const ipfsVoterData = {
         name: voterName,
         age: voterAge,
-        email: voterEmail,
-        phone: voterPhone,
-        address: voterhomeAddress,
+        gender: voterGender,
+        country: voterCountry,
+        county: voterCounty,
         nationalId: voternationalId,
       
       };
@@ -203,9 +203,9 @@ function Dashboard() {
 
       setVoterName('');
       setVoterAge('');
-      setVoterEmail(''); 
-      setVoterPhone('');
-      setVoterHomeAddress('');
+      setVoterGender('');
+      setVoterCountry('');
+      setVoterCounty('');
       setVoterNationalId('');
      
 
@@ -240,16 +240,16 @@ function Dashboard() {
 
   // Register candidate new version with IPFS hash
   const registerCandidate = async () => {
-    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience ||  !candidatenationalId ) return;
+    if (!contract || !candidateName || !candidateAge || !candidateGender || !candidateCountry || !candidateCounty ||  !candidatenationalId ) return;
 
     try {
       // Upload candidate data to IPFS and get the hash
       const ipfsCandidateData = {
         name: candidateName, 
         age: candidateAge,
-        email: candidateEmail,
-        phone: candidatePhone,
-        address: candidatehomeAddress,
+        gender: candidateGender,
+        country: candidateCountry,
+        county: candidateCounty,
         politicalParty: politicalParty,
         goalsManifesto: goalsManifesto,
         vision: vision, 
@@ -269,9 +269,9 @@ function Dashboard() {
 
       setCandidateName('');
       setCandidateAge('');
-      setCandidateEmail('');
-      setCandidatePhone('');
-      setCandidateHomeAddress('');
+      setCandidateGender('');
+      setCandidateCountry('');
+      setCandidateCounty('');
       setPoliticalParty('');
       setGoalsManifesto('');
       setVision('');

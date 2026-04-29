@@ -113,17 +113,17 @@ function AdministratorPage() {
 
   const [voterName, setVoterName] = useState('');
   const [voterAge, setVoterAge] = useState('');
-  const [voterEmail, setVoterEmail] = useState('');
-  const [voterPhone, setVoterPhone] = useState('');
-  const [voterhomeAddress, setVoterHomeAddress] = useState('');
+  const [voterGender, setVoterGender] = useState('');
+  const [voterCountry, setVoterCountry] = useState('');
+  const [voterCounty, setVoterCounty] = useState('');
   const [voternationalId, setVoterNationalId] = useState('');
  
 
   const [candidateName, setCandidateName] = useState('');
   const [candidateAge, setCandidateAge] = useState('');
-  const [candidateEmail, setCandidateEmail] = useState('');
-  const [candidatePhone, setCandidatePhone] = useState('');
-  const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+  const [candidateGender, setCandidateGender] = useState('');
+  const [candidateCountry, setCandidateCountry] = useState('');
+  const [candidateCounty, setCandidateCounty] = useState('');
   const [politicalParty, setPoliticalParty] = useState('');
   const [goalsManifesto, setGoalsManifesto] = useState('');
   const [vision, setVision] = useState('');
@@ -335,16 +335,16 @@ function AdministratorPage() {
 
   // register voter new version with IPFS hash 
   const registerVoter = async () => {
-    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
+    if (!contract || !voterName || !voterAge || !voterGender || !voterCountry || !voterCounty || !voternationalId ) return;
 
     try {
       // Upload voter data to IPFS and get the hash
       const ipfsVoterData = {
         name: voterName,
         age: voterAge,
-        email: voterEmail,
-        phone: voterPhone,
-        address: voterhomeAddress,
+        gender: voterGender,
+        country: voterCountry,
+        county: voterCounty,
         nationalId: voternationalId,
        
       };
@@ -359,9 +359,9 @@ function AdministratorPage() {
 
       setVoterName('');
       setVoterAge('');
-      setVoterEmail(''); 
-      setVoterPhone('');
-      setVoterHomeAddress('');
+      setVoterGender('');
+      setVoterCountry('');
+      setVoterCounty('');
       setVoterNationalId('');
       
 
@@ -392,7 +392,7 @@ function AdministratorPage() {
 };*/
 
 // approve voter with email notification
-const approveVoter = async (voterAddress, voterEmail) => {
+const approveVoter = async (voterAddress) => {
   const tx = await contract.approveVoter(
     voterAddress,
     "You are approved to vote"
@@ -400,7 +400,7 @@ const approveVoter = async (voterAddress, voterEmail) => {
   await tx.wait();
 
   // Send email notification
-  await sendEmailNotification(voterEmail, "Voter Approval", "You have been approved to vote.");
+  //await sendEmailNotification(voterEmail, "Voter Approval", "You have been approved to vote.");
   //alert("Voter approved!");
 
   getRegisteredVoters();
@@ -430,14 +430,14 @@ const approveVoter = async (voterAddress, voterEmail) => {
 };*/
 
 // reject voter with email notification
-const rejectVoter = async (voterAddress, voterEmail) => {
+const rejectVoter = async (voterAddress) => {
   const tx = await contract.rejectVoter(
     voterAddress,
     "You are not approved to vote"
   );
   await tx.wait();
   // Send email notification
-  await sendEmailNotification(voterEmail, "Voter Rejection", "Your voter application has been rejected. Please update your details and try again.");
+  //await sendEmailNotification(voterEmail, "Voter Rejection", "Your voter application has been rejected. Please update your details and try again.");
   //alert("Voter rejected!");
   getRegisteredVoters();
 };
@@ -484,16 +484,16 @@ const getAcceptedVoters = async () => {
 
   // register candidate new version with IPFS hash
   const registerCandidate = async () => {
-    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience ||  !candidatenationalId ) return;
+    if (!contract || !candidateName || !candidateAge || !candidateGender || !candidateCountry || !candidateCounty || !politicalParty || !goalsManifesto || !vision || !experience ||  !candidatenationalId ) return;
 
     try {
       // Upload candidate data to IPFS and get the hash
       const ipfsCandidateData = {
         name: candidateName, 
         age: candidateAge,
-        email: candidateEmail,
-        phone: candidatePhone,
-        address: candidatehomeAddress,
+        gender: candidateGender,
+        country: candidateCountry,
+        county: candidateCounty,
         politicalParty: politicalParty,
         goalsManifesto: goalsManifesto,
         vision: vision, 
@@ -513,9 +513,9 @@ const getAcceptedVoters = async () => {
 
       setCandidateName('');
       setCandidateAge('');
-      setCandidateEmail('');
-      setCandidatePhone('');
-      setCandidateHomeAddress('');
+      setCandidateGender('');
+      setCandidateCountry('');
+      setCandidateCounty('');
       setPoliticalParty('');
       setGoalsManifesto('');
       setVision('');

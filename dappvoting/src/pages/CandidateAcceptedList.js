@@ -18,9 +18,9 @@ function CandidateAcceptedList() {
 
       const [candidateName, setCandidateName] = useState('');
       const [candidateAge, setCandidateAge] = useState('');
-      const [candidateEmail, setCandidateEmail] = useState('');
-      const [candidatePhone, setCandidatePhone] = useState('');
-      const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+      const [candidateGender, setCandidateGender] = useState('');
+      const [candidateCountry, setCandidateCountry] = useState('');
+      const [candidateCounty, setCandidateCounty] = useState('');
       const [politicalParty, setPoliticalParty] = useState('');
       const [goalsManifesto, setGoalsManifesto] = useState('');
       const [vision, setVision] = useState('');
@@ -124,9 +124,9 @@ function CandidateAcceptedList() {
                 ...c,
                 candidateName: res.data.name,
                 candidateAge: res.data.age,
-                candidateEmail: res.data.email,
-                candidatePhone: res.data.phone,
-                candidateHomeAddress: res.data.address,
+                candidateGender: res.data.gender,
+                candidateCountry: res.data.country,
+                candidateCounty: res.data.county,
                 politicalParty: res.data.politicalParty,
                 goalsManifesto: res.data.goalsManifesto,
                 vision: res.data.vision,
@@ -141,9 +141,10 @@ function CandidateAcceptedList() {
                   ...c,
                   candidateName: "N/A",
                   candidateAge: "N/A",
-                  candidateEmail: "N/A",
-                  candidatePhone: "N/A",
-                  candidateHomeAddress: "N/A",
+                  candidateGender: "N/A",
+                  candidateCountry: "N/A",
+                  candidateCounty: "N/A",
+                  politicalParty: "N/A",
                   politicalParty: "N/A",
                   goalsManifesto: "N/A",
                   vision: "N/A",
@@ -165,16 +166,16 @@ function CandidateAcceptedList() {
 
   // register candidate with IPFS
   const registerCandidate = async () => {
-    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty || !goalsManifesto || !vision || !experience || !candidatenationalId) return;
+    if (!contract || !candidateName || !candidateAge || !candidateGender || !candidateCountry || !candidateCounty || !politicalParty || !goalsManifesto || !vision || !experience || !candidatenationalId) return;
 
     try {
           // 1. Upload candidate details to backend (which will store on IPFS)
           const ipfsCandidateData = {
             name: candidateName,
             age: candidateAge,
-            email: candidateEmail,
-            phone: candidatePhone,
-            address: candidatehomeAddress,
+            gender: candidateGender,
+            country: candidateCountry,
+            county: candidateCounty,
             politicalParty: politicalParty,
             goalsManifesto: goalsManifesto,
             vision: vision,
@@ -215,9 +216,9 @@ if (typeof ipfsHash !== "string") {
     
       setCandidateName('');
       setCandidateAge('');
-      setCandidateEmail('');
-      setCandidatePhone('');
-      setCandidateHomeAddress('');
+      setCandidateGender('');
+      setCandidateCountry('');
+      setCandidateCounty('');
       setPoliticalParty('');
       setGoalsManifesto('');
       setVision('');
@@ -397,7 +398,7 @@ useEffect(() => {
                   <tr>
                     <th>Name</th>
                     <th>Age</th>
-                    <th>Home Address</th>
+                    <th>County</th>
                     <th>Political Party</th>
                     <th>Goals/Manifesto</th>
                     <th>Vision</th>
@@ -411,7 +412,7 @@ useEffect(() => {
                     <tr key={index}>
                       <td>{c.candidateName}</td>
                       <td>{c.candidateAge}</td>
-                      <td>{c.candidateHomeAddress}</td>
+                      <td>{c.candidateCounty}</td>
                       <td>{c.politicalParty}</td>
                       <td>{c.goalsManifesto}</td>
                       <td>{c.vision}</td>

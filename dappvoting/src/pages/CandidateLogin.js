@@ -28,9 +28,9 @@ function CandidateLogin() {
    
    const [candidateName, setCandidateName] = useState('');
    const [candidateAge, setCandidateAge] = useState('');
-   const [candidateEmail, setCandidateEmail] = useState('');
-   const [candidatePhone, setCandidatePhone] = useState('');
-   const [candidatehomeAddress, setCandidateHomeAddress] = useState('');
+   const [candidateGender, setCandidateGender] = useState('');
+   const [candidateCountry, setCandidateCountry] = useState('');
+   const [candidateCounty, setCandidateCounty] = useState('');
    const [politicalParty, setPoliticalParty] = useState('');
    const [goalsManifesto, setGoalsManifesto] = useState('');
    const [vision, setVision] = useState('');
@@ -112,11 +112,11 @@ const checkCandidateStatus = async (address) => {
 }; 
 
 // Handle candidate login
-const handleLogin = (e) => {
+{/*const handleLogin = (e) => {
         e.preventDefault();
         console.log("Candidate Email:", candidateEmail, "Candidate Password:", candidatePassword);
         alert("Candidate logged in successfully!");
-      }; 
+      }; */}
 
   // Fetch Registered Candidates
   const getRegisteredCandidates = async () => {
@@ -150,7 +150,7 @@ const handleLogin = (e) => {
       return;
     }
 
-    if (!contract || !candidateName || !candidateAge || !candidateEmail || !candidatePhone || !candidatehomeAddress || !politicalParty  || !goalsManifesto || !vision || !experience || !candidatenationalId ) {
+    if (!contract || !candidateName || !candidateAge || !candidateGender || !candidateCountry || !candidateCounty || !politicalParty  || !goalsManifesto || !vision || !experience || !candidatenationalId ) {
       alert("Please fill in all candidate registration fields.");
       return;
     }
@@ -160,9 +160,9 @@ const handleLogin = (e) => {
       const ipfsCandidateData = {
         name: candidateName,
         age: candidateAge,
-        email: candidateEmail,
-        phone: candidatePhone,
-        address: candidatehomeAddress,
+        gender: candidateGender,
+        country: candidateCountry,
+        county: candidateCounty,
         politicalParty: politicalParty,
         goalsManifesto: goalsManifesto,
         vision: vision,
@@ -197,9 +197,9 @@ const tx = await contract.registerCandidate(ipfsHash);
 
       setCandidateName('');
       setCandidateAge('');
-      setCandidateEmail(''); 
-      setCandidatePhone('');
-      setCandidateHomeAddress('');
+      setCandidateGender('');
+      setCandidateCountry('');
+      setCandidateCounty('');
       setPoliticalParty('');
       setGoalsManifesto('');
       setVision('');
@@ -313,8 +313,8 @@ const tx = await contract.registerCandidate(ipfsHash);
     <>
             <input 
               type="text"
-              name="name"
-              placeholder="Name" 
+              name="Full Name"
+              placeholder="Full Name" 
               value={candidateName}
               onChange={(e) => setCandidateName(e.target.value)}
             />
@@ -336,27 +336,27 @@ const tx = await contract.registerCandidate(ipfsHash);
             )}
 
             <input 
-              type="email"
-              name="email"
-              placeholder="Email" 
-              value={candidateEmail}
-              onChange={(e) => setCandidateEmail(e.target.value)}
+              type="text"
+              name="gender"
+              placeholder="Gender" 
+              value={candidateGender}
+              onChange={(e) => setCandidateGender(e.target.value)}
             />
 
             <input 
               type="text"
-              name="phone"
-              placeholder="Phone" 
-              value={candidatePhone}
-              onChange={(e) => setCandidatePhone(e.target.value)}
+              name="country"
+              placeholder="Country" 
+              value={candidateCountry}
+              onChange={(e) => setCandidateCountry(e.target.value)}
             />
 
             <input 
               type="text"
-              name="address"
-              placeholder="Address" 
-              value={candidatehomeAddress}
-              onChange={(e) => setCandidateHomeAddress(e.target.value)}
+              name="county"
+              placeholder="County" 
+              value={candidateCounty}
+              onChange={(e) => setCandidateCounty(e.target.value)}
             />
 
 
@@ -437,9 +437,9 @@ const tx = await contract.registerCandidate(ipfsHash);
       <div className="profile-grid">
         <p><b>Name:</b> {candidateProfile.name}</p>
         <p><b>Age:</b> {candidateProfile.age}</p>
-        <p><b>Email:</b> {candidateProfile.email}</p>
-        <p><b>Phone:</b> {candidateProfile.phone}</p>
-        <p><b>Address:</b> {candidateProfile.address}</p>
+        <p><b>Gender:</b> {candidateProfile.gender}</p>
+        <p><b>Country:</b> {candidateProfile.country}</p>
+        <p><b>County:</b> {candidateProfile.county}</p>
         <p><b>Political Party:</b> {candidateProfile.politicalParty}</p>
         <p><b>Goals & Manifesto:</b> {candidateProfile.goalsManifesto}</p>
         <p><b>Vision:</b> {candidateProfile.vision}</p>

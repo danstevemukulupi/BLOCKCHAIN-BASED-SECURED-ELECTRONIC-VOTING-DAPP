@@ -15,9 +15,9 @@ function VoterRejectedList() {
 
     const [voterName, setVoterName] = useState('');
     const [voterAge, setVoterAge] = useState('');
-    const [voterEmail, setVoterEmail] = useState('');
-    const [voterPhone, setVoterPhone] = useState('');
-    const [voterhomeAddress, setVoterHomeAddress] = useState('');
+    const [voterGender, setVoterGender] = useState('');
+    const [voterCountry, setVoterCountry] = useState('');
+    const [voterCounty, setVoterCounty] = useState('');
     const [voternationalId, setVoterNationalId] = useState('');
     const [voters, setVoters] = useState([]);
 
@@ -118,9 +118,9 @@ function VoterRejectedList() {
               ...v,
               voterName: res.data.name,
               voterAge: res.data.age,
-              voterEmail: res.data.email,
-              voterPhone: res.data.phone,
-              voterHomeAddress: res.data.address,
+              voterGender: res.data.gender,
+              voterCountry: res.data.country,
+              voterCounty: res.data.county,
               voterNationalId: res.data.nationalId,
             };
             } catch (err) {
@@ -131,9 +131,9 @@ function VoterRejectedList() {
                 ...v,
                 voterName: "N/A",
                 voterAge: "N/A",
-                voterEmail: "N/A",
-                voterPhone: "N/A",
-                voterHomeAddress: "N/A",
+                voterGender: "N/A",
+                voterCountry: "N/A",
+                voterCounty: "N/A",
                 voterNationalId: "N/A",
               };
             }
@@ -152,16 +152,16 @@ function VoterRejectedList() {
   // Register Voter
   const registerVoter = async () => {
     //if (!contract || !voterName) return;
-    if (!contract || !voterName || !voterAge || !voterEmail || !voterPhone || !voterhomeAddress || !voternationalId ) return;
+    if (!contract || !voterName || !voterAge || !voterGender || !voterCountry || !voterCounty || !voternationalId ) return;
     try {
 
        // Upload voter data to IPFS and get the hash
         const ipfsVoterData = {
         name: voterName,
         age: voterAge,
-        email: voterEmail,
-        phone: voterPhone,
-        address: voterhomeAddress,
+        gender: voterGender,
+        country: voterCountry,
+        county: voterCounty,
         nationalId: voternationalId,
       
       };
@@ -199,9 +199,9 @@ if (typeof ipfsHash !== "string") {
     
       setVoterName('');
       setVoterAge('');
-      setVoterEmail('');
-      setVoterPhone('');
-      setVoterHomeAddress('');
+      setVoterGender('');
+      setVoterCountry('');
+      setVoterCounty('');
       setVoterNationalId('');
 
       getRegisteredVoters();
@@ -375,9 +375,9 @@ if (typeof ipfsHash !== "string") {
                   <tr>
                     <th>Name</th>
                     <th>Age</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Home Address</th>
+                    <th>Gender</th>
+                    <th>Country</th>
+                    <th>County</th>
                     <th>National ID</th>
                     <th>Wallet Address</th>
                     <th>Status</th>
@@ -392,9 +392,9 @@ if (typeof ipfsHash !== "string") {
                     <tr key={index}>
                       <td>{v.voterName}</td>
                       <td>{v.voterAge}</td>
-                      <td>{v.voterEmail}</td>
-                      <td>{v.voterPhone}</td>
-                      <td>{v.voterHomeAddress}</td>
+                      <td>{v.voterGender}</td>
+                      <td>{v.voterCountry}</td>
+                      <td>{v.voterCounty}</td>
                       <td>{v.voterNationalId}</td>  
                       <td>{v.votersAddress}</td>
                       <td>{v.status.toString()}</td>

@@ -98,9 +98,9 @@ function ElectionInfo() {
     <ul>
       <li>Full Name</li>
       <li>Age (must be 18 or older)</li>
-      <li>Email Address</li>
-      <li>Phone Number</li>
-      <li>Residential Address</li>
+      <li>Gender</li>
+      <li>Country</li>
+      <li>County</li>
       <li>National ID Number</li>
     </ul>
 
@@ -120,9 +120,9 @@ function ElectionInfo() {
     <ul>
       <li>Full Name</li>
       <li>Age</li>
-      <li>Email Address</li>
-      <li>Phone Number</li>
-      <li>Residential Address</li>
+      <li>Gender</li>
+      <li>Country</li>
+      <li>County</li>
       <li>Political Party</li>
       <li>Goals / Manifesto</li>
       <li>Vision</li>
