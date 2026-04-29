@@ -26,7 +26,7 @@ function AdministrationGuide() {
         
             <div className="voter-container">
               <h1 style={{ color: "purple"}}>Guide to MapoVote</h1>
-              <h5>Step-by-step instructions on how to participate in the electoral process, from registration to casting your ballot.</h5>
+              <h5>Administrative guide for overseeing the blockchain-based voting system, including user validation, election lifecycle management, and system control.</h5>
             </div>
         
             <br/>

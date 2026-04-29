@@ -54,6 +54,9 @@ function VoterLogin() {
       const [loggedIn, setLoggedIn] = useState(false); 
       const [ipfsHash, setIpfsHash] = useState("");
 
+      const [voterProfile, setVoterProfile] = useState(null);
+
+
       const [announcement, setAnnouncement] = useState("");
 
       // annoucement 
@@ -181,6 +184,17 @@ function VoterLogin() {
 
     if (voter.status === 1) {
       setLoggedIn(true); // ✅ unlock dashboard
+
+      // Fetch voter profile data from IPFS 
+      if (voter.ipfsHash) {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/voter/${voter.ipfsHash}`
+
+        )
+        setVoterProfile(res.data); // store user profile
+
+      } // end 
+
     } else {
       setLoggedIn(false);
       alert("You are not an approved voter yet.");
@@ -683,8 +697,33 @@ if (typeof ipfsHash !== "string") {
           <br/>
           <br/>
           <br/>
+
+             <div className="voter-login-profile">
+               {voterProfile && (
+    <div className="profile-card">
+      <h2>👤 My Profile</h2>
+
+      <div className="profile-grid">
+        <p><b>Name:</b> {voterProfile.name}</p>
+        <p><b>Age:</b> {voterProfile.age}</p>
+        <p><b>Email:</b> {voterProfile.email}</p>
+        <p><b>Phone:</b> {voterProfile.phone}</p>
+        <p><b>Address:</b> {voterProfile.address}</p>
+        <p><b>National ID:</b> {voterProfile.nationalId}</p>
+      </div>
+
+      <p className="success">
+        ✅ You are a verified and approved voter
+      </p>
+    </div>
+  )}
+      
+      </div>
+      <br/>
+           
          
           <div className="voter-login-content">
+            
       </div>
      
 
