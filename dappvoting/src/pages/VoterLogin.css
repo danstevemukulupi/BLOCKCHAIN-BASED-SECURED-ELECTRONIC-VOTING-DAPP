@@ -162,7 +162,10 @@ textarea {
   margin-bottom: 10px;
 }
 
-
+.announcement-display {
+    flex: 1;
+    display: flex;
+}
 
 
 
@@ -182,7 +185,7 @@ textarea {
     padding: 40px 20px;
     margin-bottom: auto;
     margin-top: auto;
-    flex: 1;
+  
     
 }
 
