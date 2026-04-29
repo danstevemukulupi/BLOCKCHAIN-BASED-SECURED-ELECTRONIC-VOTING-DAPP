@@ -654,6 +654,7 @@ if (walletConnected && !checkedAdmin) {
        </a>
        <h2 style={{ color: "purple" }}>MapoVote</h2>
        <Link to="/">Home</Link>
+       <Nav.Link as={Link} to="/administration-guide">Guide</Nav.Link>
        <NavDropdown title="Voters " id="basic-nav-dropdown" >
               <NavDropdown.Item as={Link} to="/voter-Registration">List of Registered Voters</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/voter-accepted-list">List of Approved Voters</NavDropdown.Item>

@@ -75,6 +75,7 @@ import StartElection from './pages/StartElection';
 import StartVoting from './pages/StartVoting';
 
 import VoteResult from './pages/VoteResult';
+import AdministrationGuide from './pages/AdministrationGuide'; 
 
 
 //import { Link } from 'react-router-dom';
@@ -117,11 +118,11 @@ function App() {
       <Route path="/start-voting" element={<StartVoting />} />
 
       <Route path="/vote-result" element={<VoteResult />} />
-      
+      <Route path="/administration-guide" element={<AdministrationGuide />} />
     </Routes>
    </Router>
   )
- 
 }
+ 
 
 export default App;
