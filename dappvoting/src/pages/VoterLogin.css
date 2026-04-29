@@ -168,11 +168,14 @@ textarea {
 
 
 .voter-login-content {
-  background-color: white;
-  text-decoration: none;
-  color:  black;
-  font-size: 18px;
-   
+    background-color: white;
+     height: 100px;
+    display: grid;
+    grid-template-columns: auto auto ;
+    padding: 5px;
+    gap: 20px; 
+    width: 100%;
+    margin-top: 70px;
    
 
 }
