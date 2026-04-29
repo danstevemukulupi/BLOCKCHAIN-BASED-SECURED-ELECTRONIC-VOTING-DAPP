@@ -179,7 +179,7 @@ function StartElection() {
            {!walletConnected ? (
           <button onClick={connectWallet}>Connect Wallet</button>
         ) : (
-          <p>Wallet connected: {account}</p>
+          <p style={{ marginTop: "10px", display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "20px", width: "20px", height: "20px", backgroundColor: "green", borderRadius: "50%", padding: "10px" }}>🟢</p>
         )}
 
       </div>
