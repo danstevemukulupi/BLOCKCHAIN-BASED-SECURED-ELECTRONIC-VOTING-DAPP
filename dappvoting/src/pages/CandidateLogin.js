@@ -43,6 +43,8 @@ function CandidateLogin() {
    const [loggedIn, setLoggedIn] = useState(false); 
    const [ipfsHash, setIpfsHash] = useState("");
 
+   const [candidateProfile, setCandidateProfile] = useState(null);
+
    // Connect to MetaMask wallet 
    const connectWallet = async () => {
   if (window.ethereum) {
@@ -88,6 +90,18 @@ const checkCandidateStatus = async (address) => {
 
     if (candidate.status === 1) {
       setLoggedIn(true); // ✅ unlock dashboard
+
+      // Fetch candidate profile data from IPFS 
+      if (candidate.ipfsHash) {
+        const res = await axios.get(
+          `${process.env.REACT_APP_API_URL}/candidate/${candidate.ipfsHash}`
+
+        )
+        setCandidateProfile(res.data); // store user profile
+
+      } // end 
+
+
     } else {
       setLoggedIn(false);
       alert("You are not an approved candidate yet.");
@@ -414,10 +428,40 @@ const tx = await contract.registerCandidate(ipfsHash);
     <br/>
     <br/>
     <br/>
+
+      <div className="candidate-login-profile">
+               {candidateProfile && (
+    <div className="profile-card">
+      <h2>👤 My Profile</h2>
+
+      <div className="profile-grid">
+        <p><b>Name:</b> {candidateProfile.name}</p>
+        <p><b>Age:</b> {candidateProfile.age}</p>
+        <p><b>Email:</b> {candidateProfile.email}</p>
+        <p><b>Phone:</b> {candidateProfile.phone}</p>
+        <p><b>Address:</b> {candidateProfile.address}</p>
+        <p><b>Political Party:</b> {candidateProfile.politicalParty}</p>
+        <p><b>Goals & Manifesto:</b> {candidateProfile.goalsManifesto}</p>
+        <p><b>Vision:</b> {candidateProfile.vision}</p>
+        <p><b>Experience:</b> {candidateProfile.experience}</p>
+        <p><b>National ID:</b> {candidateProfile.nationalId}</p>
+      </div>
+
+      <p className="success">
+        ✅ You are a verified and approved candidate
+      </p>
+    </div>
+  )}
+      
+      </div>
+      <br/>
+
+
+
    
 
-     <div className="candidate-content">
-      </div>
+     {/*<div className="candidate-content">
+      </div>*/}
 
     <footer className="footer-final">
         <div className='footer-container'>
