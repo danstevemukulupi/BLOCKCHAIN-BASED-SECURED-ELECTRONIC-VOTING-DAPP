@@ -375,7 +375,7 @@ if (typeof ipfsHash !== "string") {
        </a>
         <h2 style={{ color: "purple" }}>MapoVote</h2>
         <Link to="/">Home</Link>
-        <Link to="/voter-login">Profile</Link>
+       
        
        
     </div>
@@ -429,7 +429,7 @@ if (typeof ipfsHash !== "string") {
       )}*/}
 
       
-     
+      <br/>
       <br/>
 
       <div> 
@@ -454,7 +454,7 @@ if (typeof ipfsHash !== "string") {
    )}
 
         
-        <br/>    
+         
         <br/>
         <br/>
         <br/>

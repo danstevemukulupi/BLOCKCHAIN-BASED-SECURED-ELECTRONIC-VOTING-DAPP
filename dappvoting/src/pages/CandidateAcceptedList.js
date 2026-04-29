@@ -304,8 +304,6 @@ useEffect(() => {
                       </a>
                       <h2 style={{ color: "purple" }}>MapoVote</h2>
                       <Link to="/">Home</Link>
-                      <Link to="/administrator-page">Administrator</Link>
-                      <Link to="/help-infos">Help & Info</Link>
                   </div>
                      
                   <br/>
