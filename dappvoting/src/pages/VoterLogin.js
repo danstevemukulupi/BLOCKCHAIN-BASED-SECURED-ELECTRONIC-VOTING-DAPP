@@ -15,7 +15,8 @@ import axios from 'axios';
 
 //const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 // sepolia address
-const contractAddress = "0x65F5f54d2E24F9C9B9919D4e3cDe3fBe533D7bD5"
+//const contractAddress = "0x65F5f54d2E24F9C9B9919D4e3cDe3fBe533D7bD5"
+const contractAddress = "0x110Ba63afa08375042910EC633fb2DA7A16F51B0"
 
 function VoterLogin() {
      const [walletConnected, setWalletConnected] = useState(false);
@@ -62,7 +63,7 @@ function VoterLogin() {
 
 
       // remove duplicate voters (if any)
-      const uniqueVoters = Array.from(new Set(voters));
+      //const uniqueVoters = Array.from(new Set(voters));
 
       // annoucement 
       useEffect(() => {

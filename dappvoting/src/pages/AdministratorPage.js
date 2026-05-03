@@ -101,8 +101,8 @@ import axios from 'axios';
 //const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 
 // SEPOLIA ADDRESS
-const contractAddress = "0x65F5f54d2E24F9C9B9919D4e3cDe3fBe533D7bD5"
-
+//const contractAddress = "0x65F5f54d2E24F9C9B9919D4e3cDe3fBe533D7bD5"
+const contractAddress = "0x110Ba63afa08375042910EC633fb2DA7A16F51B0"
 
 
 function AdministratorPage() {
