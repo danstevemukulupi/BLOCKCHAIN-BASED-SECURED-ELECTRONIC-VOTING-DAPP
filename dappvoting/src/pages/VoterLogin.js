@@ -59,6 +59,11 @@ function VoterLogin() {
 
       const [announcement, setAnnouncement] = useState("");
 
+
+
+      // remove duplicate voters (if any)
+      const uniqueVoters = Array.from(new Set(voters));
+
       // annoucement 
       useEffect(() => {
   const fetchAnnouncement = async () => {
