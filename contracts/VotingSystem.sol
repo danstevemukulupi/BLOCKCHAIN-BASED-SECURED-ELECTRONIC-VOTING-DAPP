@@ -136,6 +136,14 @@ contract VotingSystem{
         //require(voters[msg.sender].votersAddress == address(0), // after 
         //"You have already registered as a voter.");
 
+        require(
+        voters[msg.sender].status != ConfirmationStatus.Awaiting &&
+        voters[msg.sender].status != ConfirmationStatus.Accepted,
+        "You already have a pending or approved registration"
+    );
+
+
+
         Voter memory newVoter = Voter({
             /*votedRoundOne: false,
             votedRoundTwo: false,
