@@ -10,7 +10,8 @@ import './CandidateRejection.css';
 
 //const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 //const contractAddress = "0x110Ba63afa08375042910EC633fb2DA7A16F51B0" // new
-const contractAddress = "0x6C2491333473C79d59d9f0F32e327C28431D04A6" // 3
+//const contractAddress = "0x6C2491333473C79d59d9f0F32e327C28431D04A6" // 3
+const contractAddress = "0xAD50B47AeCCC915CFFA0C06aaBe157c50d508828" // 4
 
 function CandidateRejection() {
 

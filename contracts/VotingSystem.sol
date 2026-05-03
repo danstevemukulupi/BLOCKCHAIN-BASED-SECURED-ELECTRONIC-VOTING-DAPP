@@ -192,6 +192,11 @@ contract VotingSystem{
 
         // Register a candidate
     function registerCandidate(string  memory _ipfsHash) public {
+
+        require(candidates[msg.sender].candidatesAddress == address(0), // after
+        "You have already registered as a candidate."
+        );
+        
         Candidate memory newCandidate = Candidate({
             //name: _name,
             //age: _age,

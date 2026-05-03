@@ -110,7 +110,8 @@ import axios from 'axios';
 // SEPOLIA ADDRESS INSIDE .ENV
 //const contractAddress = "0x65F5f54d2E24F9C9B9919D4e3cDe3fBe533D7bD5" old
 //const contractAddress = "0x110Ba63afa08375042910EC633fb2DA7A16F51B0" //new
-const contractAddress = "0x6C2491333473C79d59d9f0F32e327C28431D04A6" // 3
+//const contractAddress = "0x6C2491333473C79d59d9f0F32e327C28431D04A6" // 3
+const contractAddress = "0xAD50B47AeCCC915CFFA0C06aaBe157c50d508828" // 4
 
 
 
