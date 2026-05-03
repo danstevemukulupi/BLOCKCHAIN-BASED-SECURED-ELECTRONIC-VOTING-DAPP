@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import './CandidateRejection.css';
 
 //const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const contractAddress = "0x4ab9bff11123Fa94123CF52C9eA64eA31E02aAc7" // new
+const contractAddress = "0x110Ba63afa08375042910EC633fb2DA7A16F51B0" // new
 
 function CandidateRejection() {
 
