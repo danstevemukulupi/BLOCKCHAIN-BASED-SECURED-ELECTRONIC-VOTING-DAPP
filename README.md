@@ -80,58 +80,73 @@ cd dappvoting
 npm start
 
 ## Running on Testnet (Sepolia)
-Deploy Smart Contracts
-npx hardhat run scripts/deploy.js --network sepolia
+ Deploy Smart Contracts
+ npx hardhat run scripts/deploy.js --network sepolia
 
 ## Build Frontend
 cd dappvoting
 npm run build
 
+---
+
 ## Deployment (Render)
 
-Both the frontend and backend are deployed using Render.
-Deployment Steps:
-Push project to GitHub
-Connect repository to Render
-Configure environment variables (API keys, RPC URL, etc.)
-Deploy backend service
-Deploy frontend application
-Update frontend configuration to use deployed backend URL
+- Both the frontend and backend are deployed using Render.
+- Deployment Steps:
+- Push project to GitHub
+- Connect repository to Render
+- Configure environment variables (API keys, RPC URL, etc.)
+- Deploy backend service
+- Deploy frontend application
+- Update frontend configuration to use deployed backend URL
 
+---
 ## Testing
 Testing was conducted using manual functional testing:
 
-Voter registration verified
-Vote casting functionality tested
-Double voting prevention confirmed
-Results accuracy validated
+- Voter registration verified
+- Vote casting functionality tested
+- Double voting prevention confirmed
+- Results accuracy validated
+
+---
 
 ## Security Features
-Smart contract-based validation
-Immutable blockchain records
-Wallet authentication via MetaMask
-Prevention of vote tampering
-IPFS hash verification
+- Smart contract-based validation
+- Immutable blockchain records
+- Wallet authentication via MetaMask
+- Prevention of vote tampering
+- IPFS hash verification
+
+---
 
 ## Project Structure
-/contracts     → Smart contracts  
-/scripts       → Deployment scripts  
-/dappvoting    → React frontend  
-/backend       → Node.js backend 
+- /contracts     → Smart contracts  
+- /scripts       → Deployment scripts  
+- /dappvoting    → React frontend  
+- /backend       → Node.js backend 
 
-# Documentation
+---
+
+## Documentation
 The full dissertation/report is included in this repository.
 
-#Limitations
-Gas fees may affect usability
-Requires basic blockchain knowledge
-No automated unit testing implemented
+---
 
-# Future Improvements
-Integration of automated testing (Mocha/Chai)
-Improved user interface
-Identity verification system
-Scalability enhancements
+## Limitations
+- Gas fees may affect usability
+- Requires basic blockchain knowledge
+- No automated unit testing implemented
+
+---
+
+## Future Improvements
+- Integration of automated testing (Mocha/Chai)
+- Improved user interface
+- Identity verification system
+- Scalability enhancements
+
+---
 
 Author
 
