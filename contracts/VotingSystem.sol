@@ -133,14 +133,15 @@ contract VotingSystem{
         // Register a voter 
     function registerVoter(string memory _ipfsHash) public {
 
-        //require(voters[msg.sender].votersAddress == address(0), // after 
-        //"You have already registered as a voter.");
+        require(voters[msg.sender].votersAddress == address(0), // after 
+        "You have already registered as a voter."
+        );
 
-        require(
-        voters[msg.sender].status != ConfirmationStatus.Awaiting &&
-        voters[msg.sender].status != ConfirmationStatus.Accepted,
-        "You already have a pending or approved registration"
-    );
+        //require(
+        //voters[msg.sender].status != ConfirmationStatus.Awaiting &&
+        //voters[msg.sender].status != ConfirmationStatus.Accepted,
+        //"You already have a pending or approved registration"
+    //);
 
 
 
